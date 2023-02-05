@@ -131,3 +131,5 @@ dmypy.json
 # Docs generation
 docssource/
 docs/
+
+.idea/
