@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
+"""
+Autodoc CLI
+"""
 import click
 
-from hapdoc.rules import RegexRules
+from hapdoc.autodocker import generate as gen
+from hapdoc.autodocker.doctypes import PyDoc
 
 
 @click.group()
@@ -12,10 +16,11 @@ def hapdoc():
 
 
 @hapdoc.command()
+@click.argument('project_path', type=str)
 @click.option(
     '--doctype', '-d', 'document_type',
     help='Select project type',
-    default='fastapi',
+    default='py',
     type=str
 )
 @click.option(
@@ -25,29 +30,37 @@ def hapdoc():
     type=str
 )
 @click.option(
-    '--project', '-p', 'generate_target',
-    flag_value='project',
-    default=True,
-    type=str,
+    '--extend', '-e', 'extend',
+    help='Extend doc by specified doctypes separated by comma',
+    default='',
+    type=str
 )
 @click.option(
-    '--file', '-f', 'generate_target',
-    flag_value='file',
-    type=str,
+    '--out', '-o', 'output',
+    help='Output docs folder',
+    default='docs',
+    type=str
 )
 def generate(
+        project_path: str,
         document_type: str,
         ignore: str,
-        generate_target: str
+        extend: str,
+        output: str,
 ):
     """
     Generates docs for file or project
     """
     ignore_list = [ext.strip() for ext in ignore.split(',')]
-    RegexRules.process(
-        [],
-        document_type,
+    gen(
+        project_path,
+        {
+            'py': PyDoc,
+        },
         ignore_list,
+        document_type,
+        extend,
+        output
     )
 
 

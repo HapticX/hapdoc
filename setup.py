@@ -2,13 +2,14 @@ from setuptools import setup, find_packages
 
 setup(
     name='hapdoc',
+    description='autodoc tool for everything',
     version='0.1',
     packages=find_packages(),
-    py_modules=['hapd'],
+    py_modules=['hapdoc'],
     install_requires=['click', 'colorama'],
     entry_points={
         'console_scripts': [
-            'hapdoc = hapdoc.hapd:hapdoc'
+            'hapdoc = hapdoc.hapdoc:hapdoc'
         ]
     }
 )

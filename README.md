@@ -1,6 +1,6 @@
 <div align="center">
 
-## hapdoc
+## `h a p d o c`
 autodoc CLI tool written in Python
 
 ![Python](https://img.shields.io/badge/Python%203.10-35497E?style=for-the-badge&logo=python&logoColor=FFF077)
