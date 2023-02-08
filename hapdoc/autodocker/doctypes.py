@@ -18,4 +18,4 @@ class PyDoc(ABCDocType):
             for i in self.iter(project_path):
                 Py.process(f'{path.join(project_path, i)}', output_dir)
         else:
-            Py.process(project_path, output_dir)
+            Py.process(project_path, output_dir, True)

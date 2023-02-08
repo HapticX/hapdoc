@@ -1,24 +1,37 @@
 # -*- coding: utf-8 -*-
+"""
+Describes all FileTypes
+"""
 from re import findall, sub
-from os import mkdir, path, makedirs, sep
 
 from .abc import ABCFileType
 
-from hapdoc.md import Md2Html
-
 
 class Py(ABCFileType):
+    """
+    Provides Python script translator behavior
+    """
+
     @staticmethod
     def process(
             filepath: str,
-            output: str = 'docs'
+            output: str = 'docs',
+            one_file: bool = False
     ):
-        source, end_path, filename = Py.pre(filepath, output)
+        """
+        Translates python script into md file.
+
+        :param filepath: path to python script
+        :param output: output directory
+        :param one_file: True when file flag is True
+        :return:
+        """
+        source, end_path, filename = Py.pre(filepath, output, one_file)
         data = f'# {filename}\n'
 
-        description = findall(r'[^ \r\t]\"{3}([\s\S]+?)\"{3}', source)
+        description = findall(r'[^ \r\t]"{3}\s*([\s\S]+?)\s*"{3}', source)
         if description:
-            data += f'\n> {description[0]}'
+            data += f'\n> {description[0].strip()}'
 
         classes = findall(r'(class +([^:]+):\n(\s+)[^\n]+(\n+\3[ \S]*)+)', source)
         classes_text = []
@@ -56,27 +69,26 @@ class Py(ABCFileType):
                 arguments = []
                 for arg in arguments_typed:
                     arg_name, arg_type, default_value = arg
-                    arg_desc = findall(r':param\s+' + name + r'\s*:\s+([^\n]+)', docs)
-                    arg_desc = arg_desc[0].strip() if arg_desc else ''
+                    arg_desc = findall(r':param\s+' + arg_name.strip() + r'\s*:\s+([^\n]+)', docs)
                     arguments.append({
                         'name': arg_name,
-                        'type': arg_type,
-                        'default': default_value,
-                        'desc': description,
+                        'desc': arg_desc[0].strip() if arg_desc else '',
                         'text': f'{arg_name}: {arg_type} = {default_value}'
                                 if default_value else f'{arg_name}: {arg_type}'
                                 if arg_type else arg_name
                     })
                 arguments_text = ",\n    ".join([i["text"] for i in arguments])
+                params = '\n- '.join([f'`{i["name"]}`: {i["desc"]}' for i in arguments if i['desc']])
+                params = f'\n- {params}' if params else ''
                 methods_text.append(
-                    f'\n```py\ndef {name}(\n    {arguments_text}\n){return_type}:\n```' \
-                    f'\n{description}')
+                    f'\n```py\ndef {name}(\n    {arguments_text}\n){return_type}:\n```'
+                    f'\n{description}\n{params}\n')
             class_text += '\n___\n'.join(methods_text)
             classes_text.append(class_text)
         # write classes data
         if classes_text:
             class_text = '\n'.join(classes_text)
-            data += f'## Classes\n{class_text}'
+            data += f'\n## Classes\n{class_text}'
 
         with open(end_path, 'w', encoding='utf-8') as f:
             f.write(data)

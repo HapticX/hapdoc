@@ -54,12 +54,14 @@ class ABCFileType:
     def process(
             filepath: str,
             output: str = 'docs',
+            one_file: bool = False
     ):
         """
         Process file and translate it into .md
 
         :param filepath: path to file
         :param output: output directory
+        :param one_file: True when target is file
         """
         raise RuntimeError('Can not call this method')
 
@@ -67,10 +69,19 @@ class ABCFileType:
     def pre(
             filepath: str,
             output: str = 'docs',
+            one_file: bool = False,
     ) -> tuple[str, str, str]:
+        """
+        Preprocess file and making directories
+
+        :param filepath: path to file
+        :param output: output directory
+        :param one_file: True when target is file
+        """
         # get dir and file
         directory, file = path.split(filepath)
-        directory = sep.join(directory.split(sep)[1:])
+        if not one_file:
+            directory = sep.join(directory.split(sep)[1:])
         # filename and extension
         filename, file_extension = path.splitext(file)
         filename = filename.replace('__init__', 'readme')
