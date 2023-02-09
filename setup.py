@@ -6,7 +6,7 @@ setup(
     version='0.1',
     packages=find_packages(),
     py_modules=['hapdoc'],
-    install_requires=['click', 'colorama'],
+    install_requires=['click', 'colorama', 'fastapi', 'uvicorn'],
     entry_points={
         'console_scripts': [
             'hapdoc = hapdoc.hapdoc:hapdoc'
