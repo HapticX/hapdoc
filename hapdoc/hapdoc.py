@@ -2,6 +2,7 @@
 """
 Autodoc CLI
 """
+import os
 from os import path
 from glob import glob
 
@@ -133,6 +134,31 @@ def serve(
     md_files = [f.replace(path.normpath(docs), '')[1:-3] for f in glob(path.normpath(docs + '/**/*.md'), recursive=True)]
     print(md_files)
 
+    sidebar = [{
+            'title': 'Main',
+            'id': 'main_data_side',
+            'data': []
+    }]
+    current_directory = ''
+    for mdf in md_files:
+        directory = mdf.split(os.sep)
+        if len(directory) == 1:
+            sidebar[0]['data'].append({
+                'title': mdf,
+                'url': f'/docs/{mdf}'
+            })
+        elif sidebar[-1]['title'] != directory[0]:
+            sidebar.append({
+                'title': directory[0],
+                'id': directory[0],
+                'data': [{'title': directory[-1], 'url': f'/docs/{mdf}'}]
+            })
+        else:
+            sidebar[-1]['data'].append({
+                'title': directory[-1],
+                'url': f'/docs/{mdf}'
+            })
+
     @app.get('/docs/{doc:path}')
     async def get_md_at(doc: str):
         if not doc.endswith('.md'):
@@ -145,25 +171,10 @@ def serve(
                 template.render(
                     pageData=Md2Html.cast(data),
                     title=title,
-                    side=[
-                        {
-                            'title': 'All',
-                            'id': 'something',
-                            'data': [
-                                {
-                                    'title': path.split(f)[1],
-                                    'url': f'http://localhost:5000/docs/{f}'
-                                }
-                                for f in md_files
-                            ]
-                        }
-                    ],
-                    nav={
-                        "links": [{
-                            "title": "Github",
-                            "url": "https://github.com/hapticx/hapdoc"
-                        }]
-                    },
+                    side=sidebar,
+                    nav={"links": [
+                        {"title": "Github", "url": "https://github.com/hapticx/hapdoc"},
+                    ]},
                     accentColor='#5ECED4'
                 )
             )

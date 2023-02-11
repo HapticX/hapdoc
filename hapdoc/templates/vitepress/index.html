@@ -16,35 +16,40 @@
   <title>{{ title }}</title>
 </head>
 <body class="bg-black text-white overflow-x-hidden">
-  <main class="w-screen h-min-screen h-full flex">
-    <div class="flex flex-col w-3/12 h-full bg-white bg-opacity-10 relative">
-      <div class="flex items-start w-full pl-60 pr-8 font-bold select-none absolute">
+  <main class="w-screen min-h-screen h-full flex">
+    <div class="flex flex-col w-3/12 h-full bg-white/[.20] min-h-screen">
+      <!-- SideBar -->
+      <div class="flex flex-col gap-2 pl-60 h-full">
         <div
-          class="w-full h-full flex items-center h-16 pl-2 cursor-pointer border-b-[1px] border-white border-opacity-10 hover:opacity-50 transition-all duration-300"
+          class="w-full h-16 pl-2 pt-4 cursor-pointer border-b-[1px] border-white border-opacity-10 hover:opacity-50 hover:border-opacity-20 transition-all duration-300"
         >
           {{ title }}
         </div>
-      </div>
-      <div class="flex-auto pt-5 flex flex-col gap-2 pl-60 pt-20 h-full">
         {% for item in side %}
           <div class="flex flex-col h-full gap-2 pb-4 border-b-[1px] border-white border-opacity-10">
             <div class="flex flex-col w-full px-2 font-bold">
-              <div class="flex w-full justify-between gap-2 cursor-pointer" onclick="toggleList('itemID')">
-                <p class="select-none">{{ item.title }}</p>
+              <div class="flex w-full justify-between gap-2 cursor-pointer" onclick="toggleList('{{ item.id }}')">
+                <p class="select-none">
+                  {{ item.title }}
+                </p>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   height="24"
                   width="24"
-                  class="fill-white opacity-70 transition-all ease-out"
-                  id="itemID-icon"
+                  class="fill-white opacity-70 transition-all ease-out select-none"
+                  id="{{ item.id }}-icon"
                   style="transform: rotate(90deg);"
                 >
                   <path d="M9.4 17.65 8.35 16.6l4.6-4.6-4.6-4.6L9.4 6.35 15.05 12Z"/>
                 </svg>
               </div>
-              <div class="flex flex-col h-fit w-full py-2" id="itemID-list">
+              <div class="flex flex-col h-fit w-full py-2" id="{{ item.id }}-list" style="display: flex">
                 {% for data in item.data %}
-                  <a href="{{ data.url }}" class="opacity-50 hover:opacity-100 transition-all duration-300">{{ data.title }}</a>
+                  <a
+                    href="{{ data.url }}"
+                    class="select-none opacity-50 hover:opacity-100 transition-all duration-300">
+                    {{ data.title }}
+                  </a>
                 {% endfor %}
               </div>
             </div>
@@ -52,29 +57,34 @@
         {% endfor %}
       </div>
     </div>
-    <div class="w-9/12 pr-64 py-4 bg-white bg-opacity-20 relative">
+
+    <!-- Content -->
+    <div class="w-9/12 pr-64 py-4 bg-white/[.15] relative">
+      <!-- Links -->
       <div class="top-0 left-0 h-16 pr-72 w-full absolute flex items-center justify-end">
         {% for link in nav.links %}
-          <a href="{{ link.href }}" class="hover:text-[{{ accentColor }}] transition-all duration-300">
+          <a href="{{ link.href }}" class="select-none hover:text-[{{ accentColor }}] transition-all duration-300">
             {{ link.title }}
           </a>
         {% endfor %}
       </div>
       <div class="w-full h-full pt-20 flex px-32 gap-20">
-        <div class="flex flex-col gap-2 w-3/4">
+        <!-- Page data -->
+        <div class="flex flex-col gap-4 w-3/4">
           {{ pageData|safe }}
         </div>
+        <!-- Page navigation -->
         <div class="flex flex-col w-1/4 h-fit gap-2 text-sm py-2 border-l-[1px] border-white border-opacity-20">
-          <p class="pl-5 font-bold">
+          <p class="select-none pl-5 font-bold">
             On this page
           </p>
-          <div class="opacity-100 border-l-[1.5px] border-[{{ accentColor }}] border-opacity-100 pl-5 cursor-pointer">
+          <div class="select-none opacity-100 border-l-[1.5px] border-[{{ accentColor }}] border-opacity-100 pl-5 cursor-pointer">
             current name of page
           </div>
-          <div class="opacity-40 pl-5 hover:opacity-100 transition-all duration-300 cursor-pointer">
+          <div class="select-none opacity-40 pl-5 hover:opacity-100 transition-all duration-300 cursor-pointer">
             another name of page
           </div>
-          <div class="opacity-40 pl-5 hover:opacity-100 transition-all duration-300 cursor-pointer">
+          <div class="select-none opacity-40 pl-5 hover:opacity-100 transition-all duration-300 cursor-pointer">
             another name of page
           </div>
           </div>
@@ -93,6 +103,16 @@
       font-family: "Inter var", "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
       font-variant-ligatures: contextual;
     }
+    :root::-webkit-scrollbar {
+      background: #ffffff3a;
+      width: .75rem;
+      height: .75rem;
+    }
+    :root::-webkit-scrollbar-thumb {
+      background: #ffffff5a;
+      border-radius: 2rem;
+    }
+
     ::-moz-selection {
       background: {{ accentColor }}90;
     }
@@ -144,9 +164,35 @@
       display: inline;
     }
     code {
-      border-radius: .5rem;
+      border-radius: 0 0 .5rem .5rem;
       padding: .25rem .5rem;
       font-family: 'Fira Code', monospace;
+      width: 100%;
+    }
+    code::-webkit-scrollbar {
+      background: #00000000;
+      width: .75rem;
+      height: .75rem;
+      border-radius: 2rem;
+    }
+    code::-webkit-scrollbar-thumb {
+      background: #ffffff5a;
+      border-radius: 2rem;
+    }
+    pre {
+      background: #00000080;
+      border-radius: .5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: end;
+      justify-items: end;
+      place-items: end;
+    }
+    button {
+      width: fit-content;
+      padding: .25rem .5rem;
+      display: flex;
+      justify-items: center;
     }
   </style>
 

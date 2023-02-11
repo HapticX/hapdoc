@@ -1,9 +1,13 @@
 from setuptools import setup, find_packages
 
+with open('./readme.md', 'r', encoding='utf-8') as f:
+    long_description = f.read()
+
 setup(
     name='hapdoc',
     description='autodoc tool for everything',
-    version='0.2',
+    long_description=long_description,
+    version='0.3',
     packages=find_packages(),
     py_modules=['hapdoc'],
     install_requires=['click', 'colorama', 'fastapi', 'uvicorn'],
