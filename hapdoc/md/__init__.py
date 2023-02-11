@@ -5,7 +5,10 @@ import re
 class Md2Html:
     _rules = [
         (r'_{3,}\s*', r'<hr>'),
+        (r'-{3,}\s*', r'<hr>'),
         (r'(\s+)> +([^\n]+)', r'\1<div class="quote">\2</div>'),
+        (r'\n+((-\s*[^\n]+\n)+)', r'<ul style="list-style-type: disc">\n\1</ul>'),
+        (r'\n+-\s*([^\n]+)', r'<li>\1</li>'),
         (r'###### ([^\n]+)', r'<h6>\1</h6>'),
         (r'##### ([^\n]+)', r'<h5>\1</h5>'),
         (r'#### ([^\n]+)', r'<h4>\1</h4>'),

@@ -59,7 +59,7 @@ class Py(ABCFileType):
                     if arg_type else arg_name
                 })
             arguments_text = ",\n    ".join([i["text"] for i in arguments])
-            params = '\n- '.join([f'`{i["name"]}`: {i["desc"]}' for i in arguments if i['desc']])
+            params = '\n- '.join([f'`{i["name"]}` - {i["desc"]}' for i in arguments if i['desc']])
             params = f'\n- {params}' if params else ''
             decorator_text = '\n@'.join(decorators)
             decorator_text = f'@{decorator_text}\n' if decorators else ''
