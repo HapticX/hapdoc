@@ -4,6 +4,7 @@
 autodoc CLI tool written in Python
 
 ![Python](https://img.shields.io/badge/Python%203.10-35497E?style=for-the-badge&logo=python&logoColor=FFF077)
+![FastAPI](https://img.shields.io/badge/FastAPI-35497E?style=for-the-badge&logo=fastapi&logoColor=FFF077)
 
 </div>
 
