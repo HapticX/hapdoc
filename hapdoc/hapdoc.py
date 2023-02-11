@@ -14,7 +14,7 @@ from fastapi import status
 from uvicorn.server import Server, Config
 from jinja2 import FileSystemLoader, Environment, select_autoescape
 
-from hapdoc.autodocker import generate as gen
+from hapdoc.autodocker import generate
 from hapdoc.autodocker.doctypes import PyDoc
 from hapdoc.md import Md2Html
 
@@ -63,7 +63,7 @@ def gen(
     Generates docs for file or project
     """
     ignore_list = [ext.strip() for ext in ignore.split(',')]
-    gen(
+    generate(
         project_path,
         {
             'py': PyDoc,

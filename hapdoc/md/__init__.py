@@ -4,6 +4,8 @@ import re
 
 class Md2Html:
     _rules = [
+        (r'_{3,}\s*', r'<hr>'),
+        (r'(\s+)> +([^\n]+)', r'\1<div class="quote">\2</div>'),
         (r'###### ([^\n]+)', r'<h6>\1</h6>'),
         (r'##### ([^\n]+)', r'<h5>\1</h5>'),
         (r'#### ([^\n]+)', r'<h4>\1</h4>'),
@@ -12,10 +14,13 @@ class Md2Html:
         (r'# ([^\n]+)', r'<h1>\1</h1>'),
         (r'!\[([^\n\]]+)\]\(([^\)\s]+)\)', r'<img src="\2" alt="\1">'),
         (r'\[([^\n\]]+)\]\(([^\)\s]+)\)', r'<a href="\2">\1</a>'),
+        (r'```(\S+)\s*([^`]+?)```', r'<pre><code class="language-\1">\2</code></pre>'),
+        (r'`([^`]+?)`', r'<span class="command">\1</span>'),
     ]
 
     @staticmethod
-    def cast(source: str) -> str:
-        for pattern, repl in Md2Html._rules:
-            source = re.sub(pattern, repl, source)
+    def cast(source: str, repeat: int = 2) -> str:
+        for i in range(repeat):
+            for pattern, repl in Md2Html._rules:
+                source = re.sub(pattern, repl, source, re.MULTILINE)
         return source

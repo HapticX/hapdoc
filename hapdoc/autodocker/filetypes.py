@@ -65,7 +65,7 @@ class Py(ABCFileType):
             decorator_text = f'@{decorator_text}\n' if decorators else ''
             arguments_text = f'\n    {arguments_text}\n' if arguments_text else ''
             methods_text.append(
-                f'\n```py\n{decorator_text}def {name}({arguments_text}){return_type}:\n```'
+                f'\n```python\n{decorator_text}def {name}({arguments_text}){return_type}:\n```'
                 f'\n{description}\n{params}\n')
         return '\n___\n'.join(methods_text)
 
