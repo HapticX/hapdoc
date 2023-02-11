@@ -13,3 +13,10 @@ via `git`
 ```bash
 pip install https://github.com/hapticx/hapdoc
 ```
+
+## Usage
+Generate and serve docs via FastAPI:
+```bash
+hapdoc gen path/to/project
+hapdoc serve -d docs/hapdoc -h 127.0.0.1 -p 5000
+```

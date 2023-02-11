@@ -55,7 +55,7 @@
     <div class="w-9/12 pr-64 py-4 bg-white bg-opacity-20 relative">
       <div class="top-0 left-0 h-16 pr-72 w-full absolute flex items-center justify-end">
         {% for link in nav.links %}
-          <a href="{ link.href }" class="hover:text-[{ accentColor }] transition-all duration-300">
+          <a href="{{ link.href }}" class="hover:text-[{{ accentColor }}] transition-all duration-300">
             {{ link.title }}
           </a>
         {% endfor %}
@@ -65,15 +65,23 @@
           {{ pageData|safe }}
         </div>
         <div class="flex flex-col w-1/4 h-fit gap-2 text-sm py-2 border-l-[1px] border-white border-opacity-20">
-          <p class="pl-5 font-bold">On this page</p>
-          <div class="opacity-100 border-l-[1.5px] border-[{ accentColor }] border-opacity-100 pl-5 cursor-pointer">current name of page</div>
-          <div class="opacity-40 pl-5 hover:opacity-100 transition-all duration-300 cursor-pointer">another name of page</div>
-          <div class="opacity-40 pl-5 hover:opacity-100 transition-all duration-300 cursor-pointer">another name of page</div>
+          <p class="pl-5 font-bold">
+            On this page
+          </p>
+          <div class="opacity-100 border-l-[1.5px] border-[{{ accentColor }}] border-opacity-100 pl-5 cursor-pointer">
+            current name of page
+          </div>
+          <div class="opacity-40 pl-5 hover:opacity-100 transition-all duration-300 cursor-pointer">
+            another name of page
+          </div>
+          <div class="opacity-40 pl-5 hover:opacity-100 transition-all duration-300 cursor-pointer">
+            another name of page
+          </div>
           </div>
       </div>
-
     </div>
   </main>
+
   <style>
     @import url(https://cdn.jsdelivr.net/npm/firacode@6.2.0/distr/fira_code.css);
 
@@ -141,6 +149,7 @@
       font-family: 'Fira Code', monospace;
     }
   </style>
+
   <script lang="js">
     function toggleList(itemID) {
       // Finding elements by "itemID"

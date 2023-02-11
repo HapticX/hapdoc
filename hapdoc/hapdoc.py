@@ -158,12 +158,12 @@ def serve(
                             ]
                         }
                     ],
-                    nav=[{
+                    nav={
                         "links": [{
                             "title": "Github",
                             "url": "https://github.com/hapticx/hapdoc"
                         }]
-                    }],
+                    },
                     accentColor='#5ECED4'
                 )
             )
