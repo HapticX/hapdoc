@@ -17,8 +17,8 @@
 </head>
 <body class="bg-black text-white overflow-x-hidden">
   <main class="w-screen min-h-screen h-full flex">
+    <!-- SideBar -->
     <div class="flex flex-col w-3/12 h-full bg-white/[.20] min-h-screen">
-      <!-- SideBar -->
       <div class="flex flex-col gap-2 pl-60 h-full">
         <div
           class="w-full h-16 pl-2 pt-4 cursor-pointer border-b-[1px] border-white border-opacity-10 hover:opacity-50 hover:border-opacity-20 transition-all duration-300"
@@ -74,7 +74,7 @@
           {{ pageData|safe }}
         </div>
         <!-- Page navigation -->
-        <div class="flex flex-col w-1/4 h-fit gap-2 text-sm py-2 border-l-[1px] border-white border-opacity-20">
+        <div class="flex flex-col fixed right-0 w-1/4 h-fit gap-2 text-sm py-2 border-l-[1px] border-white border-opacity-20">
           <p class="select-none pl-5 font-bold">
             On this page
           </p>
@@ -193,6 +193,13 @@
       padding: .25rem .5rem;
       display: flex;
       justify-items: center;
+      transition: opacity .15s ease-out;
+    }
+    button:hover {
+      opacity: .75;
+    }
+    button:active {
+      opacity: .6;
     }
     ul {
       display: flex;
