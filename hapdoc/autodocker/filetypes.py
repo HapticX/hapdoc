@@ -14,7 +14,6 @@ class Py(ABCFileType):
 
     @staticmethod
     def process_funcs(
-            source: str,
             functions: list[tuple[str, str, str, str, str, str, str]]
     ) -> str:
         """
@@ -109,7 +108,7 @@ class Py(ABCFileType):
                 MULTILINE
             )
             class_text += '\n#### methods'
-            class_text += Py.process_funcs(source, methods)
+            class_text += Py.process_funcs(methods)
             classes_text.append(class_text)
         # write classes data
         if classes_text:
@@ -125,7 +124,7 @@ class Py(ABCFileType):
             MULTILINE
         )
         if functions:
-            data += f'\n### Functions\n{Py.process_funcs(source, functions)}'
+            data += f'\n### Functions\n{Py.process_funcs(functions)}'
 
         with open(end_path, 'w', encoding='utf-8') as f:
             f.write(data)
