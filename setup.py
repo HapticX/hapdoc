@@ -29,7 +29,7 @@ setup(
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
         'Programming Language :: Python :: 3.10',
-        'Topic :: Documentation'
+        'Topic :: Documentation',
         'Topic :: Software Development :: Documentation'
     ]
 )
