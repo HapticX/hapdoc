@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 """
-Describes all FileTypes
+Describes Python file type
 """
-from re import findall, sub, split, MULTILINE
+from re import findall, sub, MULTILINE
 
-from .abc import ABCFileType
+from ..abc import ABCFileType
 
 
 class Py(ABCFileType):
     """
-    Provides Python script translator behavior
+    Provides Python file type behavior
     """
 
     @staticmethod
@@ -26,13 +26,11 @@ class Py(ABCFileType):
         methods_text = []
         for method in functions:
             decorator, _, name, arguments, return_type, _, docs = method
-            print(method)
             # description
             description = findall(r'\s*([^:]+)', docs)
             description = description[0].rstrip(' \n') if description else ''
             # decorators
             decorators = [i.strip() for i in decorator.split('@')[1:]] if decorator else []
-            print(decorators)
             # return type
             return_type = findall(r'->\s*([^:]+):', return_type)
             return_type = f' -> {return_type[0]}' if return_type else ''
@@ -83,7 +81,6 @@ class Py(ABCFileType):
         :return:
         """
         source, end_path, filename = Py.pre(filepath, output, one_file)
-        print(filepath)
         data = f'# {filename}\n'
 
         description = findall(r'[^ \r\t]"{3}\s*([\s\S]+?)\s*"{3}', source)

@@ -64,16 +64,20 @@ def gen(
     Generates docs for file or project
     """
     ignore_list = [ext.strip() for ext in ignore.split(',')]
-    generate(
-        project_path,
-        {
-            'py': PyDoc,
-        },
-        ignore_list,
-        document_type,
-        extend,
-        output
-    )
+    with click.progressbar(
+        label='Generating docs',
+        fill_char=click.style('#', 'bright_green'),
+        empty_char=' ',
+        show_percent=True,
+        length=1,
+    ) as bar:
+        for i in generate(
+                project_path, {
+                    'py': PyDoc,
+                }, ignore_list, document_type, extend, output
+        ):
+            bar.length = i[1]
+            bar.update(i[0])
 
 
 @hapdoc.command()

@@ -7,7 +7,7 @@ setup(
     name='hapdoc',
     description='autodoc tool for everything',
     long_description=long_description,
-    version='0.3',
+    version='0.4',
     packages=find_packages(),
     py_modules=['hapdoc'],
     install_requires=['click', 'colorama', 'fastapi', 'uvicorn'],
