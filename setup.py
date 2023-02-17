@@ -12,7 +12,7 @@ setup(
     maintainer='HapticX',
     maintainer_email='hapticx.company@gmail.com',
     url='https://github.com/HapticX/hapdoc',
-    version='0.4',
+    version='0.5',
     packages=find_packages(),
     py_modules=['hapdoc'],
     install_requires=['click', 'colorama', 'fastapi', 'uvicorn'],
@@ -30,5 +30,6 @@ setup(
         'Operating System :: OS Independent',
         'Programming Language :: Python :: 3.10',
         'Topic :: Documentation'
+        'Topic :: Software Development :: Documentation'
     ]
 )

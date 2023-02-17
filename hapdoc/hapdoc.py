@@ -16,7 +16,7 @@ from uvicorn.server import Server, Config
 from jinja2 import FileSystemLoader, Environment, select_autoescape
 
 from hapdoc.autodocker import generate
-from hapdoc.autodocker.doctypes import PyDoc
+from hapdoc.autodocker.filetypes import Py, FastApi
 from hapdoc.md import Md2Html
 
 
@@ -63,7 +63,10 @@ def gen(
     """
     Generates docs for file or project
     """
-    ignore_list = [ext.strip() for ext in ignore.split(',')]
+    ignore_list = [
+        ext.strip() if ext.strip().startswith('.') else f'.{ext.strip()}'
+        for ext in ignore.split(',')
+    ]
     with click.progressbar(
         label='Generating docs',
         fill_char=click.style('#', 'bright_green'),
@@ -72,9 +75,7 @@ def gen(
         length=1,
     ) as bar:
         for i in generate(
-                project_path, {
-                    'py': PyDoc,
-                }, ignore_list, document_type, extend, output
+                project_path, None, ignore_list, document_type, extend, output
         ):
             bar.length = i[1]
             bar.update(i[0])
@@ -135,7 +136,10 @@ def serve(
         autoescape=select_autoescape()
     )
     template = env.get_template('index.html')
-    md_files = [f.replace(path.normpath(docs), '')[1:-3] for f in glob(path.normpath(docs + '/**/*.md'), recursive=True)]
+    md_files = [
+        f.replace(path.normpath(docs), '')[1:-3]
+        for f in glob(path.normpath(docs + '/**/*.md'), recursive=True)
+    ]
     print(md_files)
 
     sidebar = [{
@@ -143,9 +147,9 @@ def serve(
             'id': 'main_data_side',
             'data': []
     }]
-    current_directory = ''
     for mdf in md_files:
-        directory = mdf.split(os.sep)
+        directory = [i for i in path.split(mdf) if i]
+        print(directory)
         if len(directory) == 1:
             sidebar[0]['data'].append({
                 'title': mdf,
