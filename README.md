@@ -5,7 +5,7 @@ autodoc CLI tool written in Python with :heart:
 
 ![Python](https://img.shields.io/badge/Python%203.10-35497E?style=for-the-badge&logo=python&logoColor=FFF077)
 ![FastAPI](https://img.shields.io/badge/FastAPI-35497E?style=for-the-badge&logo=fastapi&logoColor=FFF077)
-![Version](https://img.shields.io/badge/Hapdoc%200.6-35497E?style=for-the-badge&logo=pypi&logoColor=FFF077)
+![Version](https://img.shields.io/pypi/v/hapdoc?label=hapdoc&style=for-the-badge)
 
 [![wakatime](https://wakatime.com/badge/user/eaf11f95-5e2a-4b60-ae6a-38cd01ed317b/project/f4dc9f08-796d-42b1-9065-363e5a347ecf.svg?style=for-the-badge)](https://wakatime.com/badge/user/eaf11f95-5e2a-4b60-ae6a-38cd01ed317b/project/f4dc9f08-796d-42b1-9065-363e5a347ecf)
 
