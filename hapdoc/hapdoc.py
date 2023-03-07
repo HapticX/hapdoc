@@ -137,41 +137,75 @@ def serve(
     )
     template = env.get_template('index.html')
     md_files = [
-        f.replace(path.normpath(docs), '')[1:-3]
+        f.replace(path.normpath(docs), '')
         for f in glob(path.normpath(docs + '/**/*.md'), recursive=True)
     ]
     print(md_files)
 
-    sidebar = [{
-            'title': 'Main',
-            'id': 'main_data_side',
-            'data': []
-    }]
+    sidebar = {}
+
     for mdf in md_files:
-        directory = [i for i in path.split(mdf) if i]
+        mdf = mdf.strip('\\')
+        directory = [i for i in mdf.split(os.sep) if i]
         print(directory)
-        if len(directory) == 1:
-            sidebar[0]['data'].append({
-                'title': mdf,
-                'url': f'/docs/{mdf}'
-            })
-        elif sidebar[-1]['title'] != directory[0]:
-            sidebar.append({
-                'title': directory[0],
-                'id': directory[0],
-                'data': [{'title': directory[-1], 'url': f'/docs/{mdf}'}]
-            })
-        else:
-            sidebar[-1]['data'].append({
-                'title': directory[-1],
-                'url': f'/docs/{mdf}'
-            })
+        s: dict = sidebar
+        for i, p in enumerate(directory):
+            # File
+            print(i, p, len(directory))
+            if i == len(directory)-1:
+                file = p.rsplit('.', 1)[0]
+                print(s)
+                s[file] = {
+                    '_data': {
+                        'id': mdf.replace('\\', '_'),
+                        'title': file,
+                        'url': f'/docs/{mdf}'
+                    },
+                    '_items': {}
+                }
+            else:
+                # Directory
+                if p in s:
+                    s = s[p]['_items']
+                else:
+                    s[p] = {
+                        '_data': {
+                            'id': mdf.replace('\\', '_'),
+                            'title': p,
+                            'url': ''
+                        },
+                        '_items': {}
+                    }
+                    s = s[p]['_items']
+        # if len(directory) == 1:
+        #     sidebar.append({
+        #         'title': mdf,
+        #         'url': f'/docs/{mdf}'
+        #     })
+        # elif sidebar and sidebar[-1]['title'] != directory[0]:
+        #     s = sidebar
+        #     d = directory
+        #     while len(directory) > 2:
+        #         s = sidebar[-1]['data']
+        #         directory.pop(0)
+        #     s.append({
+        #         'title': d[0],
+        #         'id': d[0],
+        #         'data': [{'title': d[-1], 'url': f'/docs/{mdf}'}]
+        #     })
+        # elif sidebar:
+        #     sidebar[-1]['data'].append({
+        #         'title': directory[-1],
+        #         'url': f'/docs/{mdf}'
+        #     })
+    print(sidebar)
 
     @app.get('/docs/{doc:path}')
     async def get_md_at(doc: str):
         if not doc.endswith('.md'):
             doc += '.md'
         p = path.join(docs, doc)
+        print(p)
         if path.exists(p) and path.isfile(p):
             with open(p, 'r', encoding='utf-8') as f:
                 data = f.read()
