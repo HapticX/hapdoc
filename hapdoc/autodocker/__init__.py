@@ -6,7 +6,7 @@ from .abc import ABCDocType, ABCFileType
 from .filetypes import Py, FastApi
 
 
-__all__ = ['generate']
+__all__ = ['generate', 'all_project_types']
 
 
 _config = {
@@ -21,6 +21,10 @@ _config = {
         }
     }
 }
+
+
+def all_project_types() -> list[str]:
+    return [i for i in _config.keys()]
 
 
 def generate(
@@ -89,5 +93,6 @@ def _process(
             file_types[ext].process(f'{path.join(project_path, v)}', output_dir)
             yield i, length
     else:
-        Py.process(project_path, output_dir, True)
+        file, ext = path.splitext(project_path)
+        file_types[ext].process(project_path, output_dir, True)
         yield 1, 1

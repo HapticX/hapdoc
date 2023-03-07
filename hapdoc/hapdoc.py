@@ -15,7 +15,7 @@ from fastapi import status
 from uvicorn.server import Server, Config
 from jinja2 import FileSystemLoader, Environment, select_autoescape
 
-from hapdoc.autodocker import generate
+from hapdoc.autodocker import generate, all_project_types
 from hapdoc.autodocker.filetypes import Py, FastApi
 from hapdoc.md import Md2Html
 
@@ -25,6 +25,13 @@ def hapdoc():
     """
     Autodoc CLI tool for making project's cute docs
     """
+
+
+@hapdoc.command()
+def project_types():
+    ptypes = all_project_types()
+    for t in ptypes:
+        click.echo(f'- {t}')
 
 
 @hapdoc.command()
@@ -177,27 +184,6 @@ def serve(
                         '_items': {}
                     }
                     s = s[p]['_items']
-        # if len(directory) == 1:
-        #     sidebar.append({
-        #         'title': mdf,
-        #         'url': f'/docs/{mdf}'
-        #     })
-        # elif sidebar and sidebar[-1]['title'] != directory[0]:
-        #     s = sidebar
-        #     d = directory
-        #     while len(directory) > 2:
-        #         s = sidebar[-1]['data']
-        #         directory.pop(0)
-        #     s.append({
-        #         'title': d[0],
-        #         'id': d[0],
-        #         'data': [{'title': d[-1], 'url': f'/docs/{mdf}'}]
-        #     })
-        # elif sidebar:
-        #     sidebar[-1]['data'].append({
-        #         'title': directory[-1],
-        #         'url': f'/docs/{mdf}'
-        #     })
     print(sidebar)
 
     @app.get('/docs/{doc:path}')
@@ -232,6 +218,7 @@ def serve(
             port=port
         )
     )
+    click.echo(f'Your server runs at http://{host}:{port}')
     server.run()
 
 

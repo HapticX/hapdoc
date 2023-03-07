@@ -12,6 +12,7 @@
     href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/styles/vs2015.min.css"
   >
   <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/highlight.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/languages/http.min.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <title>{{ title }}</title>
 </head>
@@ -26,6 +27,7 @@
           {{ title }}
         </div>
         {% macro sidebar(key, item) %}
+          <!-- SideBar item -->
           <div class="flex flex-col h-full gap-2 pb-4 border-b-[1px] border-white border-opacity-10">
             <div class="flex pl-2 flex-col w-full font-bold">
               <div class="flex w-full gap-2 cursor-pointer" onclick="toggleList('{{ item._data.id }}')">

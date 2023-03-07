@@ -2,7 +2,7 @@
 """
 Describes Python file type
 """
-from re import findall, sub, MULTILINE
+from re import findall, sub, MULTILINE, IGNORECASE
 
 from ..abc import ABCFileType
 
@@ -14,7 +14,7 @@ class FastApi(ABCFileType):
 
     @staticmethod
     def process_funcs(
-            functions: list[tuple[str, str, str, str, str, str, str]]
+            functions: list[tuple[str, str, str, str, str, str, str, str]]
     ) -> str:
         """
         Process functions and methods in .py files
@@ -25,12 +25,22 @@ class FastApi(ABCFileType):
         """
         methods_text = []
         for method in functions:
-            decorator, _, name, arguments, return_type, _, docs = method
+            decorator, _, is_async, name, arguments, return_type, _, docs = method
             # description
             description = findall(r'\s*([^:]+)', docs)
             description = description[0].rstrip(' \n') if description else ''
             # decorators
             decorators = [i.strip() for i in decorator.split('@')[1:]] if decorator else []
+            req_method, req_route = '', ''
+            for decorator in decorators:
+                data = findall(
+                    r'(get|post|put|patch|delete|options|copy|link|unlink|purge|head)\((\'[^\']+?\'|"[^"]+")\)',
+                    decorator, IGNORECASE)
+                if data:
+                    data = data[0]
+                    req_method, req_route = data[0].upper(), data[1].strip('"').strip("'")
+            if not req_method and not req_route:
+                continue
             # return type
             return_type = findall(r'->\s*([^:]+):', return_type)
             return_type = f' -> {return_type[0]}' if return_type else ''
@@ -61,9 +71,10 @@ class FastApi(ABCFileType):
             decorator_text = '\n@'.join(decorators)
             decorator_text = f'@{decorator_text}\n' if decorators else ''
             arguments_text = f'\n    {arguments_text}\n' if arguments_text else ''
+            query_text = f'#### Query Params:\n{params}'
             methods_text.append(
-                f'\n```python\n{decorator_text}def {name}({arguments_text}){return_type}:\n```'
-                f'\n{description}\n{params}\n')
+                f'\n```http\n{req_method} {req_route} HTTP/1.1\n```'
+                f'\n{description}\n{query_text}\n')
         return '\n___\n'.join(methods_text)
 
     @staticmethod
@@ -80,10 +91,10 @@ class FastApi(ABCFileType):
         :param one_file: True when file flag is True
         :return:
         """
-        source, end_path, filename = Py.pre(filepath, output, one_file)
+        source, end_path, filename = FastApi.pre(filepath, output, one_file)
         data = f'# {filename}\n'
 
-        description = findall(r'[^ \r\t]"{3}\s*([\s\S]+?)\s*"{3}', source)
+        description = findall(r'^"{3}\s*([\s\S]+?)\s*"{3}', source, MULTILINE)
         if description:
             data += f'\n> {description[0].strip()}'
 
@@ -99,13 +110,13 @@ class FastApi(ABCFileType):
             # Handle class methods
             methods = findall(
                 r"^\s*((@[\S]+\(\)|@[\S]+\([\S\s]+?\)|\s*|@[\S]+\s*)+)?"
-                r"\s+def +([^\s(]+)(\(\)|\([\s\S]+?\))(\s*->\s*[^:]+:|\s*:)"
+                r"\s+(async +)?def +([^\s(]+)(\(\)|\([\s\S]+?\))(\s*->\s*[^:]+:|\s*:)"
                 r"\s+(\"{3}([\s\S]+?)\"{3})?",
                 class_code,
                 MULTILINE
             )
             class_text += '\n#### methods'
-            class_text += Py.process_funcs(methods)
+            class_text += FastApi.process_funcs(methods)
             classes_text.append(class_text)
         # write classes data
         if classes_text:
@@ -115,13 +126,13 @@ class FastApi(ABCFileType):
         # Handle functions
         functions = findall(
             r'^((@[\S]+\s*\(\)\s*|@[\S]+\s*\([\s\S]+?\)\s*|@[\S]+\s*)+)?\s+'
-            r'^def +([^\s(]+)(\(\)|\([\s\S]+?\))(\s*->\s*[^:]+:|\s*:)'
+            r'^(async +)?def +([^\s(]+)(\(\)|\([\s\S]+?\))(\s*->\s*[^:]+:|\s*:)'
             r'\s+(\"{3}([\s\S]+?)\"{3})?',
             source,
             MULTILINE
         )
         if functions:
-            data += f'\n### Functions\n{Py.process_funcs(functions)}'
+            data += f'\n### Functions\n{FastApi.process_funcs(functions)}'
 
         with open(end_path, 'w', encoding='utf-8') as f:
             f.write(data)

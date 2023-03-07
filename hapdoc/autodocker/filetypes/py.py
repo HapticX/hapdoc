@@ -14,7 +14,7 @@ class Py(ABCFileType):
 
     @staticmethod
     def process_funcs(
-            functions: list[tuple[str, str, str, str, str, str, str]]
+            functions: list[tuple[str, str, str, str, str, str, str, str]]
     ) -> str:
         """
         Process functions and methods in .py files
@@ -25,7 +25,7 @@ class Py(ABCFileType):
         """
         methods_text = []
         for method in functions:
-            decorator, _, name, arguments, return_type, _, docs = method
+            decorator, _, is_async, name, arguments, return_type, _, docs = method
             # description
             description = findall(r'\s*([^:]+)', docs)
             description = description[0].rstrip(' \n') if description else ''
@@ -62,7 +62,7 @@ class Py(ABCFileType):
             decorator_text = f'@{decorator_text}\n' if decorators else ''
             arguments_text = f'\n    {arguments_text}\n' if arguments_text else ''
             methods_text.append(
-                f'\n```python\n{decorator_text}def {name}({arguments_text}){return_type}:\n```'
+                f'\n```python\n{decorator_text}{is_async}def {name}({arguments_text}){return_type}:\n```'
                 f'\n{description}\n{params}\n')
         return '\n___\n'.join(methods_text)
 
@@ -83,7 +83,7 @@ class Py(ABCFileType):
         source, end_path, filename = Py.pre(filepath, output, one_file)
         data = f'# {filename}\n'
 
-        description = findall(r'[^ \r\t]"{3}\s*([\s\S]+?)\s*"{3}', source)
+        description = findall(r'^"{3}\s*([\s\S]+?)\s*"{3}', source, MULTILINE)
         if description:
             data += f'\n> {description[0].strip()}'
 
@@ -99,7 +99,7 @@ class Py(ABCFileType):
             # Handle class methods
             methods = findall(
                 r"^\s*((@[\S]+\(\)|@[\S]+\([\S\s]+?\)|\s*|@[\S]+\s*)+)?"
-                r"\s+def +([^\s(]+)(\(\)|\([\s\S]+?\))(\s*->\s*[^:]+:|\s*:)"
+                r"\s+(async +)?def +([^\s(]+)(\(\)|\([\s\S]+?\))(\s*->\s*[^:]+:|\s*:)"
                 r"\s+(\"{3}([\s\S]+?)\"{3})?",
                 class_code,
                 MULTILINE
@@ -115,7 +115,7 @@ class Py(ABCFileType):
         # Handle functions
         functions = findall(
             r'^((@[\S]+\s*\(\)\s*|@[\S]+\s*\([\s\S]+?\)\s*|@[\S]+\s*)+)?\s+'
-            r'^def +([^\s(]+)(\(\)|\([\s\S]+?\))(\s*->\s*[^:]+:|\s*:)'
+            r'^(async +)?def +([^\s(]+)(\(\)|\([\s\S]+?\))(\s*->\s*[^:]+:|\s*:)'
             r'\s+(\"{3}([\s\S]+?)\"{3})?',
             source,
             MULTILINE

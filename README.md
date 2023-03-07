@@ -17,6 +17,7 @@ Because it's simple to use.
 ### Features :sparkles:
 - Supported projects:
   - `Python`
+  - `FastAPI`
 - Generate markdown docs, Serve it via FastAPI or Build docs into HTML files.
 
 ## Installing :inbox_tray:
@@ -30,6 +31,10 @@ pip install https://github.com/hapticx/hapdoc
 ```
 
 ## Usage :zap:
+Help message
+```bash
+hapdoc --help
+```
 Generate and serve docs via FastAPI:
 ```bash
 hapdoc gen path/to/project
