@@ -21,11 +21,11 @@ Because it's simple to use.
 - Generate markdown docs, Serve it via FastAPI or Build docs into HTML files.
 
 ## Installing :inbox_tray:
-via `pypi`:
+via `pypi` 📦
 ```bash
 pip install hapdoc --upgrade
 ```
-via `git`
+via `git` 💾
 ```bash
 pip install https://github.com/hapticx/hapdoc
 ```
