@@ -114,12 +114,30 @@ def gen(
     default='HapDoc',
     type=str
 )
+@click.option(
+    '-a', '--accent', 'accent_color',
+    default='#c27bd4',
+    type=str
+)
+@click.option(
+    '-b', '--background', 'background_color',
+    default='#212121',
+    type=str
+)
+@click.option(
+    '-s', '--surface', 'surface_color',
+    default='#343434',
+    type=str
+)
 def serve(
         host: str,
         port: str,
         docs: str,
         templates_folder: str,
         title: str,
+        accent_color: str,
+        background_color: str,
+        surface_color: str,
 ):
     """
     Launches FastAPI docs server
@@ -129,6 +147,9 @@ def serve(
     :param docs: docs folder
     :param templates_folder: folder with templates
     :param title: web title
+    :param accent_color: docs accent color
+    :param background_color: docs background color
+    :param surface_color: docs surface color
     """
     app = FastAPI(docs_url=None, redoc_url=None)
     app.add_middleware(
@@ -152,8 +173,9 @@ def serve(
     sidebar = {}
 
     for mdf in md_files:
-        mdf = mdf.strip('\\')
+        mdf = mdf.strip('\\').strip('/')
         directory = [i for i in mdf.split(os.sep) if i]
+        mdf = mdf.replace('\\', '/')
         print(directory)
         s: dict = sidebar
         for i, p in enumerate(directory):
@@ -195,6 +217,7 @@ def serve(
         if path.exists(p) and path.isfile(p):
             with open(p, 'r', encoding='utf-8') as f:
                 data = f.read()
+            p = p.replace('\\', '/').rstrip('/')
             return HTMLResponse(
                 template.render(
                     pageData=Md2Html.cast(data),
@@ -203,7 +226,10 @@ def serve(
                     nav={"links": [
                         {"title": "Github", "url": "https://github.com/hapticx/hapdoc"},
                     ]},
-                    accentColor='#5ECED4'
+                    accentColor=accent_color,
+                    backgroundColor=background_color,
+                    surfaceColor=surface_color,
+                    selected=p
                 )
             )
         return HTMLResponse(
