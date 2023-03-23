@@ -30,9 +30,12 @@ def hapdoc():
 
 @hapdoc.command()
 def project_types():
-    ptypes = all_project_types()
-    for t in ptypes:
-        click.echo(f'- {t}')
+    """
+    Shows all available project types
+    """
+    all_types = all_project_types()
+    for project_type in all_types:
+        click.echo(f'- {project_type}')
 
 
 @hapdoc.command()
@@ -178,14 +181,14 @@ def serve(
         directory = [i for i in mdf.split(os.sep) if i]
         mdf = mdf.replace('\\', '/')
         print(directory)
-        s: dict = sidebar
-        for i, p in enumerate(directory):
+        temp_sidebar: dict = sidebar
+        for idx, temp_path in enumerate(directory):
             # File
-            print(i, p, len(directory))
-            if i == len(directory)-1:
-                file = p.rsplit('.', 1)[0]
-                print(s)
-                s[file] = {
+            print(idx, temp_path, len(directory))
+            if idx == len(directory)-1:
+                file = temp_path.rsplit('.', 1)[0]
+                print(temp_sidebar)
+                temp_sidebar[file] = {
                     '_data': {
                         'id': mdf.replace('\\', '_'),
                         'title': file,
@@ -195,30 +198,30 @@ def serve(
                 }
             else:
                 # Directory
-                if p in s:
-                    s = s[p]['_items']
+                if temp_path in temp_sidebar:
+                    temp_sidebar = temp_sidebar[temp_path]['_items']
                 else:
-                    s[p] = {
+                    temp_sidebar[temp_path] = {
                         '_data': {
                             'id': mdf.replace('\\', '_'),
-                            'title': p,
+                            'title': temp_path,
                             'url': ''
                         },
                         '_items': {}
                     }
-                    s = s[p]['_items']
+                    temp_sidebar = temp_sidebar[temp_path]['_items']
     pprint(sidebar)
 
     @app.get('/{doc:path}')
     async def get_md_at(doc: str):
         if not doc.endswith('.md'):
             doc += '.md'
-        p = path.join(docs, doc)
-        print(p)
-        if path.exists(p) and path.isfile(p):
-            with open(p, 'r', encoding='utf-8') as f:
+        full_path = path.join(docs, doc)
+        print(full_path)
+        if path.exists(full_path) and path.isfile(full_path):
+            with open(full_path, 'r', encoding='utf-8') as f:
                 data = f.read()
-            p = p.replace('\\', '/').rstrip('/')
+            full_path = full_path.replace('\\', '/').rstrip('/')
             return HTMLResponse(
                 template.render(
                     pageData=Md2Html.cast(data),

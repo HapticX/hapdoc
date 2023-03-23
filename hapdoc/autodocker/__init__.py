@@ -24,7 +24,10 @@ _config = {
 
 
 def all_project_types() -> list[str]:
-    return [i for i in _config.keys()]
+    """
+    Returns all project types
+    """
+    return [_ for _ in _config.keys()]
 
 
 def generate(
@@ -35,6 +38,15 @@ def generate(
         extend: list[str] = None,
         output: str = 'docs'
 ) -> Iterable[tuple[int, int]]:
+    """Runs filetypes
+
+    :param project_path: path to the project
+    :param config: config dictionary
+    :param ignore_list: list of file extensions that need to ignore
+    :param document_type: project document type
+    :param extend: list of file extensions that need to include
+    :param output: output directory
+    """
     if config is None:
         config = _config
     if document_type not in config:
