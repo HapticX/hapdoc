@@ -62,7 +62,8 @@ class Py(ABCFileType):
             decorator_text = f'@{decorator_text}\n' if decorators else ''
             arguments_text = f'\n    {arguments_text}\n' if arguments_text else ''
             methods_text.append(
-                f'\n```python\n{decorator_text}{is_async}def {name}({arguments_text}){return_type}:\n```'
+                f'\n```python\n{decorator_text}{is_async}def '
+                f'{name}({arguments_text}){return_type}:\n```'
                 f'\n{description}\n{params}\n')
         return '\n___\n'.join(methods_text)
 
@@ -90,8 +91,8 @@ class Py(ABCFileType):
         # Handle classes
         classes = findall(r'(class +([^:]+):\n(\s+)[^\n]+(\n+\3[ \S]*)+)', source)
         classes_text = []
-        for c in classes:
-            class_code = c[0]
+        for class_data in classes:
+            class_code = class_data[0]
             name = findall(r'class +(\w+)', class_code)[0]
             doc = findall(r'class[^\n]+\s+"{3}\s*([\s\S]+?)"{3}', class_code)
             doc = f'> {doc[0]}' if doc else ''
