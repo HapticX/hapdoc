@@ -99,7 +99,7 @@ class Py(ABCFileType):
             # Handle class methods
             methods = findall(
                 r"^\s*((@[\S]+\(\)|@[\S]+\([\S\s]+?\)|\s*|@[\S]+\s*)+)?"
-                r"\s+(async +)?def +([^\s(]+)(\(\)|\([\s\S]+?\))(\s*->\s*[^:]+:|\s*:)"
+                r"\s+(async +)?def +([^_][^\s(]+)(\(\)|\([\s\S]+?\))(\s*->\s*[^:]+:|\s*:)"
                 r"\s+(\"{3}([\s\S]+?)\"{3})?",
                 class_code,
                 MULTILINE
@@ -115,7 +115,7 @@ class Py(ABCFileType):
         # Handle functions
         functions = findall(
             r'^((@[\S]+\s*\(\)\s*|@[\S]+\s*\([\s\S]+?\)\s*|@[\S]+\s*)+)?\s+'
-            r'^(async +)?def +([^\s(]+)(\(\)|\([\s\S]+?\))(\s*->\s*[^:]+:|\s*:)'
+            r'^(async +)?def +([^_][^\s(]+)(\(\)|\([\s\S]+?\))(\s*->\s*[^:]+:|\s*:)'
             r'\s+(\"{3}([\s\S]+?)\"{3})?',
             source,
             MULTILINE

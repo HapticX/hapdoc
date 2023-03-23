@@ -5,6 +5,7 @@ Autodoc CLI
 import os
 from os import path
 from glob import glob
+from pprint import pprint
 
 import click
 
@@ -188,7 +189,7 @@ def serve(
                     '_data': {
                         'id': mdf.replace('\\', '_'),
                         'title': file,
-                        'url': f'/docs/{mdf}'
+                        'url': f'/{mdf}'
                     },
                     '_items': {}
                 }
@@ -206,9 +207,9 @@ def serve(
                         '_items': {}
                     }
                     s = s[p]['_items']
-    print(sidebar)
+    pprint(sidebar)
 
-    @app.get('/docs/{doc:path}')
+    @app.get('/{doc:path}')
     async def get_md_at(doc: str):
         if not doc.endswith('.md'):
             doc += '.md'
@@ -229,7 +230,7 @@ def serve(
                     accentColor=accent_color,
                     backgroundColor=background_color,
                     surfaceColor=surface_color,
-                    selected=p
+                    selected=doc
                 )
             )
         return HTMLResponse(

@@ -8,7 +8,7 @@ setup(
     maintainer='HapticX',
     maintainer_email='hapticx.company@gmail.com',
     url='https://github.com/HapticX/hapdoc',
-    version='0.8',
+    version='1.0.0',
     packages=find_packages(),
     py_modules=['hapdoc'],
     install_requires=['click', 'colorama', 'fastapi', 'uvicorn'],
@@ -19,7 +19,7 @@ setup(
     },
     license='MIT',
     classifiers=[
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 4 - Beta',
         'Environment :: Console',
         'Framework :: FastAPI',
         'License :: OSI Approved :: MIT License',
