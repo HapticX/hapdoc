@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+"""
+Provides Abstract classes behavior
+"""
 from abc import abstractmethod
 from os import path, listdir, sep, makedirs
 from typing import Iterable
@@ -37,12 +40,12 @@ class ABCDocType:
         """
         res = listdir(directory)
         for i in res:
-            p = path.join(directory, i)
-            if path.isdir(p):
-                for j in ABCDocType.iter(p):
+            full_path = path.join(directory, i)
+            if path.isdir(full_path):
+                for j in ABCDocType.iter(full_path):
                     yield j
             else:
-                yield p
+                yield full_path
 
 
 class ABCFileType:
@@ -83,7 +86,7 @@ class ABCFileType:
         if not one_file:
             directory = sep.join(directory.split(sep)[1:])
         # filename and extension
-        filename, file_extension = path.splitext(file)
+        filename, _ = path.splitext(file)
         filename = filename.replace('__init__', 'readme')
 
         end_path = f'{path.join(output, directory, filename)}.md'

@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+"""
+Init autodocker module
+"""
 from os import path, listdir
 from typing import Iterable, Type
 
@@ -27,7 +30,7 @@ def all_project_types() -> list[str]:
     """
     Returns all project types
     """
-    return [_ for _ in _config.keys()]
+    return list(_config)
 
 
 def generate(
@@ -67,12 +70,12 @@ def _iter_dir(directory: str) -> Iterable[str]:
     """
     res = listdir(directory)
     for i in res:
-        p = path.join(directory, i)
-        if path.isdir(p):
-            for j in _iter_dir(p):
+        full_path = path.join(directory, i)
+        if path.isdir(full_path):
+            for j in _iter_dir(full_path):
                 yield j
         else:
-            yield p
+            yield full_path
 
 
 def _process(
@@ -95,16 +98,16 @@ def _process(
     file_extensions = (
         [i for i in file_types.keys() if i not in ignore_files]
         if ignore_files else
-        [i for i in file_types.keys()]
+        list(file_types)
     )
     if path.isdir(project_path):
         files = [i for i in _iter_dir(project_path) if path.splitext(i)[1] in file_extensions]
         length = len(files)
-        for i, v in enumerate(files):
-            file, ext = path.splitext(v)
-            file_types[ext].process(f'{path.join(project_path, v)}', output_dir)
+        for i, filename in enumerate(files):
+            _, ext = path.splitext(filename)
+            file_types[ext].process(f'{path.join(project_path, filename)}', output_dir)
             yield i, length
     else:
-        file, ext = path.splitext(project_path)
+        _, ext = path.splitext(project_path)
         file_types[ext].process(project_path, output_dir, True)
         yield 1, 1
