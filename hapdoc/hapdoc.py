@@ -84,12 +84,12 @@ def gen(
         empty_char=' ',
         show_percent=True,
         length=1,
-    ) as bar:
+    ) as progress:
         for i in generate(
                 project_path, None, ignore_list, document_type, extend, output
         ):
-            bar.length = i[1]
-            bar.update(i[0])
+            progress.length = i[1]
+            progress.update(i[0])
 
 
 @hapdoc.command()

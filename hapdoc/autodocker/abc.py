@@ -96,7 +96,7 @@ class ABCFileType:
             except FileExistsError:
                 pass
 
-        with open(path.join(directory, file), 'r', encoding='utf-8') as f:
-            source = f.read()
+        with open(path.join(directory, file), 'r', encoding='utf-8') as file:
+            source = file.read()
 
         return source, end_path, filename

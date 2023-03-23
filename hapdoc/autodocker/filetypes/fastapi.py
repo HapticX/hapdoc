@@ -14,7 +14,7 @@ class FastApi(ABCFileType):
 
     @staticmethod
     def process_funcs(
-            functions: list[tuple[str, str, str, str, str, str, str, str]]
+            functions: list[tuple]
     ) -> str:
         """
         Process functions and methods in .py files
@@ -25,7 +25,7 @@ class FastApi(ABCFileType):
         """
         methods_text = []
         for method in functions:
-            decorator, _, is_async, name, arguments, return_type, _, docs = method
+            decorator, _, _, _, arguments, return_type, _, docs = method
             # description
             description = findall(r'\s*([^:]+)', docs)
             description = description[0].rstrip(' \n') if description else ''
@@ -34,7 +34,8 @@ class FastApi(ABCFileType):
             req_method, req_route = '', ''
             for decorator in decorators:
                 data = findall(
-                    r'(get|post|put|patch|delete|options|copy|link|unlink|purge|head)\((\'[^\']+?\'|"[^"]+")\)',
+                    r'(get|post|put|patch|delete|options|copy|link|unlink|purge|head)'
+                    r'\((\'[^\']+?\'|"[^"]+")\)',
                     decorator, IGNORECASE)
                 if data:
                     data = data[0]
