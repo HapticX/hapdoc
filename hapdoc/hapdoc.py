@@ -132,7 +132,7 @@ def gen(
     default='#343434',
     type=str
 )
-def serve(
+def serve(  # pylint: disable=too-many-arguments
         host: str,
         port: str,
         docs: str,
