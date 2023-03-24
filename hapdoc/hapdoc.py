@@ -220,7 +220,6 @@ def serve(
         if path.exists(full_path) and path.isfile(full_path):
             with open(full_path, 'r', encoding='utf-8') as filename:
                 data = filename.read()
-            full_path = full_path.replace('\\', '/').rstrip('/')
             return HTMLResponse(
                 template.render(
                     pageData=Md2Html.cast(data),
