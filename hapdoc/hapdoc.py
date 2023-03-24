@@ -14,11 +14,20 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
 from fastapi import status
-from uvicorn.server import Server, Config
 from jinja2 import FileSystemLoader, Environment, select_autoescape
 
 from .autodocker import generate, all_project_types
 from .md import Md2Html
+
+
+app = FastAPI(docs_url=None, redoc_url=None)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=['*'],
+    allow_methods=['*'],
+    allow_headers=['*'],
+    allow_credentials=True
+)
 
 
 @click.group()
@@ -93,6 +102,7 @@ def gen(
 
 
 @hapdoc.command()
+@click.argument('docs', type=str)
 @click.option(
     '-h', '--host', 'host',
     default='127.0.0.1',
@@ -101,11 +111,6 @@ def gen(
 @click.option(
     '-p', '--port', 'port',
     default='5000',
-    type=str
-)
-@click.option(
-    '-d', '--docs', 'docs',
-    default='docs',
     type=str
 )
 @click.option(
@@ -165,7 +170,6 @@ def serve(  # pylint: disable=too-many-arguments
         f.replace(path.normpath(docs), '')
         for f in glob(path.normpath(docs + '/**/*.md'), recursive=True)
     ]
-    print(md_files)
 
     sidebar = {}
 
@@ -173,14 +177,11 @@ def serve(  # pylint: disable=too-many-arguments
         mdf = mdf.strip('\\').strip('/')
         directory = [i for i in mdf.split(os.sep) if i]
         mdf = mdf.replace('\\', '/')
-        print(directory)
         temp_sidebar: dict = sidebar
         for idx, temp_path in enumerate(directory):
             # File
-            print(idx, temp_path, len(directory))
             if idx == len(directory) - 1:
                 file = temp_path.rsplit('.', 1)[0]
-                print(temp_sidebar)
                 temp_sidebar[file] = {
                     '_data': {
                         'id': mdf.replace('\\', '_'),
@@ -234,21 +235,4 @@ def serve(  # pylint: disable=too-many-arguments
         )
 
     click.echo(f'Your server runs at http://{host}:{port}')
-    os.chdir('..')
-    uvicorn.run(
-        'hapdoc.hapdoc:app',
-        host=host,
-        port=int(port),
-        reload=True,
-        reload_includes=['*.html', '*.md', '*.py']
-    )
-
-
-app = FastAPI(docs_url=None, redoc_url=None)
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=['*'],
-    allow_methods=['*'],
-    allow_headers=['*'],
-    allow_credentials=True
-)
+    uvicorn.run(app, host=host, port=int(port))
