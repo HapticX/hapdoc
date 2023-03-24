@@ -24,7 +24,7 @@ class FastApi(Py):
         :return: md formatted string
         """
         methods_text = []
-        for desc, decorators, ret_type, arguments, docs, is_async, name in FastApi._process(functions):
+        for desc, decorators, _, arguments, _, _ in FastApi._process(functions):
             req_method, req_route = '', ''
             # Find method and route path
             for decorator in decorators:

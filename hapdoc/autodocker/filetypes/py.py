@@ -46,7 +46,7 @@ class Py(ABCFileType):
                     if default_value else f'{arg_name}: {arg_type}'
                     if arg_type else arg_name
                 })
-            yield description, decorators, return_type, arguments, docs, is_async, name
+            yield description, decorators, return_type, arguments, is_async, name
 
     @staticmethod
     def process_funcs(
@@ -60,7 +60,7 @@ class Py(ABCFileType):
         :return: md formatted string
         """
         methods_text = []
-        for desc, decorators, ret_type, arguments, docs, is_async, name in Py._process(functions):
+        for desc, decorators, ret_type, arguments, is_async, name in Py._process(functions):
             arguments_text = ",\n    ".join([i["text"] for i in arguments])
             params = '\n- '.join([f'`{i["name"]}` - {i["desc"]}' for i in arguments if i['desc']])
             params = f'\n- {params}' if params else ''
