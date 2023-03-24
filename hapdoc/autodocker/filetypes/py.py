@@ -26,7 +26,6 @@ class Py(ABCFileType):
             return_type = findall(r'->\s*([^:]+):', return_type)
             return_type = f' -> {return_type[0]}' if return_type else ''
             # arguments
-            arguments = []
             arguments_typed = list(filter(lambda x: bool(x[0]), [
                 (
                     i.split(':', 1)[0].strip(),
@@ -34,6 +33,7 @@ class Py(ABCFileType):
                     i.split('=', 1)[1].strip() if '=' in i else ''
                 ) for i in sub(r'\s+', r' ', arguments[1:-1]).split(',')
             ]))
+            arguments = []
             for arg in arguments_typed:
                 arg_desc = findall(r':param\s+' + arg[0].strip() + r'\s*:\s+([^\n]+)', docs)
                 arguments.append({
