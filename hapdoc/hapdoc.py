@@ -4,7 +4,6 @@ Autodoc CLI
 """
 import os
 from os import path
-from re import findall, MULTILINE
 from glob import glob
 from pprint import pprint
 

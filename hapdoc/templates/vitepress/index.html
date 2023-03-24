@@ -250,10 +250,8 @@
 
     {% if selected %}
       const href = document.getElementById("/{{ selected }}href");
-      console.log("/{{ selected }}href");
       href.className += " opacity-80 bg-white/20 hover:bg-white/30";
     {% endif %}
-
 
     const titleRefs = document.getElementsByClassName("titleRef");
     function checkScroll(ypos) {
