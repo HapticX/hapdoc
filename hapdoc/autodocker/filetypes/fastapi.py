@@ -4,10 +4,10 @@ Describes Python file type
 """
 from re import findall, sub, MULTILINE, IGNORECASE
 
-from ..abc import ABCFileType
+from . import Py
 
 
-class FastApi(ABCFileType):
+class FastApi(Py):
     """
     Provides Python file type behavior
     """
@@ -32,6 +32,7 @@ class FastApi(ABCFileType):
             # decorators
             decorators = [i.strip() for i in decorator.split('@')[1:]] if decorator else []
             req_method, req_route = '', ''
+            # Find method and route path
             for decorator in decorators:
                 data = findall(
                     r'(get|post|put|patch|delete|options|copy|link|unlink|purge|head)'
@@ -102,8 +103,8 @@ class FastApi(ABCFileType):
         # Handle classes
         classes = findall(r'(class +([^:]+):\n(\s+)[^\n]+(\n+\3[ \S]*)+)', source)
         classes_text = []
-        for c in classes:
-            class_code = c[0]
+        for class_data in classes:
+            class_code = class_data[0]
             name = findall(r'class +(\w+)', class_code)[0]
             doc = findall(r'class[^\n]+\s+"{3}\s*([\s\S]+?)"{3}', class_code)
             doc = f'> {doc[0]}' if doc else ''

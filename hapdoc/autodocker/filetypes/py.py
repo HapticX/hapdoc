@@ -14,7 +14,7 @@ class Py(ABCFileType):
 
     @staticmethod
     def process_funcs(
-            functions: list[tuple[str, str, str, str, str, str, str, str]]
+            functions: list[tuple]
     ) -> str:
         """
         Process functions and methods in .py files
