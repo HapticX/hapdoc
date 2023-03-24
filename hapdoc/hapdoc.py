@@ -4,6 +4,7 @@ Autodoc CLI
 """
 import os
 from os import path
+from re import findall, MULTILINE
 from glob import glob
 from pprint import pprint
 
@@ -138,7 +139,7 @@ def gen(
     default='#343434',
     type=str
 )
-def serve(  # pylint: disable=too-many-arguments
+def serve(
         host: str,
         port: str,
         docs: str,
@@ -215,10 +216,14 @@ def serve(  # pylint: disable=too-many-arguments
         if path.exists(full_path) and path.isfile(full_path):
             with open(full_path, 'r', encoding='utf-8') as filename:
                 data = filename.read()
+            page = Md2Html.cast(data)
+            page, title_refs = Md2Html.rand_title_ref(page)
+            print(title_refs)
             return HTMLResponse(
                 template.render(
-                    pageData=Md2Html.cast(data),
+                    pageData=page,
                     title=title,
+                    titleRefs=title_refs,
                     side=sidebar,
                     nav={"links": [
                         {"title": "Github", "url": "https://github.com/hapticx/hapdoc"},

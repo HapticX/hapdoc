@@ -3,6 +3,7 @@
 Provides Markdown to Html code translator
 """
 import re
+from secrets import token_hex
 
 
 class Md2Html:
@@ -15,12 +16,12 @@ class Md2Html:
         (r'(\s+)> +([^\n]+)', r'\1<div class="quote">\2</div>'),
         (r'\n+((-\s*[^\n]+\n)+)', r'<ul style="list-style-type: disc">\n\1</ul>'),
         (r'\n+-\s*([^\n]+)', r'<li>\1</li>'),
-        (r'###### ([^\n]+)', r'<h6>\1</h6>'),
-        (r'##### ([^\n]+)', r'<h5>\1</h5>'),
-        (r'#### ([^\n]+)', r'<h4>\1</h4>'),
-        (r'### ([^\n]+)', r'<h3>\1</h3>'),
-        (r'## ([^\n]+)', r'<h2>\1</h2>'),
-        (r'# ([^\n]+)', r'<h1>\1</h1>'),
+        (r'###### +([^\n]+)', r'<h6 class="titleRef">\1</h6>'),
+        (r'##### +([^\n]+)', r'<h5 class="titleRef">\1</h5>'),
+        (r'#### +([^\n]+)', r'<h4 class="titleRef">\1</h4>'),
+        (r'### +([^\n]+)', r'<h3 class="titleRef">\1</h3>'),
+        (r'## +([^\n]+)', r'<h2 class="titleRef">\1</h2>'),
+        (r'# +([^\n]+)', r'<h1 class="titleRef">\1</h1>'),
         (r'!\[([^\n\]]+)\]\(([^\)\s]+)\)', r'<img src="\2" alt="\1">'),
         (r'\[([^\n\]]+)\]\(([^\)\s]+)\)', r'<a href="\2">\1</a>'),
         # Code
@@ -71,7 +72,7 @@ class Md2Html:
             r' fill="#ffffff" fill-rule="evenodd"/></svg>'
             r'</button><code class="language-\1">\2</code></pre>'
         ),
-        (r'`([^`]+?)`', r'<span class="command">\1</span>'),
+        (r'(?!")`([^`"]+)`(?!")', r'<span class="command">\1</span>'),
     ]
 
     @staticmethod
@@ -85,3 +86,20 @@ class Md2Html:
             for pattern, repl in Md2Html._rules:
                 source = re.sub(pattern, repl, source, re.MULTILINE)
         return source
+
+    @staticmethod
+    def rand_title_ref(html_source: str) -> tuple[str, list[dict]]:
+        result = []
+        for level, attrs, text in re.findall(r'<h(\d)([^>]+?)>([^<]+?|[^h]+?)</h\1', html_source):
+            random_id = token_hex(8)
+            result.append({
+                'id': random_id,
+                'title': text,
+                'level': int(level)
+            })
+            html_source = html_source.replace(
+                f'<h{level}{attrs}>{text}',
+                f'<h{level}{attrs} id="{random_id}">{text}',
+                1
+            )
+        return html_source, result

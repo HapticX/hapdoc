@@ -33,7 +33,7 @@ def all_project_types() -> list[str]:
     return list(_config)
 
 
-def generate(  # pylint: disable=too-many-arguments
+def generate(
         project_path: str,
         config: dict[str, Type[ABCFileType]] = None,
         ignore_list: list[str] = None,

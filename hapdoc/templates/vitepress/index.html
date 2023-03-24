@@ -96,19 +96,19 @@
         </div>
         <!-- Page navigation -->
         <div class="flex flex-col fixed right-0 w-1/4 h-fit gap-2 text-sm py-2 border-l-[1px] border-white border-opacity-20">
-          <p class="select-none pl-5 font-bold">
+          <p class="select-none pl-5 font-black">
             On this page
           </p>
-          <div class="select-none opacity-100 border-l-[1.5px] border-[{{ accentColor }}] border-opacity-100 pl-5 cursor-pointer">
-            current name of page
-          </div>
-          <div class="select-none opacity-40 pl-5 hover:opacity-100 transition-all duration-300 cursor-pointer">
-            another name of page
-          </div>
-          <div class="select-none opacity-40 pl-5 hover:opacity-100 transition-all duration-300 cursor-pointer">
-            another name of page
-          </div>
-          </div>
+          {% for i in titleRefs %}
+            <a
+              id="page{{ i.id }}"
+              href="#{{ i.id }}"
+              class="select-none border-l-[1px] font-semibold pl-[{{ i.level / 2.0 + 0.5 }}em] opacity-50 hover:opacity-100 border-opacity-100 pl-5 cursor-pointer"
+            >
+              {{ i.title|safe }}
+            </a>
+          {% endfor %}
+        </div>
       </div>
     </div>
   </main>
@@ -251,9 +251,36 @@
     {% if selected %}
       const href = document.getElementById("/{{ selected }}href");
       console.log("/{{ selected }}href");
-      console.log(href);
       href.className += " opacity-80 bg-white/20 hover:bg-white/30";
     {% endif %}
+
+
+    const titleRefs = document.getElementsByClassName("titleRef");
+    function checkScroll(ypos) {
+      let selected = false;
+      const items = [...titleRefs];
+      for (var i = 0; i < items.length; ++i) {
+        const e = items[i];
+        const pageEl = document.getElementById("page" + e.id);
+        const pos = window.scrollY + e.getBoundingClientRect().top;
+
+        if (!selected && (ypos <= pos || i == items.length-1)) {
+          selected = true;
+          pageEl.classList.add('border-[{{ accentColor }}]');
+          pageEl.classList.add('opacity-90');
+          pageEl.classList.remove('opacity-60');
+        } else {
+          pageEl.classList.remove('border-[{{ accentColor }}]');
+          pageEl.classList.add('opacity-60');
+          pageEl.classList.remove('opacity-90');
+        }
+      }
+    }
+
+    window.addEventListener("scroll", ev => {
+      checkScroll(window.scrollY);
+    });
+    window.addEventListener("load", ev => {checkScroll(window.scrollY)});
 
     hljs.highlightAll();
   </script>
