@@ -3,6 +3,7 @@
 Describes Python file type
 """
 from re import findall, sub, MULTILINE
+from typing import Iterable
 
 from ..abc import ABCFileType
 
@@ -13,19 +14,9 @@ class Py(ABCFileType):
     """
 
     @staticmethod
-    def process_funcs(
-            functions: list[tuple]
-    ) -> str:
-        """
-        Process functions and methods in .py files
-
-        :param source: source python file
-        :param functions: list of parsed functions (via regex)
-        :return: md formatted string
-        """
-        methods_text = []
-        for method in functions:
-            decorator, _, is_async, name, arguments, return_type, _, docs = method
+    def _process(functions: list[tuple]) -> Iterable[tuple[str]]:
+        for i in functions:
+            decorator, _, is_async, name, arguments, return_type, _, docs = i
             # description
             description = findall(r'\s*([^:]+)', docs)
             description = description[0].rstrip(' \n') if description else ''
@@ -55,6 +46,21 @@ class Py(ABCFileType):
                     if default_value else f'{arg_name}: {arg_type}'
                     if arg_type else arg_name
                 })
+            yield description, decorators, return_type, arguments, docs, is_async, name
+
+    @staticmethod
+    def process_funcs(
+            functions: list[tuple]
+    ) -> str:
+        """
+        Process functions and methods in .py files
+
+        :param source: source python file
+        :param functions: list of parsed functions (via regex)
+        :return: md formatted string
+        """
+        methods_text = []
+        for desc, decorators, ret_type, arguments, docs, is_async, name in Py._process(functions):
             arguments_text = ",\n    ".join([i["text"] for i in arguments])
             params = '\n- '.join([f'`{i["name"]}` - {i["desc"]}' for i in arguments if i['desc']])
             params = f'\n- {params}' if params else ''
@@ -63,8 +69,8 @@ class Py(ABCFileType):
             arguments_text = f'\n    {arguments_text}\n' if arguments_text else ''
             methods_text.append(
                 f'\n```python\n{decorator_text}{is_async}def '
-                f'{name}({arguments_text}){return_type}:\n```'
-                f'\n{description}\n{params}\n')
+                f'{name}({arguments_text}){ret_type}:\n```'
+                f'\n{desc}\n{params}\n')
         return '\n___\n'.join(methods_text)
 
     @staticmethod

@@ -24,13 +24,7 @@ class FastApi(Py):
         :return: md formatted string
         """
         methods_text = []
-        for method in functions:
-            decorator, _, _, _, arguments, return_type, _, docs = method
-            # description
-            description = findall(r'\s*([^:]+)', docs)
-            description = description[0].rstrip(' \n') if description else ''
-            # decorators
-            decorators = [i.strip() for i in decorator.split('@')[1:]] if decorator else []
+        for desc, decorators, ret_type, arguments, docs, is_async, name in FastApi._process(functions):
             req_method, req_route = '', ''
             # Find method and route path
             for decorator in decorators:
@@ -43,40 +37,12 @@ class FastApi(Py):
                     req_method, req_route = data[0].upper(), data[1].strip('"').strip("'")
             if not req_method and not req_route:
                 continue
-            # return type
-            return_type = findall(r'->\s*([^:]+):', return_type)
-            return_type = f' -> {return_type[0]}' if return_type else ''
-            # arguments
-            arguments = arguments[1:-1]
-            arguments_typed = sub(r'\s+', r' ', arguments).split(',')
-            arguments_typed = list(filter(lambda x: bool(x[0]), [
-                (
-                    i.split(':', 1)[0].strip(),
-                    i.split(':', 1)[1].split('=')[0].strip() if ':' in i else '',
-                    i.split('=', 1)[1].strip() if '=' in i else ''
-                ) for i in arguments_typed
-            ]))
-            arguments = []
-            for arg in arguments_typed:
-                arg_name, arg_type, default_value = arg
-                arg_desc = findall(r':param\s+' + arg_name.strip() + r'\s*:\s+([^\n]+)', docs)
-                arguments.append({
-                    'name': arg_name,
-                    'desc': arg_desc[0].strip() if arg_desc else '',
-                    'text': f'{arg_name}: {arg_type} = {default_value}'
-                    if default_value else f'{arg_name}: {arg_type}'
-                    if arg_type else arg_name
-                })
-            arguments_text = ",\n    ".join([i["text"] for i in arguments])
             params = '\n- '.join([f'`{i["name"]}` - {i["desc"]}' for i in arguments if i['desc']])
             params = f'\n- {params}' if params else ''
-            decorator_text = '\n@'.join(decorators)
-            decorator_text = f'@{decorator_text}\n' if decorators else ''
-            arguments_text = f'\n    {arguments_text}\n' if arguments_text else ''
             query_text = f'#### Query Params:\n{params}'
             methods_text.append(
                 f'\n```http\n{req_method} {req_route} HTTP/1.1\n```'
-                f'\n{description}\n{query_text}\n')
+                f'\n{desc}\n{query_text}\n')
         return '\n___\n'.join(methods_text)
 
     @staticmethod
