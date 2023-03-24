@@ -2,9 +2,9 @@
 """
 Describes Python file type
 """
-from re import findall, MULTILINE, IGNORECASE
+from re import findall, IGNORECASE
 
-from . import Py
+from .py import Py
 
 
 class FastApi(Py):
