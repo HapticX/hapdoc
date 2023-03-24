@@ -1,3 +1,6 @@
+"""
+Provides setup script
+"""
 from setuptools import setup, find_packages
 
 setup(
@@ -8,7 +11,7 @@ setup(
     maintainer='HapticX',
     maintainer_email='hapticx.company@gmail.com',
     url='https://github.com/HapticX/hapdoc',
-    version='1.0.2',
+    version='1.0.3',
     packages=find_packages(),
     py_modules=['hapdoc'],
     install_requires=['click', 'colorama', 'fastapi', 'uvicorn'],
