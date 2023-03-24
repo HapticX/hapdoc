@@ -1,8 +1,14 @@
 # -*- coding: utf-8 -*-
+"""
+Provides Markdown to Html code translator
+"""
 import re
 
 
 class Md2Html:
+    """
+    Provides Markdown to Html
+    """
     _rules = [
         (r'_{3,}\s*', r'<hr>'),
         (r'-{3,}\s*', r'<hr>'),
@@ -70,7 +76,12 @@ class Md2Html:
 
     @staticmethod
     def cast(source: str, repeat: int = 2) -> str:
-        for i in range(repeat):
+        """
+        Casts Markdown sources to HTML code
+        :param source: Markdown sources
+        :param repeat: max repeat count
+        """
+        for _ in range(repeat):
             for pattern, repl in Md2Html._rules:
                 source = re.sub(pattern, repl, source, re.MULTILINE)
         return source

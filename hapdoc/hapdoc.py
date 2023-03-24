@@ -17,7 +17,6 @@ from uvicorn.server import Server, Config
 from jinja2 import FileSystemLoader, Environment, select_autoescape
 
 from hapdoc.autodocker import generate, all_project_types
-from hapdoc.autodocker.filetypes import Py, FastApi
 from hapdoc.md import Md2Html
 
 

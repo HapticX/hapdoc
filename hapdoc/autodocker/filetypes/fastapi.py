@@ -2,7 +2,7 @@
 """
 Describes Python file type
 """
-from re import findall, sub, MULTILINE, IGNORECASE
+from re import findall, MULTILINE, IGNORECASE
 
 from . import Py
 
@@ -102,5 +102,5 @@ class FastApi(Py):
         if functions:
             data += f'\n### Functions\n{FastApi.process_funcs(functions)}'
 
-        with open(end_path, 'w', encoding='utf-8') as f:
-            f.write(data)
+        with open(end_path, 'w', encoding='utf-8') as file:
+            file.write(data)

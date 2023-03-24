@@ -130,5 +130,5 @@ class Py(ABCFileType):
         if functions:
             data += f'\n### Functions\n{Py.process_funcs(functions)}'
 
-        with open(end_path, 'w', encoding='utf-8') as f:
-            f.write(data)
+        with open(end_path, 'w', encoding='utf-8') as file:
+            file.write(data)
