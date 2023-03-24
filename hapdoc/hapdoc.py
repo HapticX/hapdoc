@@ -8,6 +8,7 @@ from glob import glob
 from pprint import pprint
 
 import click
+import uvicorn
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -154,14 +155,7 @@ def serve(  # pylint: disable=too-many-arguments
     :param background_color: docs background color
     :param surface_color: docs surface color
     """
-    app = FastAPI(docs_url=None, redoc_url=None)
-    app.add_middleware(
-        CORSMiddleware,
-        allow_origins=['*'],
-        allow_methods=['*'],
-        allow_headers=['*'],
-        allow_credentials=True
-    )
+
     env = Environment(
         loader=FileSystemLoader(templates_folder),
         autoescape=select_autoescape()
@@ -184,7 +178,7 @@ def serve(  # pylint: disable=too-many-arguments
         for idx, temp_path in enumerate(directory):
             # File
             print(idx, temp_path, len(directory))
-            if idx == len(directory)-1:
+            if idx == len(directory) - 1:
                 file = temp_path.rsplit('.', 1)[0]
                 print(temp_sidebar)
                 temp_sidebar[file] = {
@@ -239,16 +233,22 @@ def serve(  # pylint: disable=too-many-arguments
             status_code=status.HTTP_404_NOT_FOUND
         )
 
-    server = Server(
-        config=Config(
-            app,
-            host=host,
-            port=port
-        )
-    )
     click.echo(f'Your server runs at http://{host}:{port}')
-    server.run()
+    os.chdir('..')
+    uvicorn.run(
+        'hapdoc.hapdoc:app',
+        host=host,
+        port=int(port),
+        reload=True,
+        reload_includes=['*.html', '*.md', '*.py']
+    )
 
 
-if __name__ == '__main__':
-    hapdoc()
+app = FastAPI(docs_url=None, redoc_url=None)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=['*'],
+    allow_methods=['*'],
+    allow_headers=['*'],
+    allow_credentials=True
+)
