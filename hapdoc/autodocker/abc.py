@@ -3,49 +3,7 @@
 Provides Abstract classes behavior
 """
 from abc import abstractmethod
-from os import path, listdir, sep, makedirs
-from typing import Iterable
-
-
-class ABCDocType:
-    """
-    Provides abstract behavior of inherited DocType classes
-    """
-    @abstractmethod
-    def process(
-            self,
-            project_path: str,
-            output_dir: str = 'docs',
-            ignore_files: list[str] = None,
-            extend: list['ABCDocType'] = None,
-    ):
-        """
-        Process project and generate docs
-
-        :param project_path: project path
-        :param output_dir: output directory
-        :param ignore_files: ignore files with extensions
-        :param extend: extend other DocType classes
-        :return:
-        """
-        raise RuntimeError('ABCDocType can not called.')
-
-    @staticmethod
-    def iter(directory: str) -> Iterable[str]:
-        """
-        Go over directory and yields all files
-
-        :param directory: path to directory
-        :return: file paths
-        """
-        res = listdir(directory)
-        for i in res:
-            full_path = path.join(directory, i)
-            if path.isdir(full_path):
-                for j in ABCDocType.iter(full_path):
-                    yield j
-            else:
-                yield full_path
+from os import path, sep, makedirs
 
 
 class ABCFileType:

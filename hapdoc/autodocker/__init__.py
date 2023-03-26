@@ -5,7 +5,7 @@ Init autodocker module
 from os import path, listdir
 from typing import Iterable, Type
 
-from .abc import ABCDocType, ABCFileType
+from .abc import ABCFileType
 from .filetypes import Py, FastApi
 
 

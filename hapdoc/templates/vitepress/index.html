@@ -22,7 +22,7 @@
       <div class="text-xl">{{ title }}</div>
       <div class="flex gap-2">
         {% for link in nav.links %}
-          <a href="{{ link.href }}" class="select-none hover:text-[{{ accentColor }}] transition-all duration-300">
+          <a href="{{ link.url }}" class="select-none hover:text-[{{ accentColor }}] transition-all duration-300">
             {{ link.title }}
           </a>
         {% endfor %}

@@ -17,8 +17,8 @@ from fastapi.responses import HTMLResponse
 from fastapi import status
 from jinja2 import FileSystemLoader, Environment, select_autoescape
 
-from .autodocker import generate, all_project_types
 from .md import Md2Html
+from .utils import show_all_projects, generate_md_files, cast_md_dir_to_json
 
 
 app = FastAPI(docs_url=None, redoc_url=None)
@@ -43,9 +43,7 @@ def project_types():
     """
     Shows all available project types
     """
-    all_types = all_project_types()
-    for project_type in all_types:
-        click.echo(f'- {project_type}')
+    show_all_projects()
 
 
 @hapdoc.command()
@@ -84,25 +82,7 @@ def gen(
     """
     Generates docs for file or project
     """
-    ignore_list = [
-        ext.strip() if ext.strip().startswith('.') else f'.{ext.strip()}'
-        for ext in ignore.split(',')
-    ]
-    start = time()
-    with click.progressbar(
-        label='Generating docs',
-        fill_char=click.style('#', 'bright_green'),
-        empty_char=' ',
-        bar_template='%(label)s  [%(bar)s]',
-        show_percent=True,
-        length=1,
-    ) as progress:
-        for i in generate(
-                project_path, None, ignore_list, document_type, extend, output
-        ):
-            progress.length = i[1]
-            progress.update(i[0])
-    click.echo(f'Generated in {round(time() - start)} seconds')
+    generate_md_files(project_path, document_type, ignore, extend, output)
 
 
 @hapdoc.command()
@@ -154,74 +134,24 @@ def serve(
 ):
     """
     Launches FastAPI docs server
-
-    :param host: hostname
-    :param port: port to serve
-    :param docs: docs folder
-    :param templates_folder: folder with templates
-    :param title: web title
-    :param accent_color: docs accent color
-    :param background_color: docs background color
-    :param surface_color: docs surface color
     """
-
     env = Environment(
         loader=FileSystemLoader(templates_folder),
         autoescape=select_autoescape()
     )
     template = env.get_template('index.html')
-    md_files = [
-        f.replace(path.normpath(docs), '')
-        for f in glob(path.normpath(docs + '/**/*.md'), recursive=True)
-    ]
-
-    sidebar = {}
-
-    for mdf in md_files:
-        mdf = mdf.strip('\\').strip('/')
-        directory = [i for i in mdf.split(os.sep) if i]
-        mdf = mdf.replace('\\', '/')
-        temp_sidebar: dict = sidebar
-        for idx, temp_path in enumerate(directory):
-            # File
-            if idx == len(directory) - 1:
-                file = temp_path.rsplit('.', 1)[0]
-                temp_sidebar[file] = {
-                    '_data': {
-                        'id': mdf.replace('\\', '_'),
-                        'title': file,
-                        'url': f'/{mdf}'
-                    },
-                    '_items': {}
-                }
-            else:
-                # Directory
-                if temp_path in temp_sidebar:
-                    temp_sidebar = temp_sidebar[temp_path]['_items']
-                else:
-                    temp_sidebar[temp_path] = {
-                        '_data': {
-                            'id': mdf.replace('\\', '_'),
-                            'title': temp_path,
-                            'url': ''
-                        },
-                        '_items': {}
-                    }
-                    temp_sidebar = temp_sidebar[temp_path]['_items']
-    pprint(sidebar)
+    sidebar = cast_md_dir_to_json(docs)
 
     @app.get('/{doc:path}')
     async def get_md_at(doc: str):
         if not doc.endswith('.md'):
             doc += '.md'
         full_path = path.join(docs, doc)
-        print(full_path)
         if path.exists(full_path) and path.isfile(full_path):
             with open(full_path, 'r', encoding='utf-8') as filename:
                 data = filename.read()
             page = Md2Html.cast(data)
             page, title_refs = Md2Html.rand_title_ref(page)
-            print(title_refs)
             return HTMLResponse(
                 template.render(
                     pageData=page,
@@ -241,7 +171,6 @@ def serve(
             '<h1>Not Found</h1>',
             status_code=status.HTTP_404_NOT_FOUND
         )
-
     click.echo(f'Your server runs at http://{host}:{port}')
     uvicorn.run(app, host=host, port=int(port))
 
@@ -322,91 +251,21 @@ def build(
 ):
     """
     Automatically builds project
-
-    :param docs: Path to docs
-    :param templates_folder: path to templates folder
-    :param title: Docs title
-    :param accent_color: Accent color
-    :param background_color: Background color
-    :param surface_color: Surface color
-    :param document_type: Type of project
-    :param ignore: Ignore file extensions
-    :param extend: Extend file extensions
-    :param output: Output folder
-    :param root: Root path
     """
-    ignore_list = [
-        ext.strip() if ext.strip().startswith('.') else f'.{ext.strip()}'
-        for ext in ignore.split(',')
-    ]
-    start = time()
-    with click.progressbar(
-        label='Generating docs',
-        fill_char=click.style('#', 'bright_green'),
-        empty_char=' ',
-        bar_template='%(label)s  [%(bar)s]',
-        show_percent=True,
-        length=1,
-    ) as progress:
-        for i in generate(
-                docs, None, ignore_list, document_type, extend, output
-        ):
-            progress.length = i[1]
-            progress.update(i[0])
-    click.echo(f'Generated in {round(time() - start)} seconds')
-
-    if root is None:
-        root = path.join(os.getcwd(), output, docs)
-    print(root)
-
     env = Environment(
         loader=FileSystemLoader(templates_folder),
         autoescape=select_autoescape()
     )
     template = env.get_template('index.html')
+    generate_md_files(docs, document_type, ignore, extend, output)
+    if root is None:
+        root = path.join(os.getcwd(), output, docs)
+    print(root)
+
     docs = path.join(output, docs)
-    md_files = [
-        f.replace(path.normpath(docs), '')
-        for f in glob(path.normpath(docs + '/**/*.md'), recursive=True)
-    ]
-
-    sidebar = {}
-
-    for mdf in md_files:
-        mdf = mdf.strip('\\').strip('/').rsplit('.', 1)[0]
-        directory = [i for i in mdf.split(os.sep) if i]
-        mdf = mdf.replace('\\', '/')
-        temp_sidebar: dict = sidebar
-        for idx, temp_path in enumerate(directory):
-            # File
-            if idx == len(directory) - 1:
-                file = temp_path.rsplit('.', 1)[0]
-                temp_sidebar[file] = {
-                    '_data': {
-                        'id': mdf.replace('\\', '_'),
-                        'title': file,
-                        'url': f'{root}/{mdf}.html'.replace('\\', '/')
-                    },
-                    '_items': {}
-                }
-            else:
-                # Directory
-                if temp_path in temp_sidebar:
-                    temp_sidebar = temp_sidebar[temp_path]['_items']
-                else:
-                    temp_sidebar[temp_path] = {
-                        '_data': {
-                            'id': mdf.replace('\\', '_'),
-                            'title': temp_path,
-                            'url': ''
-                        },
-                        '_items': {}
-                    }
-                    temp_sidebar = temp_sidebar[temp_path]['_items']
+    sidebar, md_files = cast_md_dir_to_json(docs, root, True, '.html')
     pprint(sidebar)
-    md_files = [
-        path.join(docs, i[1:]) for i in md_files
-    ]
+    md_files = [path.join(docs, i[1:]) for i in md_files]
     print(md_files)
 
     for filename in md_files:
@@ -430,6 +289,6 @@ def build(
                     accentColor=accent_color,
                     backgroundColor=background_color,
                     surfaceColor=surface_color,
-                    selected=(root + filename[:-len(extension)] + '.html').replace('\\', '/')
+                    selected=f'{root}{filename[:-len(extension)]}.html'.replace('\\', '/')
                 )
             )
