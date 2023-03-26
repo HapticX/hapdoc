@@ -19,12 +19,12 @@ class Md2Html:
         (r'\n+((-\s*[^\n]+\n)+)', r'<ul style="list-style-type: disc">\n\1</ul>', 0, 1),
         (r'\n+-\s*([^\n]+)', r'<li>\1</li>', 0, 1),
         # Headers
-        (r'###### *([^\n]+)', r'<h6 class="titleRef">\1</h6>', 0, 1),
-        (r'##### *([^\n]+)', r'<h5 class="titleRef">\1</h5>', 0, 1),
-        (r'#### *([^\n]+)', r'<h4 class="titleRef">\1</h4>', 0, 1),
-        (r'### *([^\n]+)', r'<h3 class="titleRef">\1</h3>', 0, 1),
-        (r'## *([^\n]+)', r'<h2 class="titleRef">\1</h2>', 0, 1),
-        (r'# *([^\n]+)', r'<h1 class="titleRef">\1</h1>', 0, 1),
+        (r'###### +([^\n]+)', r'<h6 class="titleRef">\1</h6>', re.MULTILINE, 1),
+        (r'##### +([^\n]+)', r'<h5 class="titleRef">\1</h5>', re.MULTILINE, 1),
+        (r'#### +([^\n]+)', r'<h4 class="titleRef">\1</h4>', re.MULTILINE, 1),
+        (r'### +([^\n]+)', r'<h3 class="titleRef">\1</h3>', re.MULTILINE, 1),
+        (r'## +([^\n]+)', r'<h2 class="titleRef">\1</h2>', re.MULTILINE, 1),
+        (r'# +([^\n]+)', r'<h1 class="titleRef">\1</h1>', re.MULTILINE, 1),
         # Image
         (r'!\[([^\n\]]+)\]\(([^\)\s]+)\)', r'<img src="\2" alt="\1">', 0, 1),
         # URL
