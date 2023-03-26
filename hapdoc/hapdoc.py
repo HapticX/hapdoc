@@ -279,26 +279,31 @@ def serve(
 )
 @click.option(
     '-T', '--title', 'title',
+    help='Page title',
     default='HapDoc',
     type=str
 )
 @click.option(
     '-a', '--accent', 'accent_color',
+    help='Accent color',
     default='#c27bd4',
     type=str
 )
 @click.option(
     '-b', '--background', 'background_color',
+    help='Background color',
     default='#212121',
     type=str
 )
 @click.option(
     '-s', '--surface', 'surface_color',
+    help='Surface color',
     default='#343434',
     type=str
 )
 @click.option(
     '-r', '--root', 'root',
+    help='Root path, by default uses working directory',
     default=None,
     type=str
 )
