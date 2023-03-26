@@ -18,20 +18,26 @@
 </head>
 <body class="bg-[#343434] text-white overflow-x-hidden">
   <main class="w-screen min-h-screen h-full flex">
+    <header class="w-full h-12 fixed left-0 z-50 top-0 pl-40 pr-80 flex justify-between items-center transition-all">
+      <div class="text-xl">HapDoc</div>
+      <div class="flex gap-2">
+        
+          <a href="" class="select-none hover:text-[#c27bd4] transition-all duration-300">
+            Github
+          </a>
+        
+      </div>
+    </header>
     <!-- SideBar -->
-    <div class="flex flex-col w-3/12 bg-[#343434] min-h-screen h-full">
-      <div class="flex flex-col gap-2 pl-36 h-full">
-        <div
-          class="w-full h-16 pl-2 pt-4 cursor-pointer border-b-[1px] border-white border-opacity-10 hover:opacity-50 hover:border-opacity-20 transition-all duration-300"
-        >
-          HapDoc
-        </div>
+    <div class="fixed left-0 top-12 flex flex-col w-3/12 z-40 bg-[#343434] min-h-screen h-full">
+      <div class="ml-36 py-2 mr-2 border-t-[1px] border-white border-opacity-10 border-t-[1px]" id="line"></div>
+      <div class="flex flex-col gap-2 pl-32 h-full">
         
         <div class="px-2">
           
             
           <!-- SideBar item -->
-          <div class="flex flex-col h-full gap-2 border-white border-opacity-10">
+          <div class="flex flex-col gap-2 border-white border-opacity-10">
             <div class="flex pl-2 flex-col w-full font-bold">
               
                 <a
@@ -47,7 +53,7 @@
           
             
           <!-- SideBar item -->
-          <div class="flex flex-col h-full gap-2 border-white border-opacity-10">
+          <div class="flex flex-col gap-2 border-white border-opacity-10">
             <div class="flex pl-2 flex-col w-full font-bold">
               
                 <a
@@ -63,7 +69,7 @@
           
             
           <!-- SideBar item -->
-          <div class="flex flex-col h-full gap-2 border-white border-opacity-10">
+          <div class="flex flex-col gap-2 border-white border-opacity-10">
             <div class="flex pl-2 flex-col w-full font-bold">
               
                 <a
@@ -79,7 +85,7 @@
           
             
           <!-- SideBar item -->
-          <div class="flex flex-col h-full gap-2 border-white border-opacity-10">
+          <div class="flex flex-col gap-2 border-white border-opacity-10">
             <div class="flex pl-2 flex-col w-full font-bold">
               
                 <div class="flex w-full gap-2 cursor-pointer" onclick="toggleList('autodocker/abc')">
@@ -119,7 +125,7 @@
                   
                     
           <!-- SideBar item -->
-          <div class="flex flex-col h-full gap-2 border-white border-opacity-10">
+          <div class="flex flex-col gap-2 border-white border-opacity-10">
             <div class="flex pl-2 flex-col w-full font-bold">
               
                 <div class="flex w-full gap-2 cursor-pointer" onclick="toggleList('autodocker/filetypes/readme')">
@@ -180,7 +186,7 @@
           
             
           <!-- SideBar item -->
-          <div class="flex flex-col h-full gap-2 border-white border-opacity-10">
+          <div class="flex flex-col gap-2 border-white border-opacity-10">
             <div class="flex pl-2 flex-col w-full font-bold">
               
                 <div class="flex w-full gap-2 cursor-pointer" onclick="toggleList('md/readme')">
@@ -219,36 +225,28 @@
       </div>
     </div>
 
+
+    <div class="h-full w-3/12"></div>
+
     <!-- Content -->
     <div class="w-9/12 pr-64 py-4 bg-[#212121] relative">
-      <!-- Links -->
-      <div class="top-0 left-0 h-16 pr-72 w-full absolute flex items-center justify-end">
-        
-          <a href="" class="select-none hover:text-[#c27bd4] transition-all duration-300">
-            Github
-          </a>
-        
-      </div>
       <div class="w-full h-full pt-20 flex px-32 gap-20">
         <!-- Page data -->
         <div class="flex flex-col gap-4 w-3/4">
-          <h1 class="titleRef" id="760b63ec0959adad">__main__</h1>
+          <h1 class="titleRef" id="78d4586a331bce39">__main__</h1>
 
 <div class="quote">Provides main module file for pypi</div>
         </div>
         <!-- Page navigation -->
-        <div class="flex flex-col fixed right-0 w-1/4 h-fit gap-2 text-sm py-2 border-l-[1px] border-white border-opacity-20">
-          <p class="select-none pl-5 font-black">
+        <div class="flex flex-col fixed right-0 w-1/4 h-fit text-sm pt-2">
+          <p class="select-none pl-5 font-black py-2 border-l-[1px] border-white border-opacity-20">
             On this page
           </p>
           
-            <a
-              id="page760b63ec0959adad"
-              href="#760b63ec0959adad"
-              class="select-none border-l-[1px] font-semibold pl-[1.0em] opacity-50 hover:opacity-100 border-opacity-100 pl-5 cursor-pointer"
-            >
-              __main__
-            </a>
+          <a id="page78d4586a331bce39" href="#78d4586a331bce39"
+            class="select-none border-l-[1px] py-0.5 font-semibold pl-[1.0em] opacity-50 hover:opacity-100 border-opacity-100 pl-5 cursor-pointer transition-all duration-200">
+            __main__
+          </a>
           
         </div>
       </div>
@@ -373,7 +371,7 @@
     }
   </style>
 
-  <script lang="js">
+  <script>
     function toggleList(itemID) {
       // Finding elements by "itemID"
       const listElem = document.getElementById(`${itemID}-list`);
@@ -398,9 +396,16 @@
     
 
     const titleRefs = document.getElementsByClassName("titleRef");
+    const header = document.getElementsByTagName('header')[0];
+
     function checkScroll(ypos) {
       let selected = false;
       const items = [...titleRefs];
+      if (ypos > 200) {
+        header.classList.add('bg-[#343434]');
+      } else {
+        header.classList.remove('bg-[#343434]');
+      }
       for (var i = 0; i < items.length; ++i) {
         const e = items[i];
         const pageEl = document.getElementById("page" + e.id);
