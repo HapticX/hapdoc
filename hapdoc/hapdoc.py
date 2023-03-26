@@ -262,7 +262,7 @@ def serve(
 )
 @click.option(
     '--extend', '-e', 'extend',
-    help='Extend doc by specified doctypes separated by comma',
+    help='Extend doc by specified docs types separated by comma',
     default='',
     type=str
 )
