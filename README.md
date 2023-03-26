@@ -12,7 +12,11 @@ autodoc CLI tool written in Python with :heart:
 </div>
 
 ## Why Hapdoc? 💁‍♀️
-Because it's simple to use. 🙂
+* **Easy to use**: Hapdoc is designed to be simple and user-friendly, making it easy for programmers to create documentation without having to spend a lot of time learning how to use it.
+
+* **Markdown support**: Hapdoc supports Markdown syntax, which is a popular markup language used by many developers. This means that programmers can write documentation using the same tools they use to write code, making the process more familiar and efficient.
+
+* **Customizable themes**: Hapdoc supports different themes, allowing programmers to choose a look and feel that matches their project or organization's branding. Additionally, programmers can create their own themes if they want to customize the look of their documentation further.
 
 ### Features :sparkles:
 - Supported projects:
