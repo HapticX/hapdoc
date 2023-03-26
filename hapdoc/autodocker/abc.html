@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+  >
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/styles/vs2015.min.css"
+  >
+  <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/highlight.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/languages/http.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>HapDoc</title>
+</head>
+<body class="bg-[#343434] text-white overflow-x-hidden">
+  <main class="w-screen min-h-screen h-full flex">
+    <!-- SideBar -->
+    <div class="flex flex-col w-3/12 bg-[#343434] min-h-screen h-full">
+      <div class="flex flex-col gap-2 pl-36 h-full">
+        <div
+          class="w-full h-16 pl-2 pt-4 cursor-pointer border-b-[1px] border-white border-opacity-10 hover:opacity-50 hover:border-opacity-20 transition-all duration-300"
+        >
+          HapDoc
+        </div>
+        
+        <div class="px-2">
+          
+            
+          <!-- SideBar item -->
+          <div class="flex flex-col h-full gap-2 border-white border-opacity-10">
+            <div class="flex pl-2 flex-col w-full font-bold">
+              
+                <a
+                  href="//hapdoc.html"
+                  id="//hapdoc.htmlhref"
+                  class="select-none pl-8 w-full opacity-50 hover:opacity-100 hover:bg-white/10 transition-all duration-300">
+                  hapdoc
+                </a>
+              
+            </div>
+          </div>
+        
+          
+            
+          <!-- SideBar item -->
+          <div class="flex flex-col h-full gap-2 border-white border-opacity-10">
+            <div class="flex pl-2 flex-col w-full font-bold">
+              
+                <a
+                  href="//readme.html"
+                  id="//readme.htmlhref"
+                  class="select-none pl-8 w-full opacity-50 hover:opacity-100 hover:bg-white/10 transition-all duration-300">
+                  readme
+                </a>
+              
+            </div>
+          </div>
+        
+          
+            
+          <!-- SideBar item -->
+          <div class="flex flex-col h-full gap-2 border-white border-opacity-10">
+            <div class="flex pl-2 flex-col w-full font-bold">
+              
+                <a
+                  href="//__main__.html"
+                  id="//__main__.htmlhref"
+                  class="select-none pl-8 w-full opacity-50 hover:opacity-100 hover:bg-white/10 transition-all duration-300">
+                  __main__
+                </a>
+              
+            </div>
+          </div>
+        
+          
+            
+          <!-- SideBar item -->
+          <div class="flex flex-col h-full gap-2 border-white border-opacity-10">
+            <div class="flex pl-2 flex-col w-full font-bold">
+              
+                <div class="flex w-full gap-2 cursor-pointer" onclick="toggleList('autodocker/abc')">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="24"
+                    width="24"
+                    class="fill-white opacity-70 transition-all ease-out select-none"
+                    id="autodocker/abc-icon"
+                    style="transform: rotate(90deg);"
+                  >
+                    <path d="M9.4 17.65 8.35 16.6l4.6-4.6-4.6-4.6L9.4 6.35 15.05 12Z"/>
+                  </svg>
+                  <p class="select-none">
+                    autodocker
+                  </p>
+                </div>
+                <div class="flex flex-col h-fit w-full py-2" id="autodocker/abc-list" style="display: flex">
+                  
+                    
+                      <a
+                        href="//autodocker/abc.html"
+                        id="//autodocker/abc.htmlhref"
+                        class="select-none pl-8 opacity-50 hover:opacity-100 hover:bg-white/10 transition-all duration-300">
+                        abc
+                      </a>
+                    
+                  
+                    
+                      <a
+                        href="//autodocker/readme.html"
+                        id="//autodocker/readme.htmlhref"
+                        class="select-none pl-8 opacity-50 hover:opacity-100 hover:bg-white/10 transition-all duration-300">
+                        readme
+                      </a>
+                    
+                  
+                    
+          <!-- SideBar item -->
+          <div class="flex flex-col h-full gap-2 border-white border-opacity-10">
+            <div class="flex pl-2 flex-col w-full font-bold">
+              
+                <div class="flex w-full gap-2 cursor-pointer" onclick="toggleList('autodocker/filetypes/readme')">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="24"
+                    width="24"
+                    class="fill-white opacity-70 transition-all ease-out select-none"
+                    id="autodocker/filetypes/readme-icon"
+                    style="transform: rotate(90deg);"
+                  >
+                    <path d="M9.4 17.65 8.35 16.6l4.6-4.6-4.6-4.6L9.4 6.35 15.05 12Z"/>
+                  </svg>
+                  <p class="select-none">
+                    filetypes
+                  </p>
+                </div>
+                <div class="flex flex-col h-fit w-full py-2" id="autodocker/filetypes/readme-list" style="display: flex">
+                  
+                    
+                      <a
+                        href="//autodocker/filetypes/readme.html"
+                        id="//autodocker/filetypes/readme.htmlhref"
+                        class="select-none pl-8 opacity-50 hover:opacity-100 hover:bg-white/10 transition-all duration-300">
+                        readme
+                      </a>
+                    
+                  
+                    
+                      <a
+                        href="//autodocker/filetypes/py.html"
+                        id="//autodocker/filetypes/py.htmlhref"
+                        class="select-none pl-8 opacity-50 hover:opacity-100 hover:bg-white/10 transition-all duration-300">
+                        py
+                      </a>
+                    
+                  
+                    
+                      <a
+                        href="//autodocker/filetypes/fastapi.html"
+                        id="//autodocker/filetypes/fastapi.htmlhref"
+                        class="select-none pl-8 opacity-50 hover:opacity-100 hover:bg-white/10 transition-all duration-300">
+                        fastapi
+                      </a>
+                    
+                  
+                </div>
+              
+            </div>
+          </div>
+        
+                  
+                </div>
+              
+            </div>
+          </div>
+        
+          
+            
+          <!-- SideBar item -->
+          <div class="flex flex-col h-full gap-2 border-white border-opacity-10">
+            <div class="flex pl-2 flex-col w-full font-bold">
+              
+                <div class="flex w-full gap-2 cursor-pointer" onclick="toggleList('md/readme')">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="24"
+                    width="24"
+                    class="fill-white opacity-70 transition-all ease-out select-none"
+                    id="md/readme-icon"
+                    style="transform: rotate(90deg);"
+                  >
+                    <path d="M9.4 17.65 8.35 16.6l4.6-4.6-4.6-4.6L9.4 6.35 15.05 12Z"/>
+                  </svg>
+                  <p class="select-none">
+                    md
+                  </p>
+                </div>
+                <div class="flex flex-col h-fit w-full py-2" id="md/readme-list" style="display: flex">
+                  
+                    
+                      <a
+                        href="//md/readme.html"
+                        id="//md/readme.htmlhref"
+                        class="select-none pl-8 opacity-50 hover:opacity-100 hover:bg-white/10 transition-all duration-300">
+                        readme
+                      </a>
+                    
+                  
+                </div>
+              
+            </div>
+          </div>
+        
+          
+        </div>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="w-9/12 pr-64 py-4 bg-[#212121] relative">
+      <!-- Links -->
+      <div class="top-0 left-0 h-16 pr-72 w-full absolute flex items-center justify-end">
+        
+          <a href="" class="select-none hover:text-[#c27bd4] transition-all duration-300">
+            Github
+          </a>
+        
+      </div>
+      <div class="w-full h-full pt-20 flex px-32 gap-20">
+        <!-- Page data -->
+        <div class="flex flex-col gap-4 w-3/4">
+          <h1 class="titleRef" id="085c0acf696437da">abc</h1>
+
+<div class="quote">Provides Abstract classes behavior
+</div><h2 class="titleRef" id="93a26cce8a9e3a92">Classes</h2>
+
+<h3 class="titleRef" id="0a7ad7c7bc79a2c7"><code class="command">ABCDocType</code></h3>
+<div class="quote">Provides abstract behavior of inherited DocType classes
+</div>    
+<h4 class="titleRef" id="d84ab262c8796146">methods</h4>
+<pre><button>Copy code <?xml version="1.0" encoding="utf-8"?><svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="display: inline"><path clip-rule="evenodd" d="m7.37971 5.83706c-.85075.24354-1.49225.97131-1.61046 1.86926-.01764.13392-.01925.30542-.01925.79368v7.7c0 .8525.00058 1.4467.03838 1.9093.03708.4539.10621.7147.20685.9122.21572.4233.55992.7675.98329.9833.19752.1006.45828.1697.91216.2068.46263.0378 1.05686.0384 1.90932.0384h6.2c1.2426 0 2.25-1.0074 2.25-2.25v-1c0-.4142.3358-.75.75-.75s.75.3358.75.75v1c0 2.0711-1.6789 3.75-3.75 3.75h-6.2-.03213c-.81283 0-1.46844 0-1.99934-.0434-.54664-.0446-1.02678-.139-1.471-.3653-.7056-.3595-1.27928-.9332-1.63881-1.6388-.22634-.4443-.3207-.9244-.36536-1.471-.04338-.5309-.04337-1.1866-.04336-1.9994v-.0321-7.7l-.00001-.05786c-.00007-.40868-.00011-.68702.03209-.93161.21389-1.62466 1.45558-2.91505 3.05547-3.20159.30652-1.18429 1.38234-2.05894 2.66245-2.05894h4c1.2801 0 2.3559.87465 2.6624 2.05894 1.5999.28654 2.8416 1.57693 3.0555 3.20159.0322.24459.0322.52292.0321.93158v.00003.05786 2.5c0 .4142-.3358.75-.75.75s-.75-.3358-.75-.75v-2.5c0-.48826-.0016-.65976-.0193-.79368-.1182-.89795-.7597-1.62572-1.6104-1.86926-.3541 1.10947-1.3934 1.91294-2.6203 1.91294h-4c-1.22691 0-2.26617-.80347-2.62029-1.91294zm1.37029-.83706c0-.69036.55964-1.25 1.25-1.25h4c.6904 0 1.25.55964 1.25 1.25s-.5596 1.25-1.25 1.25h-4c-.69036 0-1.25-.55964-1.25-1.25zm3.8356 4.53148c-.2587-.32345-.7307-.37589-1.0541-.11713l-.3148.25183-.028.02237c-.777.62165-1.39894 1.11915-1.85949 1.55905-.47045.4494-.83594.896-1.03856 1.4369-.31775.8482-.31775 1.7828 0 2.631.20262.5409.56811.9875 1.03856 1.4369.46054.4399 1.08249.9374 1.85949 1.559v.0001l.028.0223.3148.2519c.3234.2587.7954.2063 1.0541-.1172.2588-.3234.2064-.7954-.1171-1.0542l-.3148-.2518c-.8114-.6491-1.3812-1.1059-1.7884-1.4948-.40282-.3847-.58268-.6454-.66998-.8784-.00489-.0131-.00966-.0262-.0143-.0393h9.31898c.4142 0 .75-.3358.75-.75s-.3358-.75-.75-.75h-9.31898c.00464-.0131.00941-.0262.0143-.0393.0873-.233.26716-.4937.66998-.8784.4072-.3889.977-.8457 1.7884-1.4948l.3148-.2518c.3235-.2588.3759-.73077.1171-1.05422z" fill="#ffffff" fill-rule="evenodd"/></svg></button><code class="language-python">@abstractmethod
+def process(
+   self,
+   project_path: str,
+   output_dir: str = 'docs',
+   ignore_files: list[str] = None,
+   extend: list['ABCDocType'] = None,
+):
+</code></pre>
+Process project and generate docs<ul style="list-style-type: disc"><li><code class="command">project_path</code> - project path</li><li><code class="command">output_dir</code> - output directory</li><li><code class="command">ignore_files</code> - ignore files with extensions</li><li><code class="command">extend</code> - extend other DocType classes</li>
+</ul>
+<hr><pre><button>Copy code <?xml version="1.0" encoding="utf-8"?><svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="display: inline"><path clip-rule="evenodd" d="m7.37971 5.83706c-.85075.24354-1.49225.97131-1.61046 1.86926-.01764.13392-.01925.30542-.01925.79368v7.7c0 .8525.00058 1.4467.03838 1.9093.03708.4539.10621.7147.20685.9122.21572.4233.55992.7675.98329.9833.19752.1006.45828.1697.91216.2068.46263.0378 1.05686.0384 1.90932.0384h6.2c1.2426 0 2.25-1.0074 2.25-2.25v-1c0-.4142.3358-.75.75-.75s.75.3358.75.75v1c0 2.0711-1.6789 3.75-3.75 3.75h-6.2-.03213c-.81283 0-1.46844 0-1.99934-.0434-.54664-.0446-1.02678-.139-1.471-.3653-.7056-.3595-1.27928-.9332-1.63881-1.6388-.22634-.4443-.3207-.9244-.36536-1.471-.04338-.5309-.04337-1.1866-.04336-1.9994v-.0321-7.7l-.00001-.05786c-.00007-.40868-.00011-.68702.03209-.93161.21389-1.62466 1.45558-2.91505 3.05547-3.20159.30652-1.18429 1.38234-2.05894 2.66245-2.05894h4c1.2801 0 2.3559.87465 2.6624 2.05894 1.5999.28654 2.8416 1.57693 3.0555 3.20159.0322.24459.0322.52292.0321.93158v.00003.05786 2.5c0 .4142-.3358.75-.75.75s-.75-.3358-.75-.75v-2.5c0-.48826-.0016-.65976-.0193-.79368-.1182-.89795-.7597-1.62572-1.6104-1.86926-.3541 1.10947-1.3934 1.91294-2.6203 1.91294h-4c-1.22691 0-2.26617-.80347-2.62029-1.91294zm1.37029-.83706c0-.69036.55964-1.25 1.25-1.25h4c.6904 0 1.25.55964 1.25 1.25s-.5596 1.25-1.25 1.25h-4c-.69036 0-1.25-.55964-1.25-1.25zm3.8356 4.53148c-.2587-.32345-.7307-.37589-1.0541-.11713l-.3148.25183-.028.02237c-.777.62165-1.39894 1.11915-1.85949 1.55905-.47045.4494-.83594.896-1.03856 1.4369-.31775.8482-.31775 1.7828 0 2.631.20262.5409.56811.9875 1.03856 1.4369.46054.4399 1.08249.9374 1.85949 1.559v.0001l.028.0223.3148.2519c.3234.2587.7954.2063 1.0541-.1172.2588-.3234.2064-.7954-.1171-1.0542l-.3148-.2518c-.8114-.6491-1.3812-1.1059-1.7884-1.4948-.40282-.3847-.58268-.6454-.66998-.8784-.00489-.0131-.00966-.0262-.0143-.0393h9.31898c.4142 0 .75-.3358.75-.75s-.3358-.75-.75-.75h-9.31898c.00464-.0131.00941-.0262.0143-.0393.0873-.233.26716-.4937.66998-.8784.4072-.3889.977-.8457 1.7884-1.4948l.3148-.2518c.3235-.2588.3759-.73077.1171-1.05422z" fill="#ffffff" fill-rule="evenodd"/></svg></button><code class="language-python">@staticmethod
+def iter(directory: str) -&gt Iterable[str]:
+</code></pre>
+Go over directory and yields all files<ul style="list-style-type: disc"><li><code class="command">directory</code> - path to directory</li>
+</ul>
+
+<h3 class="titleRef" id="ad28a0d2ae307388"><code class="command">ABCFileType</code></h3>
+<div class="quote">Provides abstract behavior of inherited FileType classes
+</div>    
+<h4 class="titleRef" id="edb058fe8aaac078">methods</h4>
+<pre><button>Copy code <?xml version="1.0" encoding="utf-8"?><svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="display: inline"><path clip-rule="evenodd" d="m7.37971 5.83706c-.85075.24354-1.49225.97131-1.61046 1.86926-.01764.13392-.01925.30542-.01925.79368v7.7c0 .8525.00058 1.4467.03838 1.9093.03708.4539.10621.7147.20685.9122.21572.4233.55992.7675.98329.9833.19752.1006.45828.1697.91216.2068.46263.0378 1.05686.0384 1.90932.0384h6.2c1.2426 0 2.25-1.0074 2.25-2.25v-1c0-.4142.3358-.75.75-.75s.75.3358.75.75v1c0 2.0711-1.6789 3.75-3.75 3.75h-6.2-.03213c-.81283 0-1.46844 0-1.99934-.0434-.54664-.0446-1.02678-.139-1.471-.3653-.7056-.3595-1.27928-.9332-1.63881-1.6388-.22634-.4443-.3207-.9244-.36536-1.471-.04338-.5309-.04337-1.1866-.04336-1.9994v-.0321-7.7l-.00001-.05786c-.00007-.40868-.00011-.68702.03209-.93161.21389-1.62466 1.45558-2.91505 3.05547-3.20159.30652-1.18429 1.38234-2.05894 2.66245-2.05894h4c1.2801 0 2.3559.87465 2.6624 2.05894 1.5999.28654 2.8416 1.57693 3.0555 3.20159.0322.24459.0322.52292.0321.93158v.00003.05786 2.5c0 .4142-.3358.75-.75.75s-.75-.3358-.75-.75v-2.5c0-.48826-.0016-.65976-.0193-.79368-.1182-.89795-.7597-1.62572-1.6104-1.86926-.3541 1.10947-1.3934 1.91294-2.6203 1.91294h-4c-1.22691 0-2.26617-.80347-2.62029-1.91294zm1.37029-.83706c0-.69036.55964-1.25 1.25-1.25h4c.6904 0 1.25.55964 1.25 1.25s-.5596 1.25-1.25 1.25h-4c-.69036 0-1.25-.55964-1.25-1.25zm3.8356 4.53148c-.2587-.32345-.7307-.37589-1.0541-.11713l-.3148.25183-.028.02237c-.777.62165-1.39894 1.11915-1.85949 1.55905-.47045.4494-.83594.896-1.03856 1.4369-.31775.8482-.31775 1.7828 0 2.631.20262.5409.56811.9875 1.03856 1.4369.46054.4399 1.08249.9374 1.85949 1.559v.0001l.028.0223.3148.2519c.3234.2587.7954.2063 1.0541-.1172.2588-.3234.2064-.7954-.1171-1.0542l-.3148-.2518c-.8114-.6491-1.3812-1.1059-1.7884-1.4948-.40282-.3847-.58268-.6454-.66998-.8784-.00489-.0131-.00966-.0262-.0143-.0393h9.31898c.4142 0 .75-.3358.75-.75s-.3358-.75-.75-.75h-9.31898c.00464-.0131.00941-.0262.0143-.0393.0873-.233.26716-.4937.66998-.8784.4072-.3889.977-.8457 1.7884-1.4948l.3148-.2518c.3235-.2588.3759-.73077.1171-1.05422z" fill="#ffffff" fill-rule="evenodd"/></svg></button><code class="language-python">@staticmethod
+@abstractmethod
+def process(
+   cls,
+   filepath: str,
+   output: str = 'docs',
+   one_file: bool = False
+):
+</code></pre>
+Process file and translate it into .md<ul style="list-style-type: disc"><li><code class="command">cls</code> - Class</li><li><code class="command">filepath</code> - path to file</li><li><code class="command">output</code> - output directory</li><li><code class="command">one_file</code> - True when target is file</li>
+</ul>
+<hr><pre><button>Copy code <?xml version="1.0" encoding="utf-8"?><svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="display: inline"><path clip-rule="evenodd" d="m7.37971 5.83706c-.85075.24354-1.49225.97131-1.61046 1.86926-.01764.13392-.01925.30542-.01925.79368v7.7c0 .8525.00058 1.4467.03838 1.9093.03708.4539.10621.7147.20685.9122.21572.4233.55992.7675.98329.9833.19752.1006.45828.1697.91216.2068.46263.0378 1.05686.0384 1.90932.0384h6.2c1.2426 0 2.25-1.0074 2.25-2.25v-1c0-.4142.3358-.75.75-.75s.75.3358.75.75v1c0 2.0711-1.6789 3.75-3.75 3.75h-6.2-.03213c-.81283 0-1.46844 0-1.99934-.0434-.54664-.0446-1.02678-.139-1.471-.3653-.7056-.3595-1.27928-.9332-1.63881-1.6388-.22634-.4443-.3207-.9244-.36536-1.471-.04338-.5309-.04337-1.1866-.04336-1.9994v-.0321-7.7l-.00001-.05786c-.00007-.40868-.00011-.68702.03209-.93161.21389-1.62466 1.45558-2.91505 3.05547-3.20159.30652-1.18429 1.38234-2.05894 2.66245-2.05894h4c1.2801 0 2.3559.87465 2.6624 2.05894 1.5999.28654 2.8416 1.57693 3.0555 3.20159.0322.24459.0322.52292.0321.93158v.00003.05786 2.5c0 .4142-.3358.75-.75.75s-.75-.3358-.75-.75v-2.5c0-.48826-.0016-.65976-.0193-.79368-.1182-.89795-.7597-1.62572-1.6104-1.86926-.3541 1.10947-1.3934 1.91294-2.6203 1.91294h-4c-1.22691 0-2.26617-.80347-2.62029-1.91294zm1.37029-.83706c0-.69036.55964-1.25 1.25-1.25h4c.6904 0 1.25.55964 1.25 1.25s-.5596 1.25-1.25 1.25h-4c-.69036 0-1.25-.55964-1.25-1.25zm3.8356 4.53148c-.2587-.32345-.7307-.37589-1.0541-.11713l-.3148.25183-.028.02237c-.777.62165-1.39894 1.11915-1.85949 1.55905-.47045.4494-.83594.896-1.03856 1.4369-.31775.8482-.31775 1.7828 0 2.631.20262.5409.56811.9875 1.03856 1.4369.46054.4399 1.08249.9374 1.85949 1.559v.0001l.028.0223.3148.2519c.3234.2587.7954.2063 1.0541-.1172.2588-.3234.2064-.7954-.1171-1.0542l-.3148-.2518c-.8114-.6491-1.3812-1.1059-1.7884-1.4948-.40282-.3847-.58268-.6454-.66998-.8784-.00489-.0131-.00966-.0262-.0143-.0393h9.31898c.4142 0 .75-.3358.75-.75s-.3358-.75-.75-.75h-9.31898c.00464-.0131.00941-.0262.0143-.0393.0873-.233.26716-.4937.66998-.8784.4072-.3889.977-.8457 1.7884-1.4948l.3148-.2518c.3235-.2588.3759-.73077.1171-1.05422z" fill="#ffffff" fill-rule="evenodd"/></svg></button><code class="language-python">@staticmethod
+def pre(
+   filepath: str,
+   output: str = 'docs',
+   one_file: bool = False,
+) -&gt tuple[str, str, str]:
+</code></pre>
+Preprocess file and making directories<ul style="list-style-type: disc"><li><code class="command">filepath</code> - path to file</li><li><code class="command">output</code> - output directory</li><li><code class="command">one_file</code> - True when target is file</li>
+</ul>
+        </div>
+        <!-- Page navigation -->
+        <div class="flex flex-col fixed right-0 w-1/4 h-fit gap-2 text-sm py-2 border-l-[1px] border-white border-opacity-20">
+          <p class="select-none pl-5 font-black">
+            On this page
+          </p>
+          
+            <a
+              id="page085c0acf696437da"
+              href="#085c0acf696437da"
+              class="select-none border-l-[1px] font-semibold pl-[1.0em] opacity-50 hover:opacity-100 border-opacity-100 pl-5 cursor-pointer"
+            >
+              abc
+            </a>
+          
+            <a
+              id="page93a26cce8a9e3a92"
+              href="#93a26cce8a9e3a92"
+              class="select-none border-l-[1px] font-semibold pl-[1.5em] opacity-50 hover:opacity-100 border-opacity-100 pl-5 cursor-pointer"
+            >
+              Classes
+            </a>
+          
+            <a
+              id="page0a7ad7c7bc79a2c7"
+              href="#0a7ad7c7bc79a2c7"
+              class="select-none border-l-[1px] font-semibold pl-[2.0em] opacity-50 hover:opacity-100 border-opacity-100 pl-5 cursor-pointer"
+            >
+              <code class="command">ABCDocType</code>
+            </a>
+          
+            <a
+              id="paged84ab262c8796146"
+              href="#d84ab262c8796146"
+              class="select-none border-l-[1px] font-semibold pl-[2.5em] opacity-50 hover:opacity-100 border-opacity-100 pl-5 cursor-pointer"
+            >
+              methods
+            </a>
+          
+            <a
+              id="pagead28a0d2ae307388"
+              href="#ad28a0d2ae307388"
+              class="select-none border-l-[1px] font-semibold pl-[2.0em] opacity-50 hover:opacity-100 border-opacity-100 pl-5 cursor-pointer"
+            >
+              <code class="command">ABCFileType</code>
+            </a>
+          
+            <a
+              id="pageedb058fe8aaac078"
+              href="#edb058fe8aaac078"
+              class="select-none border-l-[1px] font-semibold pl-[2.5em] opacity-50 hover:opacity-100 border-opacity-100 pl-5 cursor-pointer"
+            >
+              methods
+            </a>
+          
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <style>
+    @import url(https://cdn.jsdelivr.net/npm/firacode@6.2.0/distr/fira_code.css);
+
+    @supports (font-variation-settings: normal) {
+      code { font-family: 'Fira Code VF', monospace; }
+    }
+
+    :root {
+      font-family: "Inter var", "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+      font-variant-ligatures: contextual;
+    }
+    :root::-webkit-scrollbar {
+      background: #ffffff3a;
+      width: .75rem;
+      height: .75rem;
+    }
+    :root::-webkit-scrollbar-thumb {
+      background: #ffffff5a;
+      border-radius: 2rem;
+    }
+
+    ::-moz-selection {
+      background: #c27bd490;
+    }
+    ::selection {
+      background: #c27bd490;
+    }
+    hr {
+      background: #c27bd4;
+      color: #c27bd4;
+      border: 0;
+      height: .1rem;
+    }
+    h1 {
+      letter-spacing: .2rem;
+      font-weight: bolder;
+      font-size: 5rem;
+    }
+    h2 {
+      letter-spacing: .15rem;
+      font-weight: bold;
+      font-size: 3.5rem;
+    }
+    h3 {
+      letter-spacing: .1rem;
+      font-weight: bold;
+      font-size: 2rem;
+    }
+    h4 {
+      letter-spacing: .05rem;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+    h5, h6 {
+      font-weight: bold;
+      font-size: .5rem;
+    }
+    .quote {
+      background: #ffffff2a;
+      border-radius: 0 .5rem .5rem 0;
+      border-left: .25rem solid #c27bd4;
+      padding: .5rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+    }
+    .command {
+      background: #ffffff2a;
+      border-radius: .25rem;
+      padding: .25rem .5rem;
+      width: fit-content;
+      font-family: 'Fira Code', monospace;
+      display: inline;
+    }
+    code {
+      border-radius: 0 0 .5rem .5rem;
+      padding: .25rem .5rem;
+      font-family: 'Fira Code', monospace;
+      width: 100%;
+    }
+    code::-webkit-scrollbar {
+      background: #00000000;
+      width: .75rem;
+      height: .75rem;
+      border-radius: 2rem;
+    }
+    code::-webkit-scrollbar-thumb {
+      background: #ffffff5a;
+      border-radius: 2rem;
+    }
+    pre {
+      background: #00000090;
+      border-radius: .5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: end;
+      justify-items: end;
+      place-items: end;
+    }
+    button {
+      width: fit-content;
+      padding: .25rem .5rem;
+      display: flex;
+      justify-items: center;
+      transition: opacity .15s ease-out;
+    }
+    button:hover {
+      opacity: .75;
+    }
+    button:active {
+      opacity: .6;
+    }
+    ul {
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+    }
+  </style>
+
+  <script lang="js">
+    function toggleList(itemID) {
+      // Finding elements by "itemID"
+      const listElem = document.getElementById(`${itemID}-list`);
+      const iconElem = document.getElementById(`${itemID}-icon`);
+
+      function hide() {
+        listElem.style.display = 'none';
+        iconElem.style.transform = 'rotate(0deg)';
+      }
+
+      function show() {
+        listElem.style.display = 'flex';
+        iconElem.style.transform = 'rotate(90deg)';
+      }
+
+      listElem.style.display === 'flex' ? hide() : show(); // toggle
+    }
+
+    
+      const href = document.getElementById("//autodocker/abc.htmlhref");
+      href.className += " opacity-80 bg-white/20 hover:bg-white/30";
+    
+
+    const titleRefs = document.getElementsByClassName("titleRef");
+    function checkScroll(ypos) {
+      let selected = false;
+      const items = [...titleRefs];
+      for (var i = 0; i < items.length; ++i) {
+        const e = items[i];
+        const pageEl = document.getElementById("page" + e.id);
+        const pos = window.scrollY + e.getBoundingClientRect().top;
+
+        if (!selected && (ypos <= pos || i == items.length-1)) {
+          selected = true;
+          pageEl.classList.add('border-[#c27bd4]');
+          pageEl.classList.add('opacity-90');
+          pageEl.classList.remove('opacity-60');
+        } else {
+          pageEl.classList.remove('border-[#c27bd4]');
+          pageEl.classList.add('opacity-60');
+          pageEl.classList.remove('opacity-90');
+        }
+      }
+    }
+
+    window.addEventListener("scroll", ev => {
+      checkScroll(window.scrollY);
+    });
+    window.addEventListener("load", ev => {checkScroll(window.scrollY)});
+
+    hljs.highlightAll();
+  </script>
+</body>
+</html>
