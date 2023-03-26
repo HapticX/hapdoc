@@ -11,19 +11,24 @@ class Md2Html:
     Provides Markdown to Html
     """
     _rules = [
-        (r'_{3,}\s*', r'<hr>'),
-        (r'-{3,}\s*', r'<hr>'),
-        (r'(\s+)> +([^\n]+)', r'\1<div class="quote">\2</div>'),
-        (r'\n+((-\s*[^\n]+\n)+)', r'<ul style="list-style-type: disc">\n\1</ul>'),
-        (r'\n+-\s*([^\n]+)', r'<li>\1</li>'),
-        (r'###### +([^\n]+)', r'<h6 class="titleRef">\1</h6>'),
-        (r'##### +([^\n]+)', r'<h5 class="titleRef">\1</h5>'),
-        (r'#### +([^\n]+)', r'<h4 class="titleRef">\1</h4>'),
-        (r'### +([^\n]+)', r'<h3 class="titleRef">\1</h3>'),
-        (r'## +([^\n]+)', r'<h2 class="titleRef">\1</h2>'),
-        (r'# +([^\n]+)', r'<h1 class="titleRef">\1</h1>'),
-        (r'!\[([^\n\]]+)\]\(([^\)\s]+)\)', r'<img src="\2" alt="\1">'),
-        (r'\[([^\n\]]+)\]\(([^\)\s]+)\)', r'<a href="\2">\1</a>'),
+        (r'>', r'&gt', 0, 1),
+        # Line
+        (r'_{3,}\s*', r'<hr>', 0, 1),
+        (r'-{3,}\s*', r'<hr>', 0, 1),
+        # List
+        (r'\n+((-\s*[^\n]+\n)+)', r'<ul style="list-style-type: disc">\n\1</ul>', 0, 1),
+        (r'\n+-\s*([^\n]+)', r'<li>\1</li>', 0, 1),
+        # Headers
+        (r'###### *([^\n]+)', r'<h6 class="titleRef">\1</h6>', 0, 1),
+        (r'##### *([^\n]+)', r'<h5 class="titleRef">\1</h5>', 0, 1),
+        (r'#### *([^\n]+)', r'<h4 class="titleRef">\1</h4>', 0, 1),
+        (r'### *([^\n]+)', r'<h3 class="titleRef">\1</h3>', 0, 1),
+        (r'## *([^\n]+)', r'<h2 class="titleRef">\1</h2>', 0, 1),
+        (r'# *([^\n]+)', r'<h1 class="titleRef">\1</h1>', 0, 1),
+        # Image
+        (r'!\[([^\n\]]+)\]\(([^\)\s]+)\)', r'<img src="\2" alt="\1">', 0, 1),
+        # URL
+        (r'\[([^\n\]]+)\]\(([^\)\s]+)\)', r'<a href="\2">\1</a>', 0, 1),
         # Code
         (
             r'```(\S+)\s*([^`]+?)```',
@@ -70,22 +75,28 @@ class Md2Html:
             r'4937.66998-.8784.4072-.3889.977-.8457 1.7884-1.'
             r'4948l.3148-.2518c.3235-.2588.3759-.73077.1171-1.05422z"'
             r' fill="#ffffff" fill-rule="evenodd"/></svg>'
-            r'</button><code class="language-\1">\2</code></pre>'
+            r'</button><code class="language-\1">\2</code></pre>',
+            0, 1
         ),
-        (r'(?!")`([^`"]+)`(?!")', r'<span class="command">\1</span>'),
+        (r'(?!")`([^`"]+)`(?!")', r'<code class="command">\1</code>', 0, 1),
+        # Bold
+        (r'[\s]\*\*([^*]*)\*\*[\s]', r'<b>\1</b>', 0, 1),
+        (r'[\s]__([^_]*)__[\s]', r'<b>\1</b>', 0, 1),
+        # Italic
+        (r'[\s]\*([^*]*)\*[\s]', r'<em>\1</em>', 0, 1),
+        (r'[\s]_([^_]*)_[\s]', r'<em>\1</em>', 0, 1),
     ]
 
     @staticmethod
-    def cast(source: str, repeat: int = 2) -> str:
+    def cast(source: str) -> str:
         """
         Casts Markdown sources to HTML code
         :param source: Markdown sources
-        :param repeat: max repeat count
         """
-        for _ in range(repeat):
-            for pattern, repl in Md2Html._rules:
-                source = re.sub(pattern, repl, source, re.MULTILINE)
-        return source
+        for pattern, repl, flags, repeat_count in Md2Html._rules:
+            for _ in range(repeat_count):
+                source = re.sub(pattern, repl, source, flags)
+        return Md2Html._prepare_blockquotes(source)
 
     @staticmethod
     def rand_title_ref(html_source: str) -> tuple[str, list[dict]]:
@@ -103,3 +114,18 @@ class Md2Html:
                 1
             )
         return html_source, result
+
+    @staticmethod
+    def _prepare_blockquotes(source: str) -> str:
+        # Blockquote
+        blockquotes = re.findall(r'((^&gt\s*[^\n]+[\n\r]+)+)', source, re.MULTILINE)
+        for blockquote, _ in blockquotes:
+            print(blockquote)
+            new_blockquote = re.sub(r'^ *&gt\s*', r'', blockquote, re.MULTILINE)
+            new_blockquote = re.sub(r'\n *&gt\s*', r'\n', new_blockquote, re.MULTILINE)
+            new_blockquote = re.sub(r'>[\n ]*&gt\s*', r'>', new_blockquote, re.MULTILINE)
+            source = source.replace(blockquote, f'<div class="quote">{new_blockquote}</div>')
+            print(new_blockquote)
+        if re.findall(r'((^&gt\s*[^\n]+[\n\r]+)+)', source, re.MULTILINE):
+            return Md2Html._prepare_blockquotes(source)
+        return source

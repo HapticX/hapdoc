@@ -2,7 +2,7 @@
 """
 Describes Python file type
 """
-from re import findall, sub, MULTILINE
+from re import findall, split, sub, MULTILINE
 from typing import Iterable
 
 from ..abc import ABCFileType
@@ -23,27 +23,24 @@ class Py(ABCFileType):
             # decorators
             decorators = [i.strip() for i in decorator.split('@')[1:]] if decorator else []
             # return type
-            return_type = findall(r'->\s*([^:]+):', return_type)
-            return_type = f' -> {return_type[0]}' if return_type else ''
+            return_type = f' -> {return_type[3:-1]}' if return_type.startswith('->') else ''
             # arguments
-            arguments_typed = list(filter(lambda x: bool(x[0]), [
-                (
-                    i.split(':', 1)[0].strip(),
-                    i.split(':', 1)[1].split('=')[0].strip() if ':' in i else '',
-                    i.split('=', 1)[1].strip() if '=' in i else ''
-                ) for i in sub(r'\s+', r' ', arguments[1:-1]).split(',')
-            ]))
-            arguments = []
-            for arg in arguments_typed:
-                arg_desc = findall(r':param\s+' + arg[0].strip() + r'\s*:\s+([^\n]+)', docs)
-                arguments.append({
+            arg_names = findall(
+                r'[(,]\s*\b([a-zA-Z][a-zA-Z0-9_]*)\b\s*(?=,\s*\b[a-zA-Z][a-zA-Z0-9_]*\b\s*[:=,]|:|=)',
+                arguments
+            )
+            arg_list = []
+            for arg in arg_names:
+                arg_desc = findall(r':param\s+' + arg[0] + r'\s*:\s*([^\n]+)', docs)
+                arg_list.append({
                     'name': arg[0],
-                    'desc': arg_desc[0].strip() if arg_desc else '',
-                    'text': f'{arg[0]}: {arg[1]} = {arg[2]}'
-                    if arg[2] else f'{arg[0]}: {arg[1]}'
-                    if arg[1] else arg[0]
+                    'desc': arg_desc[0].strip() if arg_desc else ''
                 })
-            yield description, decorators, return_type, arguments, is_async, name
+            arguments = sub(r'\s{4,}', r'\n   ', arguments)
+            arguments = sub(r'\s+\)\Z', r'\n', arguments)
+            if arguments.endswith(')'):
+                arguments = arguments[:-1]
+            yield description, decorators, return_type, arg_list, is_async, name, arguments[1:]
 
     @staticmethod
     def process_funcs(
@@ -57,13 +54,12 @@ class Py(ABCFileType):
         :return: md formatted string
         """
         methods_text = []
-        for desc, decorators, ret_type, arguments, is_async, name in Py._process(functions):
-            arguments_text = ",\n    ".join([i["text"] for i in arguments])
-            params = '\n- '.join([f'`{i["name"]}` - {i["desc"]}' for i in arguments if i['desc']])
+        for desc, decorators, ret_type, arg_list, is_async, name, arguments in Py._process(functions):
+            params = '\n- '.join([f'`{i["name"]}` - {i["desc"]}' for i in arg_list if i['desc']])
             params = f'\n- {params}' if params else ''
             decorator_text = '\n@'.join(decorators)
             decorator_text = f'@{decorator_text}\n' if decorators else ''
-            arguments_text = f'\n    {arguments_text}\n' if arguments_text else ''
+            arguments_text = f'{arguments}' if arguments else ''
             methods_text.append(
                 f'\n```python\n{decorator_text}{is_async}def '
                 f'{name}({arguments_text}){ret_type}:\n```'
@@ -92,19 +88,19 @@ class Py(ABCFileType):
             data += f'\n> {description[0].strip()}'
 
         # Handle classes
-        classes = findall(r'(class +([^:]+):\n(\s+)[^\n]+(\n+\3[ \S]*)+)', source)
+        classes = findall(r'class +([^:]+):\n(\s+)([^\n]+(\n+\2[ \S]*)+)', source)
         classes_text = []
         for class_data in classes:
-            name = findall(r'class +(\w+)', class_data[0])[0]
-            doc = findall(r'class[^\n]+\s+"{3}\s*([\s\S]+?)"{3}', class_data[0])
+            name = class_data[0]
+            doc = findall(r'"{3}\s*([\s\S]+?)"{3}', class_data[2])
             doc = f'> {doc[0]}' if doc else ''
             class_text = f'\n### `{name}`\n{doc}'
             # Handle class methods
             methods = findall(
                 r"^\s*((@[\S]+\(\)|@[\S]+\([\S\s]+?\)|\s*|@[\S]+\s*)+)?"
-                r"\s+(async +)?def +([^_][^\s(]+)(\(\)|\([\s\S]+?\))(\s*->\s*[^:]+:|\s*:)"
+                r"\s+(async +)?def +([^_][^\s(]+)(\(\)|\([\s\S]+?\))\s*(->\s*[^:]+:|\s*:)"
                 r"\s+(\"{3}([\s\S]+?)\"{3})?",
-                class_data[0],
+                class_data[2],
                 MULTILINE
             )
             class_text += '\n#### methods'
@@ -118,7 +114,7 @@ class Py(ABCFileType):
         # Handle functions
         functions = findall(
             r'^((@[\S]+\s*\(\)\s*|@[\S]+\s*\([\s\S]+?\)\s*|@[\S]+\s*)+)?\s+'
-            r'^(async +)?def +([^_][^\s(]+)(\(\)|\([\s\S]+?\))(\s*->\s*[^:]+:|\s*:)'
+            r'^(async +)?def +([^_][^\s(]+)(\(\)|\([\s\S]+?\))\s*(->\s*[^:]+:|\s*:)'
             r'\s+(\"{3}([\s\S]+?)\"{3})?',
             source,
             MULTILINE

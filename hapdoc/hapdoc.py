@@ -5,6 +5,7 @@ Autodoc CLI
 import os
 from os import path
 from glob import glob
+from time import time
 from pprint import pprint
 
 import click
@@ -87,10 +88,12 @@ def gen(
         ext.strip() if ext.strip().startswith('.') else f'.{ext.strip()}'
         for ext in ignore.split(',')
     ]
+    start = time()
     with click.progressbar(
         label='Generating docs',
         fill_char=click.style('#', 'bright_green'),
         empty_char=' ',
+        bar_template='%(label)s  [%(bar)s]',
         show_percent=True,
         length=1,
     ) as progress:
@@ -99,6 +102,7 @@ def gen(
         ):
             progress.length = i[1]
             progress.update(i[0])
+    click.echo(f'Generated in {round(time() - start)} seconds')
 
 
 @hapdoc.command()
