@@ -4,8 +4,6 @@ Autodoc CLI
 """
 import os
 from os import path, remove
-from glob import glob
-from time import time
 from pprint import pprint
 
 import click
@@ -18,7 +16,11 @@ from fastapi import status
 from jinja2 import FileSystemLoader, Environment, select_autoescape
 
 from .md import Md2Html
-from .utils import show_all_projects, generate_md_files, cast_md_dir_to_json
+from .utils import (
+    show_all_projects, generate_md_files,
+    cast_md_dir_to_json, load_user_templates,
+    create_new_user_template, get_user_template_path
+)
 
 
 app = FastAPI(docs_url=None, redoc_url=None)
@@ -47,30 +49,42 @@ def project_types():
 
 
 @hapdoc.command()
+def tmpl_list():
+    """
+    Shows all saved templates
+    """
+    templates_list = load_user_templates()
+
+
+@hapdoc.command()
+def tmpl_new():
+    """
+    Creates a new user template
+    """
+    create_new_user_template()
+
+
+@hapdoc.command()
 @click.argument('project_path', type=str)
 @click.option(
     '--doctype', '-d', 'document_type',
     help='Select project type',
-    default='py',
-    type=str
+    default='py', type=str
 )
 @click.option(
     '--ignore', '-i', 'ignore',
     help='Ignore file extensions separated by comma',
-    default='',
-    type=str
+    default='', type=str
 )
 @click.option(
     '--extend', '-e', 'extend',
     help='Extend doc by specified doctypes separated by comma',
-    default='',
-    type=str
+    default='', type=str
 )
 @click.option(
     '--out', '-o', 'output',
     help='Output docs folder',
-    default='docs',
-    type=str
+    default='docs', type=str
 )
 def gen(
         project_path: str,
@@ -89,38 +103,31 @@ def gen(
 @click.argument('docs', type=str)
 @click.option(
     '-h', '--host', 'host',
-    default='127.0.0.1',
-    type=str
+    default='127.0.0.1', type=str
 )
 @click.option(
     '-p', '--port', 'port',
-    default='5000',
-    type=str
+    default='5000', type=str
 )
 @click.option(
     '-t', '--template', 'templates_folder',
-    default='hapdoc/templates/vitepress',
-    type=str
+    default='hapdoc/templates/vitepress', type=str
 )
 @click.option(
     '-T', '--title', 'title',
-    default='HapDoc',
-    type=str
+    default='HapDoc', type=str
 )
 @click.option(
     '-a', '--accent', 'accent_color',
-    default='#c27bd4',
-    type=str
+    default='#c27bd4', type=str
 )
 @click.option(
     '-b', '--background', 'background_color',
-    default='#212121',
-    type=str
+    default='#212121', type=str
 )
 @click.option(
     '-s', '--surface', 'surface_color',
-    default='#343434',
-    type=str
+    default='#343434', type=str
 )
 def serve(
         host: str,
@@ -135,8 +142,10 @@ def serve(
     """
     Launches FastAPI docs server
     """
+    user_template = get_user_template_path(templates_folder)
+    print(user_template)
     env = Environment(
-        loader=FileSystemLoader(templates_folder),
+        loader=FileSystemLoader(user_template if user_template else templates_folder),
         autoescape=select_autoescape()
     )
     template = env.get_template('index.html')
@@ -180,61 +189,51 @@ def serve(
 @click.option(
     '--doctype', '-d', 'document_type',
     help='Select project type',
-    default='py',
-    type=str
+    default='py', type=str
 )
 @click.option(
     '--ignore', '-i', 'ignore',
     help='Ignore file extensions separated by comma',
-    default='',
-    type=str
+    default='', type=str
 )
 @click.option(
     '--extend', '-e', 'extend',
     help='Extend doc by specified docs types separated by comma',
-    default='',
-    type=str
+    default='', type=str
 )
 @click.option(
     '--out', '-o', 'output',
     help='Output docs folder',
-    default='buildocs',
-    type=str
+    default='buildocs', type=str
 )
 @click.option(
     '-t', '--template', 'templates_folder',
-    default='hapdoc/templates/vitepress',
-    type=str
+    default='hapdoc/templates/vitepress', type=str
 )
 @click.option(
     '-T', '--title', 'title',
     help='Page title',
-    default='HapDoc',
-    type=str
+    default='HapDoc', type=str
 )
 @click.option(
     '-a', '--accent', 'accent_color',
     help='Accent color',
-    default='#c27bd4',
-    type=str
+    default='#c27bd4', type=str
 )
 @click.option(
     '-b', '--background', 'background_color',
     help='Background color',
-    default='#212121',
-    type=str
+    default='#212121', type=str
 )
 @click.option(
     '-s', '--surface', 'surface_color',
     help='Surface color',
-    default='#343434',
-    type=str
+    default='#343434', type=str
 )
 @click.option(
     '-r', '--root', 'root',
     help='Root path, by default uses working directory',
-    default=None,
-    type=str
+    default=None, type=str
 )
 def build(
         docs: str,

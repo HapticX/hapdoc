@@ -11,16 +11,19 @@ autodoc CLI tool written in Python with :heart:
 
 </div>
 
-## Why Hapdoc? :information_desk_person:
-Because it's simple to use.
+## Why Hapdoc? 💁‍♀️
+Because it's simple to use. 🙂
 
 ### Features :sparkles:
 - Supported projects:
   - `Python`
   - `FastAPI`
-- Generate markdown docs, Serve it via FastAPI or Build docs into HTML files.
+- Generate Markdown docs via `gen` command.
+- Build docs into HTML via `build` command.
+- Serve generated docs at your server via `serve` command.
+- Create your own templates via `tmpl-new` command.
 
-## Installing :inbox_tray:
+## Installing 📥
 via `pypi` 📦
 ```bash
 pip install hapdoc --upgrade
@@ -30,7 +33,7 @@ via `git` 💾
 pip install https://github.com/hapticx/hapdoc
 ```
 
-## Usage :zap:
+## Usage ⚡
 Help message
 ```bash
 hapdoc --help
@@ -40,9 +43,13 @@ Generate and serve docs via FastAPI:
 hapdoc gen path/to/project
 hapdoc serve docs/hapdoc -h 127.0.0.1 -p 5000
 ```
+Build HTML docs:
+```bash
+hapdoc build path/to/project
+```
 
-## What's Next? :bulb:
+## What's Next? 💡
 We planned to add some other project types! Check more in [issues:doc_rules](https://github.com/HapticX/hapdoc/labels/doc%20rules)
 
 ## Contributing :dizzy:
-You can help us and create PR with project type :v:
+You can help us and create PR with project type ✌
