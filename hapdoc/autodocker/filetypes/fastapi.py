@@ -24,7 +24,7 @@ class FastApi(Py):
         :return: md formatted string
         """
         methods_text = []
-        for desc, decorators, _, arguments, _, _ in FastApi._process(functions):
+        for desc, decorators, _, arg_list, _, _, arguments in FastApi._process(functions):
             req_method, req_route = '', ''
             # Find method and route path
             for decorator in decorators:
@@ -37,7 +37,7 @@ class FastApi(Py):
                     req_method, req_route = data[0].upper(), data[1].strip('"').strip("'")
             if not req_method and not req_route:
                 continue
-            params = '\n- '.join([f'`{i["name"]}` - {i["desc"]}' for i in arguments if i['desc']])
+            params = '\n- '.join([f'`{i["name"]}` - {i["desc"]}' for i in arg_list if i['desc']])
             params = f'\n- {params}' if params else ''
             query_text = f'#### Query Params:\n{params}'
             methods_text.append(

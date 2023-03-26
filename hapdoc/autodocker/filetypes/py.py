@@ -31,9 +31,9 @@ class Py(ABCFileType):
             )
             arg_list = []
             for arg in arg_names:
-                arg_desc = findall(r':param\s+' + arg[0] + r'\s*:\s*([^\n]+)', docs)
+                arg_desc = findall(r':param\s+' + arg + r'\s*:\s*([^\n]+)', docs)
                 arg_list.append({
-                    'name': arg[0],
+                    'name': arg,
                     'desc': arg_desc[0].strip() if arg_desc else ''
                 })
             arguments = sub(r'\s{4,}', r'\n   ', arguments)
@@ -68,6 +68,7 @@ class Py(ABCFileType):
 
     @staticmethod
     def process(
+            cls,
             filepath: str,
             output: str = 'docs',
             one_file: bool = False
@@ -75,12 +76,13 @@ class Py(ABCFileType):
         """
         Translates python script into md file.
 
+        :param cls: Class
         :param filepath: path to python script
         :param output: output directory
         :param one_file: True when file flag is True
         :return:
         """
-        source, end_path, filename = Py.pre(filepath, output, one_file)
+        source, end_path, filename = cls.pre(filepath, output, one_file)
         data = f'# {filename}\n'
 
         description = findall(r'^"{3}\s*([\s\S]+?)\s*"{3}', source, MULTILINE)
@@ -104,7 +106,7 @@ class Py(ABCFileType):
                 MULTILINE
             )
             class_text += '\n#### methods'
-            class_text += Py.process_funcs(methods)
+            class_text += cls.process_funcs(methods)
             classes_text.append(class_text)
         # write classes data
         if classes_text:
@@ -120,7 +122,7 @@ class Py(ABCFileType):
             MULTILINE
         )
         if functions:
-            data += f'\n### Functions\n{Py.process_funcs(functions)}'
+            data += f'\n### Functions\n{cls.process_funcs(functions)}'
 
         with open(end_path, 'w', encoding='utf-8') as file:
             file.write(data)

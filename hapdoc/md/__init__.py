@@ -118,7 +118,7 @@ class Md2Html:
     @staticmethod
     def _prepare_blockquotes(source: str) -> str:
         # Blockquote
-        blockquotes = re.findall(r'((^&gt\s*[^\n]+[\n\r]+)+)', source, re.MULTILINE)
+        blockquotes = re.findall(r'((^&gt\s*[^\n]+[\n\r]*)+)', source, re.MULTILINE)
         for blockquote, _ in blockquotes:
             print(blockquote)
             new_blockquote = re.sub(r'^ *&gt\s*', r'', blockquote, re.MULTILINE)
@@ -126,6 +126,6 @@ class Md2Html:
             new_blockquote = re.sub(r'>[\n ]*&gt\s*', r'>', new_blockquote, re.MULTILINE)
             source = source.replace(blockquote, f'<div class="quote">{new_blockquote}</div>')
             print(new_blockquote)
-        if re.findall(r'((^&gt\s*[^\n]+[\n\r]+)+)', source, re.MULTILINE):
+        if re.findall(r'((^&gt\s*[^\n]+[\n\r]*)+)', source, re.MULTILINE):
             return Md2Html._prepare_blockquotes(source)
         return source

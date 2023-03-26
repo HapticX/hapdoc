@@ -105,9 +105,9 @@ def _process(
         length = len(files)
         for i, filename in enumerate(files):
             _, ext = path.splitext(filename)
-            file_types[ext].process(f'{path.join(project_path, filename)}', output_dir)
+            file_types[ext].process(file_types[ext], f'{path.join(project_path, filename)}', output_dir)
             yield i, length
     else:
         _, ext = path.splitext(project_path)
-        file_types[ext].process(project_path, output_dir, True)
+        file_types[ext].process(file_types[ext], project_path, output_dir, True)
         yield 1, 1

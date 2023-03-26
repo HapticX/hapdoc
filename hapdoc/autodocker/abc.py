@@ -55,6 +55,7 @@ class ABCFileType:
     @staticmethod
     @abstractmethod
     def process(
+            cls,
             filepath: str,
             output: str = 'docs',
             one_file: bool = False
@@ -62,6 +63,7 @@ class ABCFileType:
         """
         Process file and translate it into .md
 
+        :param cls: Class
         :param filepath: path to file
         :param output: output directory
         :param one_file: True when target is file
