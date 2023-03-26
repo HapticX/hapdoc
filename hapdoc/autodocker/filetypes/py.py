@@ -26,7 +26,7 @@ class Py(ABCFileType):
             return_type = f' -> {return_type[3:-1]}' if return_type.startswith('->') else ''
             # arguments
             arg_names = findall(
-                r'[(,]\s*\b([a-zA-Z][a-zA-Z0-9_]*)\b\s*(?=,\s*\b[a-zA-Z][a-zA-Z0-9_]*\b\s*[:=,]|:|=)',
+                r'[^\s:=]\s*\b([a-zA-Z][a-zA-Z0-9_]*)\b\s*(?=,\s*\b[a-zA-Z][a-zA-Z0-9_]*\b\s*[:=,]|:|=)',
                 arguments
             )
             arg_list = []
