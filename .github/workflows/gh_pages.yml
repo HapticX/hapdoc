@@ -28,7 +28,7 @@ jobs:
 
       - name: Build documentation
         run: |
-          hapdoc build hapdoc --root /hapdoc
+          hapdoc build hapdoc --root /hapdoc/hapdoc
           ls
 
       - name: Deploy
