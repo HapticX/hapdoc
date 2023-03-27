@@ -14,22 +14,28 @@
   <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/highlight.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/languages/http.min.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url("https://use.fontawesome.com/releases/v5.13.0/css/all.css");
+  </style>
   <title>HapDoc</title>
 </head>
 <body class="bg-[#343434] text-white overflow-x-hidden">
-  <main class="w-screen min-h-screen h-full flex">
-    <header class="w-full h-12 fixed left-0 z-50 top-0 pl-40 pr-80 flex justify-between items-center transition-all">
-      <div class="text-xl">HapDoc</div>
+  <div class="w-screen min-h-screen h-full flex">
+    <header class="w-full h-14 xl:h-12 rounded-b-xl fixed left-0 z-50 top-0 px-5 xl:pl-40 xl:pr-80 flex justify-between items-center transition-all">
+      <div class="text-2xl">HapDoc</div>
       <div class="flex gap-2">
         
-          <a href="https://github.com/hapticx/hapdoc" class="select-none hover:text-[#c27bd4] transition-all duration-300">
-            Github
+          <a href="https://github.com/hapticx/hapdoc" class="flex items-center gap-2 select-none hover:text-[#c27bd4] transition-all duration-300" alt="Github"> 
+            
+              <p> Github </p>
+            
+            <i class="fab fa-github"></i>
           </a>
         
       </div>
     </header>
-    <!-- SideBar -->
-    <div class="fixed left-0 top-12 flex flex-col w-3/12 z-40 bg-[#343434] min-h-screen h-full">
+    <!-- SideBar (desktop) -->
+    <div class="hidden xl:block xl:fixed left-0 top-12 flex flex-col w-3/12 z-40 bg-[#343434] min-h-screen h-full">
       <div class="ml-36 pt-2 mr-2 border-t-[1px] border-white border-opacity-10 border-t-[1px]" id="line"></div>
       <div class="flex flex-col gap-2 pl-32 h-full">
         
@@ -241,32 +247,34 @@
       </div>
     </div>
 
+    <!-- Sidebar (mobile) -->
+    <div></div>
 
-    <div class="h-full w-3/12"></div>
+    <div class="h-full w-3/12 hidden xl:block"></div>
 
     <!-- Content -->
-    <div class="w-9/12 pr-64 py-4 bg-[#212121] relative">
-      <div class="w-full h-full pt-20 flex px-32 gap-20">
+    <main class="w-full xl:w-9/12 xl:pr-64 py-4 bg-[#212121] relative">
+      <div class="w-full h-full pt-20 flex px-5 xl:px-32 gap-20">
         <!-- Page data -->
-        <div class="flex flex-col gap-4 w-3/4">
-          <h1 class="titleRef" id="087fe5c9c414d2f5">readme</h1>
+        <div class="flex flex-col gap-4 w-full xl:w-3/4">
+          <h1 class="titleRef" id="257657cfca88eab3">readme</h1>
 
         </div>
-        <!-- Page navigation -->
-        <div class="flex flex-col fixed right-0 w-1/4 h-fit text-sm pt-2">
+        <!-- Page navigation (desktop) -->
+        <div class="hidden xl:flex flex-col fixed right-0 w-1/4 h-fit text-sm pt-2">
           <p class="select-none pl-5 font-black py-2 border-l-[1px] border-white border-opacity-20">
             On this page
           </p>
           
-          <a id="page087fe5c9c414d2f5" href="#087fe5c9c414d2f5"
+          <a id="page257657cfca88eab3" href="#257657cfca88eab3"
             class="select-none border-l-[1px] py-0.5 font-semibold pl-[1.0em] opacity-50 hover:opacity-100 border-opacity-100 pl-5 cursor-pointer transition-all duration-200">
             readme
           </a>
           
         </div>
       </div>
-    </div>
-  </main>
+    </main>
+  </div>
 
   <style>
     @import url(https://cdn.jsdelivr.net/npm/firacode@6.2.0/distr/fira_code.css);
