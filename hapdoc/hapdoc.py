@@ -338,7 +338,12 @@ def build(
                     titleRefs=title_refs,
                     side=sidebar,
                     nav={"links": [
-                        {"title": "Github", "url": "https://github.com/hapticx/hapdoc"},
+                        {
+                            "title": "Github",
+                            "icon": "fa-brands fa-github",
+                            "show_text": False,
+                            "url": "https://github.com/hapticx/hapdoc"
+                        },
                     ]},
                     accentColor=accent_color,
                     backgroundColor=background_color,
