@@ -224,8 +224,8 @@ def serve(
                     nav={"links": [
                         {
                             "title": "Github",
-                            "icon": "fa-brands fa-github",
-                            "show_text": False,
+                            "icon": "fab fa-github",
+                            "show_text": True,
                             "url": "https://github.com/hapticx/hapdoc"
                         },
                     ]},
@@ -345,8 +345,8 @@ def build(
                     nav={"links": [
                         {
                             "title": "Github",
-                            "icon": "fa-brands fa-github",
-                            "show_text": False,
+                            "icon": "fab fa-github",
+                            "show_text": True,
                             "url": "https://github.com/hapticx/hapdoc"
                         },
                     ]},
