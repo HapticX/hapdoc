@@ -465,7 +465,7 @@
       <div class="w-full h-full pt-20 flex px-5 xl:px-32 gap-20">
         <!-- Page data -->
         <div class="flex flex-col gap-4 w-full xl:w-3/4">
-          <h1 class="titleRef" id="fda669bcd323113f">readme</h1>
+          <h1 class="titleRef" id="80787b46abeb3362">readme</h1>
 
 <div class="quote">Just imports other modules</div>
         </div>
@@ -475,7 +475,7 @@
             On this page
           </p>
           
-          <a id="pagefda669bcd323113f" href="#fda669bcd323113f"
+          <a id="page80787b46abeb3362" href="#80787b46abeb3362"
             class="select-none border-l-[1px] py-0.5 font-semibold pl-[1.0em] opacity-50 hover:opacity-100 border-opacity-100 pl-5 cursor-pointer transition-all duration-200">
             readme
           </a>
@@ -614,17 +614,21 @@
     function toggleList(itemID) {
       const listElem = document.getElementById(`${itemID}-list`);
       const iconElem = document.getElementById(`${itemID}-icon`);
-      const listElem = document.getElementById(`${itemID}-list-mobile`);
-      const iconElem = document.getElementById(`${itemID}-icon-mobile`);
+      const listElemMobile = document.getElementById(`${itemID}-list-mobile`);
+      const iconElemMobile = document.getElementById(`${itemID}-icon-mobile`);
 
       function hide() {
         listElem.style.display = 'none';
         iconElem.style.transform = 'rotate(0deg)';
+        listElemMobile.style.display = 'none';
+        iconElemMobile.style.transform = 'rotate(0deg)';
       }
 
       function show() {
         listElem.style.display = 'flex';
         iconElem.style.transform = 'rotate(90deg)';
+        listElemMobile.style.display = 'flex';
+        iconElemMobile.style.transform = 'rotate(90deg)';
       }
 
       listElem.style.display === 'flex' ? hide() : show(); // toggle
