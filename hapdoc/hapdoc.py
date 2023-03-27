@@ -36,14 +36,18 @@ app.add_middleware(
 @click.group()
 def hapdoc():
     """
-    Autodoc CLI tool for making project's cute docs
+    HapDoc is a powerful command-line interface tool that automates the process of
+    generating documentation for various types of projects.
+    With HapDoc, you can easily create high-quality documentation for
+    Python, FastAPI, Vue, and many other types of projects.
     """
 
 
 @hapdoc.command()
 def project_types():
     """
-    Shows all available project types
+    This command displays a list of all available project
+    types that can be used in doc generating.
     """
     show_all_projects()
 
@@ -51,7 +55,8 @@ def project_types():
 @hapdoc.command()
 def tmpl_list():
     """
-    Shows all saved templates
+    This command displays a list of all templates that have been saved by the current user.
+    It is useful for quickly checking which templates are available for use.
     """
     templates_list = load_user_templates()
 
@@ -59,7 +64,9 @@ def tmpl_list():
 @hapdoc.command()
 def tmpl_new():
     """
-    Creates a new user template
+    The `tml_new` command creates a new template and saves it for future use.
+    The user will be prompted to provide a name for the template and
+    specify whether Tailwind CSS should be included.
     """
     create_new_user_template()
 
@@ -139,7 +146,8 @@ def gen(
         output: str,
 ):
     """
-    Generates docs for file or project
+    This command generates Markdown files with documentation for a project or file.
+    The user provides a path to the project or file that needs documentation.
     """
     generate_md_files(project_path, document_type, ignore, extend, output)
 
@@ -185,7 +193,8 @@ def serve(
         surface_color: str,
 ):
     """
-    Launches FastAPI docs server
+    The `serve` command starts a web server using FastAPI and uvicorn and
+    provides access to Markdown files in a web browser.
     """
     user_template = get_user_template_path(templates_folder)
     print(user_template)
@@ -294,7 +303,8 @@ def build(
         root: str,
 ):
     """
-    Automatically builds project
+    This command generates documentation for a project by first creating Markdown
+    files and then converting them to HTML files.
     """
     env = Environment(
         loader=FileSystemLoader(templates_folder),
