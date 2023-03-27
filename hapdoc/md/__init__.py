@@ -85,6 +85,8 @@ class Md2Html:
         # Italic
         (r'[\s]\*([^*]*)\*[\s]', r'<em>\1</em>', 0, 1),
         (r'[\s]_([^_]*)_[\s]', r'<em>\1</em>', 0, 1),
+        # Find text without element
+        (r'(<\/(pre))>([\s\S]+?)<(\/?)(?=hr|div)', r'\1><p>\3</p><\4', 0, 1)
     ]
 
     @staticmethod
