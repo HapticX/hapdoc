@@ -2,8 +2,8 @@
 """
 Autodoc CLI
 """
-import os
-from os import path, remove
+from json import dumps
+from os import path, remove, makedirs, getcwd
 from pprint import pprint
 
 import click
@@ -62,6 +62,51 @@ def tmpl_new():
     Creates a new user template
     """
     create_new_user_template()
+
+
+@hapdoc.command()
+@click.argument("directory", type=str)
+@click.option(
+    '--output', '-o', 'output_file',
+    help='Output file name',
+    default='overview.json', type=str
+)
+@click.option(
+    '--outdir', '-O', 'output_directory',
+    help='Output directory path',
+    default=None, type=str
+)
+@click.option(
+    '--root', '-r', 'root',
+    help='Root path, by default uses working directory',
+    default=None, type=str
+)
+@click.option(
+    '--extension', '-e', 'ext',
+    help='File extensions in generated JSON',
+    default=None, type=str
+)
+def md2json(directory: str, output_directory: str, output_file: str, root: str, ext: str):
+    """
+    The md2json command converts Markdown files (.md) in a directory to JSON format,
+    which can be used for rendering the files using the jinja2 templating engine.
+    This command is useful for converting Markdown files to a format that
+    can be easily parsed and manipulated by other tools.
+    """
+    if ext is None:
+        ext = ".md"
+    data = cast_md_dir_to_json(directory, root, False, ext)
+    click.echo(click.style("Generated", fg="bright_green"))
+
+    if output_directory is not None:
+        makedirs(output_directory, exist_ok=True)
+        with open(path.join(output_directory, output_file), 'w', encoding='utf-8') as file:
+            file.write(dumps(data, indent=4))
+        click.echo(click.style(f"Saved at {output_directory}/{output_file}", fg="bright_green"))
+    else:
+        with open(output_file, 'w', encoding='utf-8') as file:
+            file.write(dumps(data, indent=4))
+        click.echo(click.style(f"Saved at {output_file}", fg="bright_green"))
 
 
 @hapdoc.command()
@@ -258,7 +303,7 @@ def build(
     template = env.get_template('index.html')
     generate_md_files(docs, document_type, ignore, extend, output)
     if root is None:
-        root = path.join(os.getcwd(), output, docs)
+        root = path.join(getcwd(), output, docs)
     print(root)
 
     docs = path.join(output, docs)
