@@ -300,17 +300,21 @@
     function toggleList(itemID) {
       const listElem = document.getElementById(`${itemID}-list`);
       const iconElem = document.getElementById(`${itemID}-icon`);
-      const listElem = document.getElementById(`${itemID}-list-mobile`);
-      const iconElem = document.getElementById(`${itemID}-icon-mobile`);
+      const listElemMobile = document.getElementById(`${itemID}-list-mobile`);
+      const iconElemMobile = document.getElementById(`${itemID}-icon-mobile`);
 
       function hide() {
         listElem.style.display = 'none';
         iconElem.style.transform = 'rotate(0deg)';
+        listElemMobile.style.display = 'none';
+        iconElemMobile.style.transform = 'rotate(0deg)';
       }
 
       function show() {
         listElem.style.display = 'flex';
         iconElem.style.transform = 'rotate(90deg)';
+        listElemMobile.style.display = 'flex';
+        iconElemMobile.style.transform = 'rotate(90deg)';
       }
 
       listElem.style.display === 'flex' ? hide() : show(); // toggle
