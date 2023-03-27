@@ -94,7 +94,7 @@
 
     <!-- Sidebar (mobile) -->
     <div class="fixed top-12 left-0 z-40 w-full h-full flex flex-col gap-2 text-2xl bg-[{{ surfaceColor }}] transition-all" id="sideBarPhone">
-      {% macro sidebar(key, item) %}
+      {% macro sidebar_mobile(key, item) %}
         <!-- SideBar item -->
         <div class="flex flex-col gap-2 border-white border-opacity-10 mt-2">
           <div class="flex pl-2 flex-col w-full font-bold">
@@ -105,7 +105,7 @@
                   height="24"
                   width="24"
                   class="fill-white opacity-70 transition-all ease-out select-none"
-                  id="{{ item._data.id }}-icon"
+                  id="{{ item._data.id }}-icon-mobile"
                   style="transform: rotate(90deg);"
                 >
                   <path d="M9.4 17.65 8.35 16.6l4.6-4.6-4.6-4.6L9.4 6.35 15.05 12Z"/>
@@ -114,7 +114,7 @@
                   {{ item._data.title }}
                 </p>
               </div>
-              <div class="flex flex-col h-fit w-full" id="{{ item._data.id }}-list" style="display: flex">
+              <div class="flex flex-col h-fit w-full" id="{{ item._data.id }}-list-mobile" style="display: flex">
                 {% for k, i in item._items.items() %}
                   {% if not i._data.url %}
                     {{- sidebar(key, i) -}}
@@ -141,7 +141,7 @@
       {% endmacro %}
       <div class="px-2">
         {% for key, item in side.items() %}
-          {{ sidebar(key, item) }}
+          {{ sidebar_mobile(key, item) }}
         {% endfor %}
       </div>
     </div>
@@ -300,6 +300,8 @@
     function toggleList(itemID) {
       const listElem = document.getElementById(`${itemID}-list`);
       const iconElem = document.getElementById(`${itemID}-icon`);
+      const listElem = document.getElementById(`${itemID}-list-mobile`);
+      const iconElem = document.getElementById(`${itemID}-icon-mobile`);
 
       function hide() {
         listElem.style.display = 'none';
