@@ -19,7 +19,6 @@ class FastApi(Py):
         """
         Process functions and methods in .py files
 
-        :param source: source python file
         :param functions: list of parsed functions (via regex)
         :return: md formatted string
         """
