@@ -465,7 +465,7 @@
       <div class="w-full h-full pt-20 flex px-5 xl:px-32 gap-20">
         <!-- Page data -->
         <div class="flex flex-col gap-4 w-full xl:w-3/4">
-          <h1 class="titleRef" id="3f2c55fe5e89c01b">readme</h1>
+          <h1 class="titleRef" id="c101c195238cea60">readme</h1>
 
 Just imports other modules
         </div>
@@ -475,7 +475,7 @@ Just imports other modules
             On this page
           </p>
           
-          <a id="page3f2c55fe5e89c01b" href="#3f2c55fe5e89c01b"
+          <a id="pagec101c195238cea60" href="#c101c195238cea60"
             class="select-none border-l-[1px] py-0.5 font-semibold pl-[1.0em] opacity-50 hover:opacity-100 border-opacity-100 pl-5 cursor-pointer transition-all duration-200">
             readme
           </a>
@@ -512,35 +512,15 @@ Just imports other modules
     ::selection {
       background: #c27bd490;
     }
-    hr {
-      background: #c27bd4;
-      color: #c27bd4;
-      border: 0;
-      height: .1rem;
-    }
-    h1 {
-      letter-spacing: .2rem;
-      font-weight: bolder;
-      font-size: 5rem;
-    }
-    h2 {
-      letter-spacing: .15rem;
-      font-weight: bold;
-      font-size: 3.5rem;
-    }
-    h3 {
-      letter-spacing: .1rem;
-      font-weight: bold;
-      font-size: 2rem;
-    }
-    h4 {
-      letter-spacing: .05rem;
-      font-weight: bold;
-      font-size: 1rem;
-    }
-    h5, h6 {
-      font-weight: bold;
-      font-size: .5rem;
+    .titleLink {
+      height: 100%;
+      float: left;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-right: .25rem;
+      user-select: none;
     }
     .quote {
       background: #ffffff2a;
@@ -557,6 +537,36 @@ Just imports other modules
       width: fit-content;
       font-family: 'Fira Code', monospace;
       display: inline;
+    }
+    hr {
+      background: #c27bd4;
+      color: #c27bd4;
+      border: 0;
+      height: .1rem;
+    }
+    h1 {
+      letter-spacing: .2rem;
+      font-weight: bolder;
+      font-size: 4rem;
+    }
+    h2 {
+      letter-spacing: .15rem;
+      font-weight: bold;
+      font-size: 3rem;
+    }
+    h3 {
+      letter-spacing: .1rem;
+      font-weight: bold;
+      font-size: 2rem;
+    }
+    h4 {
+      letter-spacing: .05rem;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+    h5, h6 {
+      font-weight: bold;
+      font-size: .5rem;
     }
     code {
       border-radius: 0 0 .5rem .5rem;
@@ -604,12 +614,35 @@ Just imports other modules
   </style>
 
   <script>
+    // Get elements
     const titleRefs = document.getElementsByClassName("titleRef");
     const header = document.getElementsByTagName('header')[0];
     const sidebar = document.getElementById('sideBarPhone');
     const sandwich = document.getElementById('sandwich');
-    
-    let showSidebar = true;
+    const titleRefsArray = [...titleRefs];
+
+    // Prepare titles
+    function newLink(id) {
+      let result = document.createElement('a');
+      result.href = `#${id}`;
+      result.className = "titleLink";
+      result.innerHTML = `<i class="fas fa-link"></i>`;
+      result.style.visibility = 'hidden';
+      return result;
+    }
+
+    titleRefsArray.forEach((e) => {
+      let link = newLink(e.id);
+      e.appendChild(link);
+      e.addEventListener('mouseover', () => {
+        console.log(link);
+        link.style.visibility = 'visible';
+      })
+      e.addEventListener('mouseout', () => {
+        console.log(link);
+        link.style.visibility = 'hidden';
+      })
+    });
 
     function toggleList(itemID) {
       const listElem = document.getElementById(`${itemID}-list`);
@@ -617,46 +650,40 @@ Just imports other modules
       const listElemMobile = document.getElementById(`${itemID}-list-mobile`);
       const iconElemMobile = document.getElementById(`${itemID}-icon-mobile`);
 
-      function hide() {
+      // toggle
+      listElem.style.display === 'flex' ? (() => {
         listElem.style.display = 'none';
         iconElem.style.transform = 'rotate(0deg)';
         listElemMobile.style.display = 'none';
         iconElemMobile.style.transform = 'rotate(0deg)';
-      }
-
-      function show() {
+      })() : (() => {
         listElem.style.display = 'flex';
         iconElem.style.transform = 'rotate(90deg)';
         listElemMobile.style.display = 'flex';
         iconElemMobile.style.transform = 'rotate(90deg)';
-      }
-
-      listElem.style.display === 'flex' ? hide() : show(); // toggle
+      })();
     }
 
+    // Mobile
+    let showSidebar = true;
     function sideBarSwitcher() {
       showSidebar = !showSidebar;
-      if (showSidebar) {
-        sidebar.style.transform = '';
-      } else {
-        sidebar.style.transform = `translateX(-${screen.width}px)`;
-      }
+      sidebar.style.transform = showSidebar ? '' : `translateX(-${screen.width}px)`;
     }
 
     function checkScroll(ypos) {
-      const items = [...titleRefs];
       let selected = false;
 
       header.classList.toggle('bg-[#343434]', ypos > 200);
 
-      for (let i = 0; i < items.length; ++i) {
-        const e = items[i];
+      for (let i = 0; i < titleRefsArray.length; ++i) {
+        const e = titleRefsArray[i];
         const { id } = e;
         const { top } = e.getBoundingClientRect();
         const pageEl = document.getElementById("page" + id);
         const pos = window.scrollY + top;
 
-        const isSelected = !selected && (ypos <= pos || i == items.length-1);
+        const isSelected = !selected && (ypos <= pos || i == titleRefsArray.length-1);
         selected = selected || isSelected;
         
         pageEl.classList.toggle('border-[#c27bd4]', isSelected);
