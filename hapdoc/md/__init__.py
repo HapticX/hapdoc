@@ -11,27 +11,27 @@ class Md2Html:
     Provides Markdown to Html
     """
     _rules = [
-        (r'>', r'&gt', 0, 1),
+        (r'>', r'&gt', 1),
         # Line
-        (r'_{3,}\s*', r'<hr>', 0, 1),
-        (r'-{3,}\s*', r'<hr>', 0, 1),
+        (r'_{3,}\s*', r'<hr>', 1),
+        (r'-{3,}\s*', r'<hr>', 1),
         # List
         (
             re.compile(r'^((\s*-\s*[^\n]+\n*)+)', re.MULTILINE),
-            r'<ul style="list-style-type: disc">\n\1</ul>', re.MULTILINE, 1
+            r'<ul style="list-style-type: disc">\n\1</ul>', 1
         ),
-        (re.compile(r'\n+-\s*([^\n]+)', re.MULTILINE), r'<li>\1</li>', re.MULTILINE, 1),
+        (re.compile(r'\n+-\s*([^\n]+)', re.MULTILINE), r'<li>\1</li>', 1),
         # Headers
-        (re.compile(r'^###### *([^\n]+)', re.MULTILINE), r'<h6 class="titleRef">\1</h6>', re.MULTILINE, 1),
-        (re.compile(r'^##### *([^\n]+)', re.MULTILINE), r'<h5 class="titleRef">\1</h5>', re.MULTILINE, 1),
-        (re.compile(r'^#### *([^\n]+)', re.MULTILINE), r'<h4 class="titleRef">\1</h4>', re.MULTILINE, 1),
-        (re.compile(r'^### *([^\n]+)', re.MULTILINE), r'<h3 class="titleRef">\1</h3>', re.MULTILINE, 1),
-        (re.compile(r'^## *([^\n]+)', re.MULTILINE), r'<h2 class="titleRef">\1</h2>', re.MULTILINE, 1),
-        (re.compile(r'^# *([^\n]+)', re.MULTILINE), r'<h1 class="titleRef">\1</h1>', re.MULTILINE, 1),
+        (re.compile(r'^###### *([^\n]+)', re.MULTILINE), r'<h6 class="titleRef">\1</h6>', 1),
+        (re.compile(r'^##### *([^\n]+)', re.MULTILINE), r'<h5 class="titleRef">\1</h5>', 1),
+        (re.compile(r'^#### *([^\n]+)', re.MULTILINE), r'<h4 class="titleRef">\1</h4>', 1),
+        (re.compile(r'^### *([^\n]+)', re.MULTILINE), r'<h3 class="titleRef">\1</h3>', 1),
+        (re.compile(r'^## *([^\n]+)', re.MULTILINE), r'<h2 class="titleRef">\1</h2>', 1),
+        (re.compile(r'^# *([^\n]+)', re.MULTILINE), r'<h1 class="titleRef">\1</h1>', 1),
         # Image
-        (r'!\[([^\n\]]+)\]\(([^\)\s]+)\)', r'<img src="\2" alt="\1">', 0, 1),
+        (r'!\[([^\n\]]+)\]\(([^\)\s]+)\)', r'<img src="\2" alt="\1">', 1),
         # URL
-        (r'\[([^\n\]]+)\]\(([^\)\s]+)\)', r'<a href="\2">\1</a>', 0, 1),
+        (r'\[([^\n\]]+)\]\(([^\)\s]+)\)', r'<a href="\2">\1</a>', 1),
         # Code
         (
             r'```(\S+)\s*([^`]+?)```',
@@ -79,17 +79,17 @@ class Md2Html:
             r'4948l.3148-.2518c.3235-.2588.3759-.73077.1171-1.05422z"'
             r' fill="#ffffff" fill-rule="evenodd"/></svg>'
             r'</button><code class="language-\1">\2</code></pre>',
-            0, 1
+            1
         ),
-        (r'(?!")`([^`"]+)`(?!")', r'<code class="command">\1</code>', 0, 1),
+        (r'(?!")`([^`"]+)`(?!")', r'<code class="command">\1</code>', 1),
         # Bold
-        (r'[\s]\*\*([^*]*)\*\*[\s]', r'<b>\1</b>', 0, 1),
-        (r'[\s]__([^_]*)__[\s]', r'<b>\1</b>', 0, 1),
+        (r'[\s]\*\*([^*]*)\*\*[\s]', r'<b>\1</b>', 1),
+        (r'[\s]__([^_]*)__[\s]', r'<b>\1</b>', 1),
         # Italic
-        (r'[\s]\*([^*]*)\*[\s]', r'<em>\1</em>', 0, 1),
-        (r'[\s]_([^_]*)_[\s]', r'<em>\1</em>', 0, 1),
+        (r'[\s]\*([^*]*)\*[\s]', r'<em>\1</em>', 1),
+        (r'[\s]_([^_]*)_[\s]', r'<em>\1</em>', 1),
         # Find text without element
-        (r'(<\/(pre|h\d))>([\s\S]+?)<(\/?)(?=hr|div|pre|h\d|ul)', r'\1><p>\3</p><\4', 0, 1)
+        (r'(<\/(pre|h\d))>([\s\S]+?)<(\/?)(?=hr|div|pre|h\d|ul)', r'\1><p>\3</p><\4', 1)
     ]
 
     @staticmethod
@@ -98,9 +98,9 @@ class Md2Html:
         Casts Markdown sources to HTML code
         :param source: Markdown sources
         """
-        for pattern, repl, flags, repeat_count in Md2Html._rules:
+        for pattern, repl, repeat_count in Md2Html._rules:
             for _ in range(repeat_count):
-                source = re.sub(pattern, repl, source, flags)
+                source = re.sub(pattern, repl, source)
         return Md2Html._prepare_blockquotes(source)
 
     @staticmethod
