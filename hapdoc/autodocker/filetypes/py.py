@@ -10,7 +10,7 @@ from ..abc import ABCFileType
 
 class Py(ABCFileType):
     """
-    Provides Python file type behavior
+    Provides Python to Markdown translator
     """
 
     @staticmethod
@@ -87,7 +87,7 @@ class Py(ABCFileType):
 
         description = findall(r'^"{3}\s*([\s\S]+?)\s*"{3}', source, MULTILINE)
         if description:
-            data += f'\n> {description[0].strip()}'
+            data += f'\n{description[0].strip()}'
 
         # Handle classes
         classes = findall(r'class +([^:]+):\n(\s+)([^\n]+(\n+\2[ \S]*)+)', source)
@@ -95,7 +95,7 @@ class Py(ABCFileType):
         for class_data in classes:
             name = class_data[0]
             doc = findall(r'"{3}\s*([\s\S]+?)"{3}', class_data[2])
-            doc = f'> {doc[0]}' if doc else ''
+            doc = f'{doc[0]}' if doc else ''
             class_text = f'\n### `{name}`\n{doc}'
             # Handle class methods
             methods = findall(

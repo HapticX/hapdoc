@@ -9,7 +9,7 @@ from .py import Py
 
 class FastApi(Py):
     """
-    Provides Python file type behavior
+    Provides FastAPI to Markdown translator
     """
 
     @staticmethod
