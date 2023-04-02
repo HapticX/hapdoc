@@ -7,16 +7,11 @@
     content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
   >
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/styles/vs2015.min.css"
-  >
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/styles/vs2015.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
   <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/highlight.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/languages/http.min.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    @import url("https://use.fontawesome.com/releases/v5.13.0/css/all.css");
-  </style>
   <title>HapDoc</title>
 </head>
 <body class="bg-[#343434] text-white overflow-x-hidden">
@@ -462,10 +457,10 @@
 
     <!-- Content -->
     <main class="w-full xl:w-9/12 xl:pr-64 py-4 bg-[#212121] relative">
-      <div class="w-full h-full pt-20 flex px-5 xl:px-32 gap-20">
+      <div class="w-full h-full pt-20 flex px-12 xl:px-32 gap-20">
         <!-- Page data -->
         <div class="flex flex-col gap-4 w-full xl:w-3/4">
-          <h1 class="titleRef" id="c101c195238cea60">readme</h1>
+          <h1 class="titleRef" id="87788b1039f7f5e5">readme</h1>
 
 Just imports other modules
         </div>
@@ -475,7 +470,7 @@ Just imports other modules
             On this page
           </p>
           
-          <a id="pagec101c195238cea60" href="#c101c195238cea60"
+          <a id="page87788b1039f7f5e5" href="#87788b1039f7f5e5"
             class="select-none border-l-[1px] py-0.5 font-semibold pl-[1.0em] opacity-50 hover:opacity-100 border-opacity-100 pl-5 cursor-pointer transition-all duration-200">
             readme
           </a>
@@ -512,14 +507,19 @@ Just imports other modules
     ::selection {
       background: #c27bd490;
     }
+    .titleRef {
+      position: relative;
+    }
     .titleLink {
+      position: absolute;
       height: 100%;
-      float: left;
+      font-size: 1.5rem;
+      top: 0;
+      left: -2rem;
+      margin-right: 2rem;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      font-size: 1.5rem;
-      margin-right: .25rem;
       user-select: none;
     }
     .quote {
