@@ -35,4 +35,5 @@ Here's a list of available commands you can use with HapDoc:
 - `serve`: Starts server at host and port.
 - `tmpl-list`: List of saved templates.
 - `tmpl-new`: Create a new template.
+
 """

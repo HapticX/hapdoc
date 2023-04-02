@@ -16,15 +16,18 @@ class Md2Html:
         (r'_{3,}\s*', r'<hr>', 0, 1),
         (r'-{3,}\s*', r'<hr>', 0, 1),
         # List
-        (r'\n+((-\s*[^\n]+\n)+)', r'<ul style="list-style-type: disc">\n\1</ul>', 0, 1),
-        (r'\n+-\s*([^\n]+)', r'<li>\1</li>', 0, 1),
+        (
+            re.compile(r'^((\s*-\s*[^\n]+\n*)+)', re.MULTILINE),
+            r'<ul style="list-style-type: disc">\n\1</ul>', re.MULTILINE, 1
+        ),
+        (re.compile(r'\n+-\s*([^\n]+)', re.MULTILINE), r'<li>\1</li>', re.MULTILINE, 1),
         # Headers
-        (r'###### +([^\n]+)', r'<h6 class="titleRef">\1</h6>', re.MULTILINE, 1),
-        (r'##### +([^\n]+)', r'<h5 class="titleRef">\1</h5>', re.MULTILINE, 1),
-        (r'#### +([^\n]+)', r'<h4 class="titleRef">\1</h4>', re.MULTILINE, 1),
-        (r'### +([^\n]+)', r'<h3 class="titleRef">\1</h3>', re.MULTILINE, 1),
-        (r'## +([^\n]+)', r'<h2 class="titleRef">\1</h2>', re.MULTILINE, 1),
-        (r'# +([^\n]+)', r'<h1 class="titleRef">\1</h1>', re.MULTILINE, 1),
+        (re.compile(r'^###### *([^\n]+)', re.MULTILINE), r'<h6 class="titleRef">\1</h6>', re.MULTILINE, 1),
+        (re.compile(r'^##### *([^\n]+)', re.MULTILINE), r'<h5 class="titleRef">\1</h5>', re.MULTILINE, 1),
+        (re.compile(r'^#### *([^\n]+)', re.MULTILINE), r'<h4 class="titleRef">\1</h4>', re.MULTILINE, 1),
+        (re.compile(r'^### *([^\n]+)', re.MULTILINE), r'<h3 class="titleRef">\1</h3>', re.MULTILINE, 1),
+        (re.compile(r'^## *([^\n]+)', re.MULTILINE), r'<h2 class="titleRef">\1</h2>', re.MULTILINE, 1),
+        (re.compile(r'^# *([^\n]+)', re.MULTILINE), r'<h1 class="titleRef">\1</h1>', re.MULTILINE, 1),
         # Image
         (r'!\[([^\n\]]+)\]\(([^\)\s]+)\)', r'<img src="\2" alt="\1">', 0, 1),
         # URL
@@ -86,7 +89,7 @@ class Md2Html:
         (r'[\s]\*([^*]*)\*[\s]', r'<em>\1</em>', 0, 1),
         (r'[\s]_([^_]*)_[\s]', r'<em>\1</em>', 0, 1),
         # Find text without element
-        (r'(<\/(pre))>([\s\S]+?)<(\/?)(?=hr|div)', r'\1><p>\3</p><\4', 0, 1)
+        (r'(<\/(pre|h\d))>([\s\S]+?)<(\/?)(?=hr|div|pre|h\d|ul)', r'\1><p>\3</p><\4', 0, 1)
     ]
 
     @staticmethod
