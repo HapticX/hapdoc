@@ -112,7 +112,7 @@
               <div class="flex flex-col h-fit w-full" id="{{ item._data.id }}-list-mobile" style="display: flex">
                 {% for k, i in item._items.items() %}
                   {% if not i._data.url %}
-                    {{- sidebar(key, i) -}}
+                    {{- sidebar_mobile(key, i) -}}
                   {% else %}
                     <a
                       href="{{ i._data.url }}"

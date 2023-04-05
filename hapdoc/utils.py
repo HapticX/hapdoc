@@ -3,61 +3,53 @@
 Provides some CLI utils
 """
 import click
-
-from glob import glob
-from os import path, sep, listdir, makedirs
+from os import path, makedirs, listdir, sep
 from time import time
+from glob import glob
 
-from .autodocker import generate, all_project_types
+from .autodocker import all_project_types, generate
 
 
-_directory = path.join(path.expanduser('~'), 'HapticX', 'hapdoc', 'templates')
-_library_path = path.abspath(__file__).replace('\\', '/').rsplit('/', 1)[0]
+_DIRECTORY = path.join(path.expanduser('~'), 'HapticX', 'hapdoc', 'templates')
+_LIBRARY_PATH = path.abspath(__file__).replace('\\', '/').rsplit('/', 1)[0]
 
 
 def show_all_projects():
-    """
-    Shows all project types
-    """
+    """Shows all project types"""
     all_types = all_project_types()
     for project_type in all_types:
         click.echo(f'- {project_type}')
 
 
 def load_user_templates() -> list[str]:
-    """
-    Returns list of user templates
-    """
-    templates = listdir(_directory)
+    """Returns list of user templates"""
+    templates = listdir(_DIRECTORY)
     for i in templates:
         click.echo('- ' + click.style(i, fg="bright_green"))
 
 
 def get_user_template_path(name: str = 'default') -> str | None:
-    """
-    Returns path to user template if available
-    :param name: template name, ex. 'default'
-    """
-    if path.exists(path.join(_directory, name)):
-        return path.join(_directory, name)
+    """Returns path to user template if available"""
+    if path.exists(path.join(_DIRECTORY, name)):
+        return path.join(_DIRECTORY, name)
 
 
 def create_new_user_template():
-    """
-    Creates a new user template
-    """
+    """Creates a new user template"""
     name: str = click.prompt(click.style("Name of your template", fg="bright_yellow"))
-    if name in listdir(_directory):
+    if name in listdir(_DIRECTORY):
         click.echo(click.style("This template name is exists", fg="bright_red"))
         create_new_user_template()
         return
+
     use_tailwind: bool = click.confirm(click.style("Use tailwind?", fg="bright_yellow"))
     with open(
-            path.join(_library_path, 'templates', 'vitepress', 'index.html'),
+            path.join(_LIBRARY_PATH, 'templates', 'vitepress', 'index.html'),
             'r', encoding='utf-8') as file:
         template_text = file.read()
-    makedirs(path.join(_directory, name), exist_ok=True)
-    with open(path.join(_directory, name, 'index.html'), 'w', encoding='utf-8') as file:
+
+    makedirs(path.join(_DIRECTORY, name), exist_ok=True)
+    with open(path.join(_DIRECTORY, name, 'index.html'), 'w', encoding='utf-8') as file:
         file.write(template_text)
     click.echo(click.style("Successfully created project", fg="bright_green"))
 
@@ -133,7 +125,7 @@ def cast_md_dir_to_json(
                 file = temp_path.rsplit('.', 1)[0]
                 temp_sidebar[file] = {
                     '_data': {
-                        'id': mdf.replace('\\', '_'),
+                        'id': mdf,
                         'title': file,
                         'url': f'{root}/{mdf}{extension}'.replace('\\', '/')
                     },
@@ -146,7 +138,7 @@ def cast_md_dir_to_json(
                 # New directory
                 temp_sidebar[temp_path] = {
                     '_data': {
-                        'id': mdf.replace('\\', '_'),
+                        'id': mdf,
                         'title': temp_path,
                         'url': ''
                     },

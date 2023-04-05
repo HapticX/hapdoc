@@ -2,7 +2,7 @@
 """
 Provides Markdown to Html code translator
 """
-import re
+from re import MULTILINE, findall, sub, compile
 from secrets import token_hex
 
 
@@ -13,24 +13,24 @@ class Md2Html:
     _rules = [
         # > -> &gt
         (r'>', r'&gt', 1),
+        (r'<', r'&lt', 1),
         # <br>
-        (re.compile(r'( {2}$(?!\s*`))', re.MULTILINE), r'<br>', 1),
+        (compile(r'( {2}$(?!\s*`))', MULTILINE), r'<br>', 1),
         # Line
-        (r'_{3,}\s*', r'<hr>', 1),
-        (r'-{3,}\s*', r'<hr>', 1),
+        (compile(r'^\s*^(_{3,}|-{3})\s*', MULTILINE), r'<hr>', 1),
         # List
         (
-            re.compile(r'^((\s*-\s*[^\n]+\n*)+)', re.MULTILINE),
+            compile(r'^((\s*-\s*[^\n]+\n*)+)', MULTILINE),
             r'<ul style="list-style-type: disc">\n\1</ul>', 1
         ),
-        (re.compile(r'\n+-\s*([^\n]+)', re.MULTILINE), r'<li>\1</li>', 1),
+        (compile(r'\n+-\s*([^\n]+)', MULTILINE), r'<li>\1</li>', 1),
         # Headers
-        (re.compile(r'^###### *([^\n]+)', re.MULTILINE), r'<h6 class="titleRef">\1</h6>', 1),
-        (re.compile(r'^##### *([^\n]+)', re.MULTILINE), r'<h5 class="titleRef">\1</h5>', 1),
-        (re.compile(r'^#### *([^\n]+)', re.MULTILINE), r'<h4 class="titleRef">\1</h4>', 1),
-        (re.compile(r'^### *([^\n]+)', re.MULTILINE), r'<h3 class="titleRef">\1</h3>', 1),
-        (re.compile(r'^## *([^\n]+)', re.MULTILINE), r'<h2 class="titleRef">\1</h2>', 1),
-        (re.compile(r'^# *([^\n]+)', re.MULTILINE), r'<h1 class="titleRef">\1</h1>', 1),
+        (compile(r'^###### *([^\n]+)', MULTILINE), r'<h6 class="titleRef">\1</h6>', 1),
+        (compile(r'^##### *([^\n]+)', MULTILINE), r'<h5 class="titleRef">\1</h5>', 1),
+        (compile(r'^#### *([^\n]+)', MULTILINE), r'<h4 class="titleRef">\1</h4>', 1),
+        (compile(r'^### *([^\n]+)', MULTILINE), r'<h3 class="titleRef">\1</h3>', 1),
+        (compile(r'^## *([^\n]+)', MULTILINE), r'<h2 class="titleRef">\1</h2>', 1),
+        (compile(r'^# *([^\n]+)', MULTILINE), r'<h1 class="titleRef">\1</h1>', 1),
         # Image
         (r'!\[([^\n\]]+)\]\(([^\)\s]+)\)', r'<img src="\2" alt="\1">', 1),
         # URL
@@ -103,13 +103,13 @@ class Md2Html:
         """
         for pattern, repl, repeat_count in Md2Html._rules:
             for _ in range(repeat_count):
-                source = re.sub(pattern, repl, source)
+                source = sub(pattern, repl, source)
         return Md2Html._prepare_blockquotes(source)
 
     @staticmethod
     def rand_title_ref(html_source: str) -> tuple[str, list[dict]]:
         result = []
-        for level, attrs, text in re.findall(r'<h(\d)([^>]+?)>([^<]+?|[^h]+?)</h\1', html_source):
+        for level, attrs, text in findall(r'<h(\d)([^>]+?)>([^<]+?|[^h]+?)</h\1', html_source):
             random_id = token_hex(8)
             result.append({
                 'id': random_id,
@@ -126,14 +126,14 @@ class Md2Html:
     @staticmethod
     def _prepare_blockquotes(source: str) -> str:
         # Blockquote
-        blockquotes = re.findall(r'((^&gt\s*[^\n]+[\n\r]*)+)', source, re.MULTILINE)
+        blockquotes = findall(r'((^&gt\s*[^\n]+[\n\r]*)+)', source, MULTILINE)
         for blockquote, _ in blockquotes:
             print(blockquote)
-            new_blockquote = re.sub(r'^ *&gt\s*', r'', blockquote, re.MULTILINE)
-            new_blockquote = re.sub(r'\n *&gt\s*', r'\n', new_blockquote, re.MULTILINE)
-            new_blockquote = re.sub(r'>[\n ]*&gt\s*', r'>', new_blockquote, re.MULTILINE)
+            new_blockquote = sub(r'^ *&gt\s*', r'', blockquote, MULTILINE)
+            new_blockquote = sub(r'\n *&gt\s*', r'\n', new_blockquote, MULTILINE)
+            new_blockquote = sub(r'>[\n ]*&gt\s*', r'>', new_blockquote, MULTILINE)
             source = source.replace(blockquote, f'<div class="quote">{new_blockquote}</div>')
             print(new_blockquote)
-        if re.findall(r'((^&gt\s*[^\n]+[\n\r]*)+)', source, re.MULTILINE):
+        if findall(r'((^&gt\s*[^\n]+[\n\r]*)+)', source, MULTILINE):
             return Md2Html._prepare_blockquotes(source)
         return source
