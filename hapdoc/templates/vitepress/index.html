@@ -12,9 +12,26 @@
   <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/highlight.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/languages/http.min.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            'accent-color': '{{ accentColor }}',
+            'surface-color': '{{ surfaceColor }}',
+            'background-color': '{{ backgroundColor }}',
+            'light-accent-color': '{{ lightAccentColor }}',
+            'light-surface-color': '{{ lightSurfaceColor }}',
+            'light-background-color': '{{ lightBackgroundColor }}',
+          }
+        }
+      }
+    }
+  </script>
   <title>{{ title }}</title>
 </head>
-<body class="bg-[{{ surfaceColor }}] text-white overflow-x-hidden">
+<body class="dark:bg-surface-color bg-light-surface-color dark:text-white text-black overflow-x-hidden">
   <div class="w-screen min-h-screen h-full flex">
     <div
       id="header"
@@ -24,7 +41,7 @@
       <div class="text-2xl">{{ title }}</div>
       <div class="flex gap-2">
         {% for link in nav.links %}
-          <a href="{{ link.url }}" class="flex items-center gap-2 select-none hover:text-[{{ accentColor }}] transition-all duration-300" alt="{{ link.title }}"> 
+          <a href="{{ link.url }}" class="flex items-center gap-2 select-none dark:hover:text-accent-color hover:text-lightaccent-color transition-all duration-300" alt="{{ link.title }}"> 
             {% if link.title %}
               <p> {{ link.title }} </p>
             {% endif %}
@@ -33,7 +50,7 @@
         {% endfor %}
         <div class="flex w-full h-full px-4 gap-2 justify-end place-self-center select-none">
           <div
-            class="flex relative items-center rounded-full w-16 px-2 bg-[{{ surfaceColor }}] cursor-pointer transition-colors duration-300"
+            class="flex relative items-center rounded-full w-16 px-2 dark:bg-surface-color bg-light-surface-color cursor-pointer transition-colors duration-300"
             id="themeButton"
           >
             <i id="themeIcon" class="fas fa-moon absolute"></i>
@@ -43,7 +60,7 @@
       </div>
     </div>
     <!-- SideBar (desktop) -->
-    <div class="hidden xl:block xl:fixed left-0 top-12 flex flex-col w-3/12 z-40 bg-[{{ surfaceColor }}] min-h-screen h-full">
+    <div class="hidden xl:block xl:fixed left-0 top-12 flex flex-col w-3/12 z-40 dark:bg-surface-color bg-light-surface-color min-h-screen h-full">
       <div class="ml-36 pt-2 mr-2 border-t-[1px] border-white border-opacity-10 border-t-[1px]" id="line"></div>
       <div class="flex flex-col gap-2 pl-32 h-full">
         {% macro sidebar(key, item) %}
@@ -95,10 +112,10 @@
     </div>
 
     <!-- Sidebar (mobile) -->
-    <div class="fixed top-12 left-0 z-40 w-full h-full flex flex-col gap-2 text-2xl bg-[{{ surfaceColor }}] transition-all" id="sideBarPhone">
+    <div class="fixed top-12 left-0 z-40 w-full h-full flex flex-col gap-2 text-2xl dark:bg-surface-color bg-light-surface-color transition-all" id="sideBarPhone">
       {% macro sidebar_mobile(key, item) %}
         <!-- SideBar item -->
-        <div class="flex flex-col gap-2 border-white border-opacity-10 mt-2">
+        <div class="flex flex-col gap-2 dark:border-white border-black border-opacity-10 mt-2">
           <div class="flex pl-2 flex-col w-full font-bold">
             {% if item._items %}
               <div class="flex w-full items-center gap-2 cursor-pointer" onclick="toggleList('{{ item._data.id }}')">
@@ -145,7 +162,7 @@
     <div class="h-full w-3/12 hidden xl:block"></div>
 
     <!-- Content -->
-    <div class="w-full xl:w-9/12 xl:pr-64 py-4 bg-[{{ backgroundColor }}] relative">
+    <div class="w-full xl:w-9/12 xl:pr-64 py-4 dark:bg-background-color bg-light-background-color relative">
       <div class="w-full h-full pt-20 flex px-12 xl:px-32 gap-20">
         <!-- Page data -->
         <div class="flex flex-col gap-4 w-full xl:w-3/4">
@@ -153,12 +170,12 @@
         </div>
         <!-- Page navigation (desktop) -->
         <div class="hidden xl:flex flex-col fixed right-0 w-1/4 h-fit text-sm pt-2">
-          <p class="select-none pl-5 font-black py-2 border-l-[1px] border-white border-opacity-20">
+          <p class="select-none pl-5 font-black py-2 border-l-[1px] dark:border-white border-black border-opacity-20">
             On this page
           </p>
           {% for i in titleRefs %}
           <a id="page{{ i.id }}" href="#{{ i.id }}"
-            class="select-none border-l-[1px] py-0.5 font-semibold pl-[{{ i.level / 2.0 + 0.5 }}em] opacity-50 hover:opacity-100 border-opacity-100 pl-5 cursor-pointer transition-all duration-200">
+            class="select-none border-l-[1px] py-0.5 font-semibold pl-[{{ i.level / 2.0 + 0.5 }}em] opacity-50 hover:opacity-100 dark:border-white border-black border-opacity-100 pl-5 cursor-pointer transition-all duration-200">
             {{ i.title|safe }}
           </a>
           {% endfor %}
@@ -331,30 +348,31 @@
     const header = document.getElementById('header');
     const sidebar = document.getElementById('sideBarPhone');
     const sandwich = document.getElementById('sandwich');
-    const titleRefsArray = [...titleRefs];
     const themeIcon = document.getElementById('themeIcon');
     const themeString = document.getElementById('themeString');
     const themeButton = document.getElementById('themeButton');
+    const titleRefsArray = [...titleRefs];
 
     let isDark = true;
 
-    themeButton.addEventListener('click', () => {
-      isDark = !isDark;
-      if (isDark) {
-        themeButton.classList.add('bg-[{{ surfaceColor }}]');
-        themeButton.classList.add('text-white');
-        themeButton.classList.remove('bg-[{{ accentColor }}]');
-        themeButton.classList.remove('text-black');
+    function updateTheme(dark) {
+      if (dark) {
+        themeButton.className = 'flex dark:text-white text-black relative items-center rounded-full w-16 px-2 dark:bg-surface-color bg-light-surface-color cursor-pointer transition-colors duration-300';
         themeIcon.className = "fas fa-moon darkAnim";
         themeString.innerHTML = "Dark";
+        localStorage.theme = 'dark';
       } else {
-        themeButton.classList.remove('bg-[{{ surfaceColor }}]');
-        themeButton.classList.remove('text-white');
-        themeButton.classList.add('bg-[{{ accentColor }}]');
-        themeButton.classList.add('text-black');
+        themeButton.className = 'flex dark:text-black text-white relative items-center rounded-full w-16 px-2 dark:bg-accent-color bg-light-accent-color cursor-pointer transition-colors duration-300';
         themeIcon.className = "fas fa-sun lightAnim";
         themeString.innerHTML = "Light";
+        localStorage.theme = 'light';
       }
+    }
+
+    themeButton.addEventListener('click', () => {
+      isDark = !isDark;
+      updateTheme(isDark);
+      handleTheme(false);
     });
 
     // Prepare titles
@@ -410,7 +428,8 @@
     function checkScroll(ypos) {
       let selected = false;
 
-      header.classList.toggle('bg-[{{ surfaceColor }}]', ypos > 200);
+      header.classList.toggle('dark:bg-surface-color', ypos > 200);
+      header.classList.toggle('bg-light-surface-color', ypos > 200);
 
       for (let i = 0; i < titleRefsArray.length; ++i) {
         const e = titleRefsArray[i];
@@ -422,7 +441,8 @@
         const isSelected = !selected && (ypos <= pos || i == titleRefsArray.length-1);
         selected = selected || isSelected;
         
-        pageEl.classList.toggle('border-[{{ accentColor }}]', isSelected);
+        pageEl.classList.toggle('border-light-accent-color', isSelected);
+        pageEl.classList.toggle('dark:border-accent-color', isSelected);
         pageEl.classList.toggle('opacity-90', isSelected);
         pageEl.classList.toggle('opacity-60', !isSelected);
       }
@@ -431,8 +451,8 @@
     {% if selected %}
       const href = document.getElementById("{{ selected }}href");
       const hrefMobile = document.getElementById("{{ selected }}hrefMobile");
-      href.className += " opacity-90 text-[{{ accentColor }}]";
-      hrefMobile.className += " opacity-90 text-[{{ accentColor }}]";
+      href.className += " opacity-90 dark:text-accent-color text-light-accent-color";
+      hrefMobile.className += " opacity-90 dark:text-accent-color text-light-accent-color";
     {% endif %}
 
     window.addEventListener("scroll", ev => {
@@ -443,6 +463,36 @@
 
     sandwich.addEventListener('click', sideBarSwitcher);
     sideBarSwitcher();
+
+    function handleTheme(changed) {
+      if (changed) {
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          document.documentElement.className = 'dark';
+          localStorage.theme = 'dark';
+          isDark = true;
+        } else {
+          document.documentElement.className = '';
+          localStorage.theme = 'light';
+          isDark = false;
+        }
+      }
+      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.className = 'dark';
+        localStorage.theme = 'dark';
+        isDark = true;
+      } else {
+        document.documentElement.className = '';
+        localStorage.theme = 'light';
+        isDark = false;
+      }
+      updateTheme(isDark);
+    }
+
+    // MediaQueryList
+    const darkModePreference = window.matchMedia("(prefers-color-scheme: dark)");
+    darkModePreference.addEventListener("change", e => handleTheme(true));
+    darkModePreference.addListener(e => handleTheme(true));
+    handleTheme(false);
 
     hljs.highlightAll();
   </script>

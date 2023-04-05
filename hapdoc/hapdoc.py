@@ -182,6 +182,21 @@ def gen(
     '-s', '--surface', 'surface_color',
     default='#343434', type=str
 )
+@click.option(
+    '-la', '--light-accent', 'light_accent_color',
+    help='Light Accent color',
+    default='#b26bc4', type=str
+)
+@click.option(
+    '-lb', '--light-background', 'light_background_color',
+    help='Light Background color',
+    default='#cacaca', type=str
+)
+@click.option(
+    '-ls', '--light-surface', 'light_surface_color',
+    help='Light Surface color',
+    default='#dedede', type=str
+)
 def serve(
         host: str,
         port: str,
@@ -191,6 +206,9 @@ def serve(
         accent_color: str,
         background_color: str,
         surface_color: str,
+        light_accent_color: str,
+        light_background_color: str,
+        light_surface_color: str,
 ):
     """
     The `serve` command starts a web server using FastAPI and uvicorn and
@@ -231,6 +249,9 @@ def serve(
                     accentColor=accent_color,
                     backgroundColor=background_color,
                     surfaceColor=surface_color,
+                    lightAccentColor=light_accent_color,
+                    lightBackgroundColor=light_background_color,
+                    lightSurfaceColor=light_surface_color,
                     selected=f'/{doc}'
                 )
             )
@@ -289,6 +310,21 @@ def serve(
     default='#343434', type=str
 )
 @click.option(
+    '-la', '--light-accent', 'light_accent_color',
+    help='Light Accent color',
+    default='#b26bc4', type=str
+)
+@click.option(
+    '-lb', '--light-background', 'light_background_color',
+    help='Light Background color',
+    default='#dfdfdf', type=str
+)
+@click.option(
+    '-ls', '--light-surface', 'light_surface_color',
+    help='Light Surface color',
+    default='#cacaca', type=str
+)
+@click.option(
     '-r', '--root', 'root',
     help='Root path, by default uses working directory',
     default=None, type=str
@@ -300,6 +336,9 @@ def build(
         accent_color: str,
         background_color: str,
         surface_color: str,
+        light_accent_color: str,
+        light_background_color: str,
+        light_surface_color: str,
         document_type: str,
         ignore: str,
         extend: str,
@@ -351,6 +390,9 @@ def build(
                     accentColor=accent_color,
                     backgroundColor=background_color,
                     surfaceColor=surface_color,
+                    lightAccentColor=light_accent_color,
+                    lightBackgroundColor=light_background_color,
+                    lightSurfaceColor=light_surface_color,
                     selected=f'{root}{filename[:-len(extension)]}.html'.replace('\\', '/')
                 )
             )
