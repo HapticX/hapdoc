@@ -22,6 +22,7 @@ autodoc CLI tool written in Python with :heart:
 - Supported projects:
   - `Python`
   - `FastAPI`
+  - `JavaScript`
 - Generate Markdown docs via `gen` command.
 - Build docs into HTML via `build` command.
 - Serve generated docs at your server via `serve` command.
