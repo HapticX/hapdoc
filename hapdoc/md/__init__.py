@@ -38,7 +38,7 @@ class Md2Html:
         # Code
         (
             r'```(\S+)\s*([\s\S]+?)```',
-            r'<pre><button class="flex gap-2 items-center"><p>Copy code</p><i class="fas fa-copy"></i>'
+            r'<pre><button class="flex gap-2 items-center text-white"><p>Copy code</p><i class="fas fa-copy"></i>'
             r'</button><code class="language-\1">\2</code></pre>',
             1
         ),
