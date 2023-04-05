@@ -23,15 +23,15 @@ def show_all_projects():
 
 def load_user_templates() -> list[str]:
     """Returns list of user templates"""
-    templates = listdir(_DIRECTORY)
-    for i in templates:
+    for i in listdir(_DIRECTORY):
         click.echo('- ' + click.style(i, fg="bright_green"))
 
 
 def get_user_template_path(name: str = 'default') -> str | None:
     """Returns path to user template if available"""
-    if path.exists(path.join(_DIRECTORY, name)):
-        return path.join(_DIRECTORY, name)
+    directory = path.join(_DIRECTORY, name)
+    if path.exists(directory):
+        return directory
 
 
 def create_new_user_template():
@@ -42,7 +42,6 @@ def create_new_user_template():
         create_new_user_template()
         return
 
-    use_tailwind: bool = click.confirm(click.style("Use tailwind?", fg="bright_yellow"))
     with open(
             path.join(_LIBRARY_PATH, 'templates', 'vitepress', 'index.html'),
             'r', encoding='utf-8') as file:

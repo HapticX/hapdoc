@@ -73,8 +73,7 @@ def _iter_dir(directory: str) -> Iterable[str]:
     :param directory: path to directory
     :return: file paths
     """
-    res = listdir(directory)
-    for i in res:
+    for i in listdir(directory):
         full_path = path.join(directory, i)
         if path.isdir(full_path):
             for j in _iter_dir(full_path):
@@ -100,12 +99,16 @@ def _process(
     :param file_types: dictionary of supported file types
     :return:
     """
+    # Exclude ignored file extensions
     file_extensions = (
         [i for i in file_types.keys() if i not in ignore_files]
         if ignore_files else
         list(file_types)
     )
+    if extend:
+        file_extensions += extend
     if path.isdir(project_path):
+        # Project path is directory
         files = [i for i in _iter_dir(project_path) if path.splitext(i)[1] in file_extensions]
         length = len(files)
         for i, filename in enumerate(files):
@@ -113,6 +116,7 @@ def _process(
             file_types[ext].process(file_types[ext], f'{path.join(project_path, filename)}', output_dir)
             yield i, length
     else:
+        # Project path is one file
         _, ext = path.splitext(project_path)
         file_types[ext].process(file_types[ext], project_path, output_dir, True)
         yield 1, 1
