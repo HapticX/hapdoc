@@ -16,7 +16,10 @@
 </head>
 <body class="bg-[#343434] text-white overflow-x-hidden">
   <div class="w-screen min-h-screen h-full flex">
-    <div class="w-full h-14 xl:h-12 rounded-b-xl xl:rounded-none fixed left-0 z-50 top-0 px-5 xl:pl-44 xl:pr-80 flex justify-between items-center transition-all">
+    <div
+      id="header"
+      class="w-full h-14 xl:h-12 rounded-b-xl xl:rounded-none fixed left-0 z-50 top-0 px-5 xl:pl-44 xl:pr-80 flex justify-between items-center transition-all"
+    >
       <i class="fas fa-bars text-xl block xl:hidden" id="sandwich"></i>
       <div class="text-2xl">HapDoc</div>
       <div class="flex gap-2">
@@ -29,13 +32,13 @@
           </a>
         
         <div class="flex w-full h-full px-4 gap-2 justify-end place-self-center select-none">
-          <p id="themeString">Dark</p>
           <div
             class="flex relative items-center rounded-full w-16 px-2 bg-[#343434] cursor-pointer transition-colors duration-300"
             id="themeButton"
           >
             <i id="themeIcon" class="fas fa-moon absolute"></i>
           </div>
+          <p id="themeString" class="w-16">Dark</p>
         </div>
       </div>
     </div>
@@ -115,17 +118,12 @@
           <div class="flex flex-col gap-2 border-white border-opacity-10 mt-2">
             <div class="flex pl-2 flex-col w-full font-bold">
               
-                <div class="flex w-full gap-2 cursor-pointer" onclick="toggleList('autodocker/abc')">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    height="24"
-                    width="24"
-                    class="fill-white opacity-70 transition-all ease-out select-none"
+                <div class="flex w-full items-center gap-2 cursor-pointer" onclick="toggleList('autodocker/abc')">
+                  <i
+                    class="fas fa-sort-down opacity-70 transition-all ease-out select-none"
                     id="autodocker/abc-icon"
-                    style="transform: rotate(90deg);"
-                  >
-                    <path d="M9.4 17.65 8.35 16.6l4.6-4.6-4.6-4.6L9.4 6.35 15.05 12Z"/>
-                  </svg>
+                    style="transform: rotate(0deg);"
+                  ></i>
                   <p class="select-none">
                     autodocker
                   </p>
@@ -155,17 +153,12 @@
           <div class="flex flex-col gap-2 border-white border-opacity-10 mt-2">
             <div class="flex pl-2 flex-col w-full font-bold">
               
-                <div class="flex w-full gap-2 cursor-pointer" onclick="toggleList('autodocker/filetypes/js')">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    height="24"
-                    width="24"
-                    class="fill-white opacity-70 transition-all ease-out select-none"
+                <div class="flex w-full items-center gap-2 cursor-pointer" onclick="toggleList('autodocker/filetypes/js')">
+                  <i
+                    class="fas fa-sort-down opacity-70 transition-all ease-out select-none"
                     id="autodocker/filetypes/js-icon"
-                    style="transform: rotate(90deg);"
-                  >
-                    <path d="M9.4 17.65 8.35 16.6l4.6-4.6-4.6-4.6L9.4 6.35 15.05 12Z"/>
-                  </svg>
+                    style="transform: rotate(0deg);"
+                  ></i>
                   <p class="select-none">
                     filetypes
                   </p>
@@ -225,17 +218,12 @@
           <div class="flex flex-col gap-2 border-white border-opacity-10 mt-2">
             <div class="flex pl-2 flex-col w-full font-bold">
               
-                <div class="flex w-full gap-2 cursor-pointer" onclick="toggleList('md/readme')">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    height="24"
-                    width="24"
-                    class="fill-white opacity-70 transition-all ease-out select-none"
+                <div class="flex w-full items-center gap-2 cursor-pointer" onclick="toggleList('md/readme')">
+                  <i
+                    class="fas fa-sort-down opacity-70 transition-all ease-out select-none"
                     id="md/readme-icon"
-                    style="transform: rotate(90deg);"
-                  >
-                    <path d="M9.4 17.65 8.35 16.6l4.6-4.6-4.6-4.6L9.4 6.35 15.05 12Z"/>
-                  </svg>
+                    style="transform: rotate(0deg);"
+                  ></i>
                   <p class="select-none">
                     md
                   </p>
@@ -335,17 +323,11 @@
         <div class="flex flex-col gap-2 border-white border-opacity-10 mt-2">
           <div class="flex pl-2 flex-col w-full font-bold">
             
-              <div class="flex w-full gap-2 cursor-pointer" onclick="toggleList('autodocker/abc')">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  height="24"
-                  width="24"
-                  class="fill-white opacity-70 transition-all ease-out select-none"
+              <div class="flex w-full items-center gap-2 cursor-pointer" onclick="toggleList('autodocker/abc')">
+                <i
+                  class="fas fa-sort-down opacity-70 transition-all ease-out select-none"
                   id="autodocker/abc-icon-mobile"
-                  style="transform: rotate(90deg);"
-                >
-                  <path d="M9.4 17.65 8.35 16.6l4.6-4.6-4.6-4.6L9.4 6.35 15.05 12Z"/>
-                </svg>
+                ></i>
                 <p class="select-none">
                   autodocker
                 </p>
@@ -375,17 +357,11 @@
         <div class="flex flex-col gap-2 border-white border-opacity-10 mt-2">
           <div class="flex pl-2 flex-col w-full font-bold">
             
-              <div class="flex w-full gap-2 cursor-pointer" onclick="toggleList('autodocker/filetypes/js')">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  height="24"
-                  width="24"
-                  class="fill-white opacity-70 transition-all ease-out select-none"
+              <div class="flex w-full items-center gap-2 cursor-pointer" onclick="toggleList('autodocker/filetypes/js')">
+                <i
+                  class="fas fa-sort-down opacity-70 transition-all ease-out select-none"
                   id="autodocker/filetypes/js-icon-mobile"
-                  style="transform: rotate(90deg);"
-                >
-                  <path d="M9.4 17.65 8.35 16.6l4.6-4.6-4.6-4.6L9.4 6.35 15.05 12Z"/>
-                </svg>
+                ></i>
                 <p class="select-none">
                   filetypes
                 </p>
@@ -445,17 +421,11 @@
         <div class="flex flex-col gap-2 border-white border-opacity-10 mt-2">
           <div class="flex pl-2 flex-col w-full font-bold">
             
-              <div class="flex w-full gap-2 cursor-pointer" onclick="toggleList('md/readme')">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  height="24"
-                  width="24"
-                  class="fill-white opacity-70 transition-all ease-out select-none"
+              <div class="flex w-full items-center gap-2 cursor-pointer" onclick="toggleList('md/readme')">
+                <i
+                  class="fas fa-sort-down opacity-70 transition-all ease-out select-none"
                   id="md/readme-icon-mobile"
-                  style="transform: rotate(90deg);"
-                >
-                  <path d="M9.4 17.65 8.35 16.6l4.6-4.6-4.6-4.6L9.4 6.35 15.05 12Z"/>
-                </svg>
+                ></i>
                 <p class="select-none">
                   md
                 </p>
@@ -487,7 +457,7 @@
       <div class="w-full h-full pt-20 flex px-12 xl:px-32 gap-20">
         <!-- Page data -->
         <div class="flex flex-col gap-4 w-full xl:w-3/4">
-          <h1 class="titleRef" id="044b027e55fbc21f">__main__</h1>
+          <h1 class="titleRef" id="e30fd18ce55629b1">__main__</h1>
 
 Provides main module file for pypi
         </div>
@@ -497,7 +467,7 @@ Provides main module file for pypi
             On this page
           </p>
           
-          <a id="page044b027e55fbc21f" href="#044b027e55fbc21f"
+          <a id="pagee30fd18ce55629b1" href="#e30fd18ce55629b1"
             class="select-none border-l-[1px] py-0.5 font-semibold pl-[1.0em] opacity-50 hover:opacity-100 border-opacity-100 pl-5 cursor-pointer transition-all duration-200">
             __main__
           </a>
@@ -668,7 +638,7 @@ Provides main module file for pypi
   <script>
     // Get elements
     const titleRefs = document.getElementsByClassName("titleRef");
-    const header = document.getElementsByTagName('header')[0];
+    const header = document.getElementById('header');
     const sidebar = document.getElementById('sideBarPhone');
     const sandwich = document.getElementById('sandwich');
     const titleRefsArray = [...titleRefs];
@@ -679,19 +649,18 @@ Provides main module file for pypi
     let isDark = true;
 
     themeButton.addEventListener('click', () => {
-      console.log('changed');
       isDark = !isDark;
       if (isDark) {
         themeButton.classList.add('bg-[#343434]');
         themeButton.classList.add('text-white');
-        themeButton.classList.remove('bg-[#9afe87]');
+        themeButton.classList.remove('bg-[#c27bd4]');
         themeButton.classList.remove('text-black');
         themeIcon.className = "fas fa-moon darkAnim";
         themeString.innerHTML = "Dark";
       } else {
         themeButton.classList.remove('bg-[#343434]');
         themeButton.classList.remove('text-white');
-        themeButton.classList.add('bg-[#9afe87]');
+        themeButton.classList.add('bg-[#c27bd4]');
         themeButton.classList.add('text-black');
         themeIcon.className = "fas fa-sun lightAnim";
         themeString.innerHTML = "Light";
@@ -730,14 +699,14 @@ Provides main module file for pypi
       // toggle
       listElem.style.display === 'flex' ? (() => {
         listElem.style.display = 'none';
-        iconElem.style.transform = 'rotate(0deg)';
+        iconElem.style.transform = 'rotate(-90deg)';
         listElemMobile.style.display = 'none';
-        iconElemMobile.style.transform = 'rotate(0deg)';
+        iconElemMobile.style.transform = 'rotate(-90deg)';
       })() : (() => {
         listElem.style.display = 'flex';
-        iconElem.style.transform = 'rotate(90deg)';
+        iconElem.style.transform = 'rotate(0deg)';
         listElemMobile.style.display = 'flex';
-        iconElemMobile.style.transform = 'rotate(90deg)';
+        iconElemMobile.style.transform = 'rotate(0deg)';
       })();
     }
 
