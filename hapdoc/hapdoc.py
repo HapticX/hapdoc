@@ -317,7 +317,7 @@ def build(
     template = env.get_template('index.html')
     generate_md_files(docs, document_type, ignore, extend, output)
     if root is None:
-        root = 'file://' + path.join(getcwd(), output, docs)
+        root = path.join(getcwd(), output, docs)
 
     if path.isfile(docs):
         docs, filename = path.split(docs)

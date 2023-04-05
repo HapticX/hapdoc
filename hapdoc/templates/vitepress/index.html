@@ -16,7 +16,7 @@
 </head>
 <body class="bg-[{{ surfaceColor }}] text-white overflow-x-hidden">
   <div class="w-screen min-h-screen h-full flex">
-    <header class="w-full h-14 xl:h-12 rounded-b-xl xl:rounded-none fixed left-0 z-50 top-0 px-5 xl:pl-44 xl:pr-80 flex justify-between items-center transition-all">
+    <div class="w-full h-14 xl:h-12 rounded-b-xl xl:rounded-none fixed left-0 z-50 top-0 px-5 xl:pl-44 xl:pr-80 flex justify-between items-center transition-all">
       <i class="fas fa-bars text-xl block xl:hidden" id="sandwich"></i>
       <div class="text-2xl">{{ title }}</div>
       <div class="flex gap-2">
@@ -28,8 +28,17 @@
             <i class="{{ link.icon }}"></i>
           </a>
         {% endfor %}
+        <div class="flex w-full h-full px-4 gap-2 justify-end place-self-center select-none">
+          <p id="themeString">Dark</p>
+          <div
+            class="flex relative items-center rounded-full w-16 px-2 bg-[{{ surfaceColor }}] cursor-pointer transition-colors duration-300"
+            id="themeButton"
+          >
+            <i id="themeIcon" class="fas fa-moon absolute"></i>
+          </div>
+        </div>
       </div>
-    </header>
+    </div>
     <!-- SideBar (desktop) -->
     <div class="hidden xl:block xl:fixed left-0 top-12 flex flex-col w-3/12 z-40 bg-[{{ surfaceColor }}] min-h-screen h-full">
       <div class="ml-36 pt-2 mr-2 border-t-[1px] border-white border-opacity-10 border-t-[1px]" id="line"></div>
@@ -144,7 +153,7 @@
     <div class="h-full w-3/12 hidden xl:block"></div>
 
     <!-- Content -->
-    <main class="w-full xl:w-9/12 xl:pr-64 py-4 bg-[{{ backgroundColor }}] relative">
+    <div class="w-full xl:w-9/12 xl:pr-64 py-4 bg-[{{ backgroundColor }}] relative">
       <div class="w-full h-full pt-20 flex px-12 xl:px-32 gap-20">
         <!-- Page data -->
         <div class="flex flex-col gap-4 w-full xl:w-3/4">
@@ -163,7 +172,7 @@
           {% endfor %}
         </div>
       </div>
-    </main>
+    </div>
   </div>
 
   <style>
@@ -298,6 +307,30 @@
     p {
       line-height: 1.85rem;
     }
+    @keyframes toDarkAnimation {
+      0% {
+        transform: translateX(2rem);
+      }
+      100% {
+        transform: translateX(0rem);
+      }
+    }
+    @keyframes toLightAnimation {
+      0% {
+        transform: translateX(0rem);
+      }
+      100% {
+        transform: translateX(2rem);
+      }
+    }
+    .lightAnim {
+      animation: toLightAnimation .25s ease-in-out;
+      animation-fill-mode: forwards;
+    }
+    .darkAnim {
+      animation: toDarkAnimation .25s ease-in-out;
+      animation-fill-mode: forwards;
+    }
   </style>
 
   <script>
@@ -307,6 +340,31 @@
     const sidebar = document.getElementById('sideBarPhone');
     const sandwich = document.getElementById('sandwich');
     const titleRefsArray = [...titleRefs];
+    const themeIcon = document.getElementById('themeIcon');
+    const themeString = document.getElementById('themeString');
+    const themeButton = document.getElementById('themeButton');
+
+    let isDark = true;
+
+    themeButton.addEventListener('click', () => {
+      console.log('changed');
+      isDark = !isDark;
+      if (isDark) {
+        themeButton.classList.add('bg-[{{ surfaceColor }}]');
+        themeButton.classList.add('text-white');
+        themeButton.classList.remove('bg-[#9afe87]');
+        themeButton.classList.remove('text-black');
+        themeIcon.className = "fas fa-moon darkAnim";
+        themeString.innerHTML = "Dark";
+      } else {
+        themeButton.classList.remove('bg-[{{ surfaceColor }}]');
+        themeButton.classList.remove('text-white');
+        themeButton.classList.add('bg-[#9afe87]');
+        themeButton.classList.add('text-black');
+        themeIcon.className = "fas fa-sun lightAnim";
+        themeString.innerHTML = "Light";
+      }
+    });
 
     // Prepare titles
     function newLink(id) {
