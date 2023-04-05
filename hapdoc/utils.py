@@ -40,7 +40,6 @@ def get_user_template_path(name: str = 'default') -> str | None:
     """
     if path.exists(path.join(_directory, name)):
         return path.join(_directory, name)
-    return None
 
 
 def create_new_user_template():

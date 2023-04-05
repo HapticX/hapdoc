@@ -86,7 +86,7 @@ def tmpl_new():
 @click.option(
     '--root', '-r', 'root',
     help='Root path, by default uses working directory',
-    default=None, type=str
+    default='', type=str
 )
 @click.option(
     '--extension', '-e', 'ext',
@@ -197,7 +197,6 @@ def serve(
     provides access to Markdown files in a web browser.
     """
     user_template = get_user_template_path(templates_folder)
-    print(user_template)
     env = Environment(
         loader=FileSystemLoader(user_template if user_template else templates_folder),
         autoescape=select_autoescape()
@@ -319,13 +318,12 @@ def build(
     generate_md_files(docs, document_type, ignore, extend, output)
     if root is None:
         root = path.join(getcwd(), output, docs)
-    print(root)
 
+    if path.isfile(docs):
+        docs, filename = path.split(docs)
     docs = path.join(output, docs)
     sidebar, md_files = cast_md_dir_to_json(docs, root, True, '.html')
-    pprint(sidebar)
     md_files = [path.join(docs, i[1:]) for i in md_files]
-    print(md_files)
 
     for filename in md_files:
         with open(filename, 'r', encoding='utf-8') as file:

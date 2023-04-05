@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Describes Python file type
+Describes FastAPI file type
 """
 from re import findall, IGNORECASE
 

@@ -11,7 +11,10 @@ class Md2Html:
     Provides Markdown to Html
     """
     _rules = [
+        # > -> &gt
         (r'>', r'&gt', 1),
+        # <br>
+        (re.compile(r'( {2}$(?!\s*`))', re.MULTILINE), r'<br>', 1),
         # Line
         (r'_{3,}\s*', r'<hr>', 1),
         (r'-{3,}\s*', r'<hr>', 1),
@@ -34,7 +37,7 @@ class Md2Html:
         (r'\[([^\n\]]+)\]\(([^\)\s]+)\)', r'<a href="\2">\1</a>', 1),
         # Code
         (
-            r'```(\S+)\s*([^`]+?)```',
+            r'```(\S+)\s*([\s\S]+?)```',
             r'<pre><button>Copy code <?xml version="1.0" encoding="utf-8"?>'
             r'<svg width="24px" height="24px" viewBox="0 0 24 24" '
             r'xmlns="http://www.w3.org/2000/svg" style="display: inline">'

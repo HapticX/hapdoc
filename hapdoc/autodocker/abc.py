@@ -19,7 +19,7 @@ class ABCFileType:
             one_file: bool = False
     ):
         """
-        Process file and translate it into .md
+        Process source file and translates it into Markdown file
 
         :param cls: Class
         :param filepath: path to file

@@ -6,7 +6,7 @@ from os import path, listdir
 from typing import Iterable, Type
 
 from .abc import ABCFileType
-from .filetypes import Py, FastApi
+from .filetypes import Py, FastApi, JavaScript
 
 
 __all__ = ['generate', 'all_project_types']
@@ -21,6 +21,11 @@ _config = {
     'fastapi': {
         'file_types': {
             '.py': FastApi
+        }
+    },
+    'js': {
+        'file_types': {
+            '.js': JavaScript
         }
     }
 }
