@@ -2,7 +2,7 @@
 """
 Describes Python file type
 """
-from re import findall, split, sub, MULTILINE
+from re import findall, compile, sub, MULTILINE
 from typing import Iterable
 
 from ..abc import ABCFileType
@@ -85,12 +85,12 @@ class Py(ABCFileType):
         source, end_path, filename = cls.pre(filepath, output, one_file)
         data = f'# {filename}\n'
 
-        description = findall(r'^"{3}\s*([\s\S]+?)\s*"{3}', source, MULTILINE)
+        description = findall(compile(r'^"{3}\s*([\s\S]+?)\s*"{3}', MULTILINE), source)
         if description:
             data += f'\n{description[0].strip()}'
 
         # Handle classes
-        classes = findall(r'class +([^:]+):\n(\s+)([^\n]+(\n+\2[ \S]*)+)', source)
+        classes = findall(compile(r'^\s*class +([^:]+?):\n(\s+)([^\n]+(\n+\2[ \S]*)+)', MULTILINE), source)
         classes_text = []
         for class_data in classes:
             name = class_data[0]
