@@ -37,3 +37,5 @@ Here's a list of available commands you can use with HapDoc:
 - `tmpl-new`: Create a new template.
 
 """
+
+__version__ = '1.9.3'

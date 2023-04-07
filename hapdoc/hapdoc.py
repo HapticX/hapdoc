@@ -4,7 +4,6 @@ Autodoc CLI
 """
 from json import dumps
 from os import path, remove, makedirs, getcwd
-from pprint import pprint
 
 import click
 import uvicorn
@@ -21,6 +20,7 @@ from .utils import (
     cast_md_dir_to_json, load_user_templates,
     create_new_user_template, get_user_template_path
 )
+from . import __version__
 
 
 app = FastAPI(docs_url=None, redoc_url=None)
@@ -33,14 +33,20 @@ app.add_middleware(
 )
 
 
-@click.group()
-def hapdoc():
+@click.group(invoke_without_command=True)
+@click.option(
+    '-v/--version', 'show_version',
+    default=False, type=bool
+)
+def hapdoc(show_version: bool):
     """
     HapDoc is a powerful command-line interface tool that automates the process of
     generating documentation for various types of projects.
     With HapDoc, you can easily create high-quality documentation for
     Python, FastAPI, Vue, and many other types of projects.
     """
+    if show_version:
+        click.echo(click.style(f'HapDoc v{__version__}', fg='bright_blue'))
 
 
 @hapdoc.command()
@@ -74,22 +80,22 @@ def tmpl_new():
 @hapdoc.command()
 @click.argument("directory", type=str)
 @click.option(
-    '--output', '-o', 'output_file',
+    '-o', '--output', 'output_file',
     help='Output file name',
     default='overview.json', type=str
 )
 @click.option(
-    '--outdir', '-O', 'output_directory',
+    '-O', '--outdir', 'output_directory',
     help='Output directory path',
     default=None, type=str
 )
 @click.option(
-    '--root', '-r', 'root',
+    '-r', '--root', 'root',
     help='Root path, by default uses working directory',
     default='', type=str
 )
 @click.option(
-    '--extension', '-e', 'ext',
+    '-e', '--extension', 'ext',
     help='File extensions in generated JSON',
     default=None, type=str
 )
@@ -119,22 +125,22 @@ def md2json(directory: str, output_directory: str, output_file: str, root: str, 
 @hapdoc.command()
 @click.argument('project_path', type=str)
 @click.option(
-    '--doctype', '-d', 'document_type',
+    '-d', '--doctype', 'document_type',
     help='Select project type',
     default='py', type=str
 )
 @click.option(
-    '--ignore', '-i', 'ignore',
+    '-i', '--ignore', 'ignore',
     help='Ignore file extensions separated by comma',
     default='', type=str
 )
 @click.option(
-    '--extend', '-e', 'extend',
+    '-e', '--extend', 'extend',
     help='Extend doc by specified doctypes separated by comma',
     default='', type=str
 )
 @click.option(
-    '--out', '-o', 'output',
+    '-o', '--out', 'output',
     help='Output docs folder',
     default='docs', type=str
 )
@@ -197,6 +203,11 @@ def gen(
     help='Light Surface color',
     default='#dedede', type=str
 )
+@click.option(
+    '-dv', '--doc-version', 'doc_version',
+    help='Generated documentation version',
+    default='1.0.0', type=str
+)
 def serve(
         host: str,
         port: str,
@@ -209,6 +220,7 @@ def serve(
         light_accent_color: str,
         light_background_color: str,
         light_surface_color: str,
+        doc_version: str,
 ):
     """
     The `serve` command starts a web server using FastAPI and uvicorn and
@@ -246,6 +258,7 @@ def serve(
                             "url": "https://github.com/hapticx/hapdoc"
                         },
                     ]},
+                    docVersion=doc_version,
                     accentColor=accent_color,
                     backgroundColor=background_color,
                     surfaceColor=surface_color,
@@ -266,22 +279,22 @@ def serve(
 @hapdoc.command()
 @click.argument('docs', type=str)
 @click.option(
-    '--doctype', '-d', 'document_type',
+    '-d', '--doctype', 'document_type',
     help='Select project type',
     default='py', type=str
 )
 @click.option(
-    '--ignore', '-i', 'ignore',
+    '-i', '--ignore', 'ignore',
     help='Ignore file extensions separated by comma',
     default='', type=str
 )
 @click.option(
-    '--extend', '-e', 'extend',
+    '-e', '--extend', 'extend',
     help='Extend doc by specified docs types separated by comma',
     default='', type=str
 )
 @click.option(
-    '--out', '-o', 'output',
+    '-o', '--out', 'output',
     help='Output docs folder',
     default='buildocs', type=str
 )
@@ -329,6 +342,11 @@ def serve(
     help='Root path, by default uses working directory',
     default=None, type=str
 )
+@click.option(
+    '-dv', '--doc-version', 'doc_version',
+    help='Generated documentation version',
+    default='1.0.0', type=str
+)
 def build(
         docs: str,
         templates_folder: str,
@@ -344,6 +362,7 @@ def build(
         extend: str,
         output: str,
         root: str,
+        doc_version: str,
 ):
     """
     This command generates documentation for a project by first creating Markdown
@@ -387,6 +406,7 @@ def build(
                             "url": "https://github.com/hapticx/hapdoc"
                         },
                     ]},
+                    docVersion=doc_version,
                     accentColor=accent_color,
                     backgroundColor=background_color,
                     surfaceColor=surface_color,

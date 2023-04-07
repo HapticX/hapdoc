@@ -38,7 +38,10 @@
       class="w-full h-14 xl:h-12 rounded-b-xl xl:rounded-none fixed left-0 z-50 top-0 px-5 xl:pl-44 xl:pr-80 flex justify-between items-center transition-all"
     >
       <i class="fas fa-bars text-xl block xl:hidden" id="sandwich"></i>
-      <div class="text-2xl">{{ title }}</div>
+      <div class="flex items-end gap-2 text-2xl">
+        <p>{{ title }}</p>
+        <p class="text-base">v{{ docVersion }}</p>
+      </div>
       <div class="flex gap-2">
         {% for link in nav.links %}
           <a href="{{ link.url }}" class="flex items-center gap-2 select-none dark:hover:text-accent-color hover:text-lightaccent-color transition-all duration-300" alt="{{ link.title }}"> 
@@ -61,7 +64,7 @@
     </div>
     <!-- SideBar (desktop) -->
     <div class="hidden xl:block xl:fixed left-0 top-12 flex flex-col w-3/12 z-40 dark:bg-surface-color bg-light-surface-color min-h-screen h-full">
-      <div class="ml-36 pt-2 mr-2 border-t-[1px] border-white border-opacity-10 border-t-[1px]" id="line"></div>
+      <div class="ml-36 pt-2 mr-2 border-t-[1px] dark:border-white/10 border-black/10 border-t-[1px]" id="line"></div>
       <div class="flex flex-col gap-2 pl-32 h-full">
         {% macro sidebar(key, item) %}
           <!-- SideBar item -->
