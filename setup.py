@@ -30,7 +30,7 @@ setup(
     maintainer='HapticX',
     maintainer_email='hapticx.company@gmail.com',
     url='https://github.com/HapticX/hapdoc',
-    version='1.9.3',
+    version='1.9.4',
     packages=find_packages(),
     py_modules=['hapdoc'],
     install_requires=['click', 'fastapi', 'uvicorn', 'jinja2'],

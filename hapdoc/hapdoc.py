@@ -368,8 +368,9 @@ def build(
     This command generates documentation for a project by first creating Markdown
     files and then converting them to HTML files.
     """
+    user_template = get_user_template_path(templates_folder)
     env = Environment(
-        loader=FileSystemLoader(templates_folder),
+        loader=FileSystemLoader(user_template if user_template else templates_folder),
         autoescape=select_autoescape()
     )
     template = env.get_template('index.html')
