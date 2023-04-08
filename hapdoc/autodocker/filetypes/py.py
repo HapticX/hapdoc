@@ -25,17 +25,10 @@ class Py(ABCFileType):
             # return type
             return_type = f' -> {return_type[3:-1]}' if return_type.startswith('->') else ''
             # arguments
-            arg_names = findall(
-                r'[^\s:=]\s*\b([a-zA-Z][a-zA-Z0-9_]*)\b\s*(?=,\s*\b[a-zA-Z][a-zA-Z0-9_]*\b\s*[:=,]|:|=)',
-                arguments
-            )
-            arg_list = []
-            for arg in arg_names:
-                arg_desc = findall(r':param\s+' + arg + r'\s*:\s*([^\n]+)', docs)
-                arg_list.append({
-                    'name': arg,
-                    'desc': arg_desc[0].strip() if arg_desc else ''
-                })
+            arg_list = [
+                {'name': arg[0], 'desc': arg[1]}
+                for arg in findall(r':param\s+([^\s:]+?)\s*:\s*([^\n]+)\s*\n', docs)
+            ]
             arguments = sub(r'\s{4,}', r'\n   ', arguments)
             arguments = sub(r'\s+\)\Z', r'\n', arguments)
             if arguments.endswith(')'):
