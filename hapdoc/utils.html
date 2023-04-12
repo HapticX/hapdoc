@@ -40,7 +40,7 @@
       <i class="fas fa-bars text-xl block xl:hidden" id="sandwich"></i>
       <div class="flex items-end gap-2 text-2xl">
         <p>HapDoc</p>
-        <p class="text-base">v1.9.9</p>
+        <p class="text-base">v1.9.10</p>
       </div>
       <div class="flex gap-2">
         
@@ -280,10 +280,10 @@
       <div class="w-full h-full pt-20 flex px-12 xl:px-32 gap-20">
         <!-- Page data -->
         <div class="flex flex-col gap-4 w-full xl:w-3/4">
-          <h1 class="titleRef" id="18adf759228bee1f">utils</h1><p>
+          <h1 class="titleRef" id="699ecfe4a8d1e334">utils</h1><p>
 
 Provides some CLI utils
-</p><h3 class="titleRef" id="a30080a7604296ce">Functions</h3><p>
+</p><h3 class="titleRef" id="f350dcddfa364047">Functions</h3><p>
 
 </p><pre><button class="flex gap-2 items-center text-white"><p>Copy code</p><i class="fas fa-copy"></i></button><code class="language-python">def load_conf(key: str, argument: str | None, default: str) -&gt str:
 </code></pre><p>
@@ -308,8 +308,8 @@ Creates a new user template
 ):
 </code></pre><p>
 Generates docs for file or project
-</p><ul style="list-style-type: disc"><li><code class="command">project_path</code> - Path to project directory or file</li><li><code class="command">document_type</code> - Available file extension</li><li><code class="command">ignore</code> - Ignore file extensions separated by comma</li><li><code class="command">extend</code> - Extend file extensions separated by comma</li><li><code class="command">output</code> - Output directory</li>
-</ul><hr><pre><button class="flex gap-2 items-center text-white"><p>Copy code</p><i class="fas fa-copy"></i></button><code class="language-python">def cast_md_dir_to_json(
+</p><ul style="list-style-type: disc"><li><code class="command">project_path</code> - Path to project directory or file</li><li><code class="command">document_type</code> - Available file extension</li><li><code class="command">ignore</code> - Ignore file extensions separated by comma</li><li><code class="command">extend</code> - Extend file extensions separated by comma</li><li><code class="command">output</code> - Output directory</ul></li>
+<hr><pre><button class="flex gap-2 items-center text-white"><p>Copy code</p><i class="fas fa-copy"></i></button><code class="language-python">def cast_md_dir_to_json(
    directory: str,
    root: str = '',
    return_md_files: bool = False,
@@ -317,8 +317,8 @@ Generates docs for file or project
 ) -&gt dict[str, dict] | tuple[dict[str, dict], list[str]]:
 </code></pre><p>
 Casts directory of md files to JSON representation
-</p><ul style="list-style-type: disc"><li><code class="command">directory</code> - Directory with Markdown files</li><li><code class="command">root</code> - Root directory</li><li><code class="command">return_md_files</code> - Returns list of Markdown files when True</li><li><code class="command">extension</code> - File extension in JSON url</li>
-</ul>
+</p><ul style="list-style-type: disc"><li><code class="command">directory</code> - Directory with Markdown files</li><li><code class="command">root</code> - Root directory</li><li><code class="command">return_md_files</code> - Returns list of Markdown files when True</li><li><code class="command">extension</code> - File extension in JSON url</ul></li>
+
         </div>
         <!-- Page navigation (desktop) -->
         <div class="hidden xl:flex flex-col fixed right-0 w-1/4 h-fit text-sm pt-2">
@@ -326,12 +326,12 @@ Casts directory of md files to JSON representation
             On this page
           </p>
           
-          <a id="page18adf759228bee1f" href="#18adf759228bee1f"
+          <a id="page699ecfe4a8d1e334" href="#699ecfe4a8d1e334"
             class="select-none border-l-[1px] py-0.5 font-semibold pl-[1.0em] opacity-50 hover:opacity-100 dark:border-white border-black border-opacity-100 pl-5 cursor-pointer transition-all duration-200">
             utils
           </a>
           
-          <a id="pagea30080a7604296ce" href="#a30080a7604296ce"
+          <a id="pagef350dcddfa364047" href="#f350dcddfa364047"
             class="select-none border-l-[1px] py-0.5 font-semibold pl-[2.0em] opacity-50 hover:opacity-100 dark:border-white border-black border-opacity-100 pl-5 cursor-pointer transition-all duration-200">
             Functions
           </a>
