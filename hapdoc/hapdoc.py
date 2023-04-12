@@ -93,7 +93,7 @@ def tmpl_new():
 @click.option(
     '-r', '--root', 'root',
     help='Root path, by default uses working directory',
-    default='', type=str
+    default=None, type=str
 )
 @click.option(
     '-e', '--extension', 'ext',
@@ -107,6 +107,8 @@ def md2json(directory: str, output_directory: str, output_file: str, root: str, 
     This command is useful for converting Markdown files to a format that
     can be easily parsed and manipulated by other tools.
     """
+    root = load_conf('root', root, '/')
+
     if ext is None:
         ext = ".md"
     data = cast_md_dir_to_json(directory, root, False, ext)
@@ -173,11 +175,11 @@ def gen(
 )
 @click.option(
     '-t', '--template', 'templates_folder',
-    default='hapdoc/templates/vitepress', type=str
+    default=None, type=str
 )
 @click.option(
     '-T', '--title', 'title',
-    default='HapDoc', type=str
+    default=None, type=str
 )
 @click.option(
     '-a', '--accent', 'accent_color',
@@ -209,7 +211,7 @@ def gen(
 @click.option(
     '-dv', '--doc-version', 'doc_version',
     help='Generated documentation version',
-    default='1.0.0', type=str
+    default=None, type=str
 )
 def serve(
         host: str,
@@ -229,6 +231,10 @@ def serve(
     The `serve` command starts a web server using FastAPI and uvicorn and
     provides access to Markdown files in a web browser.
     """
+    doc_version = load_conf('version', doc_version, '1.0.0')
+    title = load_conf('title', title, 'HapDoc')
+    templates_folder = load_conf('template', templates_folder, 'hapdoc/templates/vitepress')
+
     user_template = get_user_template_path(templates_folder)
     env = Environment(
         loader=FileSystemLoader(user_template if user_template else templates_folder),
@@ -236,9 +242,6 @@ def serve(
     )
     template = env.get_template('index.html')
     sidebar = cast_md_dir_to_json(docs)
-
-    doc_version = load_conf('version', doc_version)
-    title = load_conf('title', title)
 
     @app.get('/{doc:path}')
     async def get_md_at(doc: str):
@@ -306,12 +309,12 @@ def serve(
 )
 @click.option(
     '-t', '--template', 'templates_folder',
-    default='hapdoc/templates/vitepress', type=str
+    default=None, type=str
 )
 @click.option(
     '-T', '--title', 'title',
     help='Page title',
-    default='HapDoc', type=str
+    default=None, type=str
 )
 @click.option(
     '-a', '--accent', 'accent_color',
@@ -351,7 +354,7 @@ def serve(
 @click.option(
     '-dv', '--doc-version', 'doc_version',
     help='Generated documentation version',
-    default='1.0.0', type=str
+    default=None, type=str
 )
 def build(
         docs: str,
@@ -374,6 +377,11 @@ def build(
     This command generates documentation for a project by first creating Markdown
     files and then converting them to HTML files.
     """
+    doc_version = load_conf('version', doc_version, '1.0.0')
+    root = load_conf('root', root, '/')
+    title = load_conf('title', title, 'HapDoc')
+    templates_folder = load_conf('template', templates_folder, 'hapdoc/templates/vitepress')
+
     user_template = get_user_template_path(templates_folder)
     env = Environment(
         loader=FileSystemLoader(user_template if user_template else templates_folder),
@@ -383,10 +391,6 @@ def build(
     generate_md_files(docs, document_type, ignore, extend, output)
     if root is None:
         root = path.join(getcwd(), output, docs)
-
-    doc_version = load_conf('version', doc_version)
-    root = load_conf('root', root)
-    title = load_conf('title', title)
 
     if path.isfile(docs):
         docs, filename = path.split(docs)

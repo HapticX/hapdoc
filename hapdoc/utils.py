@@ -19,8 +19,10 @@ _CONFIG.read("project.hapdoc")
 _CONFIG = _CONFIG['HapDoc']
 
 
-def load_conf(key: str, default: str) -> str:
-    return _CONFIG[key] if _CONFIG else default
+def load_conf(key: str, argument: str | None, default: str) -> str:
+    if argument is not None:
+        return _CONFIG[key] if _CONFIG else default
+    return argument
 
 
 def show_all_projects():
