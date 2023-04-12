@@ -140,7 +140,7 @@ def md2json(directory: str, output_directory: str, output_file: str, root: str, 
 @click.option(
     '-e', '--extend', 'extend',
     help='Extend doc by specified doctypes separated by comma',
-    default='', type=str
+    default=None, type=str
 )
 @click.option(
     '-o', '--out', 'output',
@@ -297,7 +297,7 @@ def serve(
 @click.option(
     '-e', '--extend', 'extend',
     help='Extend doc by specified docs types separated by comma',
-    default='', type=str
+    default=None, type=str
 )
 @click.option(
     '-o', '--out', 'output',
