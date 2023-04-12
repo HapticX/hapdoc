@@ -38,4 +38,4 @@ Here's a list of available commands you can use with HapDoc:
 
 """
 
-__version__ = '1.9.3'
+__version__ = '1.9.7'

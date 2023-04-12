@@ -33,7 +33,7 @@ jobs:
 
       - name: Build documentation
         run: |
-          hapdoc build hapdoc --root /hapdoc/hapdoc --doc-version 1.9.3
+          hapdoc build hapdoc --root /hapdoc/hapdoc
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3

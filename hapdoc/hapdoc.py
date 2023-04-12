@@ -18,7 +18,8 @@ from .md import Md2Html
 from .utils import (
     show_all_projects, generate_md_files,
     cast_md_dir_to_json, load_user_templates,
-    create_new_user_template, get_user_template_path
+    create_new_user_template, get_user_template_path,
+    load_conf
 )
 from . import __version__
 
@@ -64,7 +65,7 @@ def tmpl_list():
     This command displays a list of all templates that have been saved by the current user.
     It is useful for quickly checking which templates are available for use.
     """
-    templates_list = load_user_templates()
+    load_user_templates()
 
 
 @hapdoc.command()
@@ -110,6 +111,8 @@ def md2json(directory: str, output_directory: str, output_file: str, root: str, 
         ext = ".md"
     data = cast_md_dir_to_json(directory, root, False, ext)
     click.echo(click.style("Generated", fg="bright_green"))
+
+    root = load_conf('root', root)
 
     if output_directory is not None:
         makedirs(output_directory, exist_ok=True)
@@ -233,6 +236,9 @@ def serve(
     )
     template = env.get_template('index.html')
     sidebar = cast_md_dir_to_json(docs)
+
+    doc_version = load_conf('version', doc_version)
+    title = load_conf('title', title)
 
     @app.get('/{doc:path}')
     async def get_md_at(doc: str):
@@ -377,6 +383,10 @@ def build(
     generate_md_files(docs, document_type, ignore, extend, output)
     if root is None:
         root = path.join(getcwd(), output, docs)
+
+    doc_version = load_conf('version', doc_version)
+    root = load_conf('root', root)
+    title = load_conf('title', title)
 
     if path.isfile(docs):
         docs, filename = path.split(docs)

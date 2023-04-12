@@ -2,7 +2,9 @@
 Provides setup script
 """
 from os import path, makedirs
-from setuptools import setup, find_packages
+from setuptools import setup, find_packages, version
+
+from hapdoc import __version__
 
 
 # Load readme
@@ -30,7 +32,7 @@ setup(
     maintainer='HapticX',
     maintainer_email='hapticx.company@gmail.com',
     url='https://github.com/HapticX/hapdoc',
-    version='1.9.6',
+    version=__version__,
     packages=find_packages(),
     py_modules=['hapdoc'],
     install_requires=['click', 'fastapi', 'uvicorn', 'jinja2'],

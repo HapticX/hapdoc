@@ -25,8 +25,11 @@ autodoc CLI tool written in Python with :heart:
   - `JavaScript`
 - Generate Markdown docs via `gen` command.
 - Build docs into HTML via `build` command.
+- Build Markdown docs into JSON via `md2json` command.
 - Serve generated docs at your server via `serve` command.
-- Create your own templates via `tmpl-new` command.
+- Create your own templates via `tmpl-new`.
+- See your saved templates via `tmpl-list`.
+- Prepare your docs with [`project.hapdoc`](https://github.com/HapticX/hapdoc/blob/master/project.hapdoc) config file.
 
 ## Installing 📥
 via `pypi` 📦

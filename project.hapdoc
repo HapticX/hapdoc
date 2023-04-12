@@ -1,0 +1,4 @@
+[HapDoc]
+version = 1.9.7  # Documentation version
+title = HapDoc  # Documentation title
+# root = /root/path

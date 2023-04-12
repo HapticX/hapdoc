@@ -6,12 +6,21 @@ import click
 from os import path, makedirs, listdir, sep
 from time import time
 from glob import glob
+from configparser import ConfigParser
 
 from .autodocker import all_project_types, generate
 
 
 _DIRECTORY = path.join(path.expanduser('~'), 'HapticX', 'hapdoc', 'templates')
 _LIBRARY_PATH = path.abspath(__file__).replace('\\', '/').rsplit('/', 1)[0]
+
+_CONFIG = ConfigParser(inline_comment_prefixes=('#', ';'))
+_CONFIG.read("project.hapdoc")
+_CONFIG = _CONFIG['HapDoc']
+
+
+def load_conf(key: str, default: str) -> str:
+    return _CONFIG[key] if _CONFIG else default
 
 
 def show_all_projects():
