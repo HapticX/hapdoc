@@ -78,6 +78,7 @@ def generate_md_files(
     :param extend: Extend file extensions separated by comma
     :param output: Output directory
     """
+    extend = extend.split(',')
     ignore_list = [
         ext.strip() if ext.strip().startswith('.') else f'.{ext.strip()}'
         for ext in ignore.split(',')

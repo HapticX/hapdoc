@@ -100,13 +100,16 @@ def _process(
     :return:
     """
     # Exclude ignored file extensions
+    for ptype in extend:
+        for i in _config[ptype]['file_types']:
+            if i not in ignore_files:
+                file_types[i] = _config[ptype]['file_types'][i]
     file_extensions = (
         [i for i in file_types.keys() if i not in ignore_files]
         if ignore_files else
         list(file_types)
     )
-    if extend:
-        file_extensions += extend
+    print(file_extensions)
     if path.isdir(project_path):
         # Project path is directory
         files = [i for i in _iter_dir(project_path) if path.splitext(i)[1] in file_extensions]
