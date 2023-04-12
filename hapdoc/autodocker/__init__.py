@@ -109,7 +109,6 @@ def _process(
         if ignore_files else
         list(file_types)
     )
-    print(file_extensions)
     if path.isdir(project_path):
         # Project path is directory
         files = [i for i in _iter_dir(project_path) if path.splitext(i)[1] in file_extensions]

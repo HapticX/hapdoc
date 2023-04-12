@@ -20,7 +20,7 @@ class Md2Html:
         (compile(r'^\s*^(_{3,}|-{3})\s*', MULTILINE), r'<hr>', 1),
         # List
         (
-            compile(r'^((\s*-\s*[^\n]+\n*)+)', MULTILINE),
+            compile(r'^((\s*-\s*[^\n]+(?= *\n))+)', MULTILINE),
             r'<ul style="list-style-type: disc">\n\1</ul>', 1
         ),
         (compile(r'\n+-\s*([^\n]+)', MULTILINE), r'<li>\1</li>', 1),
