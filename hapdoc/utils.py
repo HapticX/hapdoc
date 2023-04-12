@@ -20,8 +20,8 @@ _CONFIG = _CONFIG['HapDoc']
 
 
 def load_conf(key: str, argument: str | None, default: str) -> str:
-    if argument is not None:
-        return _CONFIG[key] if _CONFIG else default
+    if argument is None:
+        return _CONFIG.get(key, fallback=default)
     return argument
 
 

@@ -107,7 +107,7 @@ def md2json(directory: str, output_directory: str, output_file: str, root: str, 
     This command is useful for converting Markdown files to a format that
     can be easily parsed and manipulated by other tools.
     """
-    root = load_conf('root', root, '/')
+    root = load_conf('root', root, '')
 
     if ext is None:
         ext = ".md"
