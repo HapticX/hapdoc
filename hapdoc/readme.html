@@ -40,7 +40,7 @@
       <i class="fas fa-bars text-xl block xl:hidden" id="sandwich"></i>
       <div class="flex items-end gap-2 text-2xl">
         <p>HapDoc</p>
-        <p class="text-base">v1.9.3</p>
+        <p class="text-base">v1.9.8</p>
       </div>
       <div class="flex gap-2">
         
@@ -62,9 +62,13 @@
         </div>
       </div>
     </div>
-    <!-- SideBar (desktop) -->
-    <div class="hidden xl:block xl:fixed left-0 top-12 flex flex-col w-3/12 z-40 dark:bg-surface-color bg-light-surface-color min-h-screen h-full">
-      <div class="ml-36 pt-2 mr-2 border-t-[1px] dark:border-white/10 border-black/10 border-t-[1px]" id="line"></div>
+
+    <!-- SideBar -->
+    <div
+      class="fixed w-full xl:w-3/12 xl:block left-0 top-12 flex flex-col z-40 text-2xl xl:text-base dark:bg-surface-color bg-light-surface-color min-h-screen h-full transition-all"
+      id="sidebar"
+    >
+      <div class="hidden xl:block ml-36 pt-2 mr-2 border-t-[1px] dark:border-white/10 border-black/10 border-t-[1px]" id="line"></div>
       <div class="flex flex-col gap-2 pl-32 h-full">
         
         <div class="px-2">
@@ -154,7 +158,7 @@
                       <a
                         href="/hapdoc/hapdoc/md/readme.html"
                         id="/hapdoc/hapdoc/md/readme.htmlhref"
-                        class="select-none pl-8 opacity-50 hover:opacity-100 transition-all duration-300">
+                        class="select-none pl-8 opacity-50 hover:opacity-100 transition-all duration-700">
                         readme
                       </a>
                     
@@ -186,7 +190,7 @@
                       <a
                         href="/hapdoc/hapdoc/autodocker/readme.html"
                         id="/hapdoc/hapdoc/autodocker/readme.htmlhref"
-                        class="select-none pl-8 opacity-50 hover:opacity-100 transition-all duration-300">
+                        class="select-none pl-8 opacity-50 hover:opacity-100 transition-all duration-700">
                         readme
                       </a>
                     
@@ -195,7 +199,7 @@
                       <a
                         href="/hapdoc/hapdoc/autodocker/abc.html"
                         id="/hapdoc/hapdoc/autodocker/abc.htmlhref"
-                        class="select-none pl-8 opacity-50 hover:opacity-100 transition-all duration-300">
+                        class="select-none pl-8 opacity-50 hover:opacity-100 transition-all duration-700">
                         abc
                       </a>
                     
@@ -221,7 +225,7 @@
                       <a
                         href="/hapdoc/hapdoc/autodocker/filetypes/fastapi.html"
                         id="/hapdoc/hapdoc/autodocker/filetypes/fastapi.htmlhref"
-                        class="select-none pl-8 opacity-50 hover:opacity-100 transition-all duration-300">
+                        class="select-none pl-8 opacity-50 hover:opacity-100 transition-all duration-700">
                         fastapi
                       </a>
                     
@@ -230,7 +234,7 @@
                       <a
                         href="/hapdoc/hapdoc/autodocker/filetypes/readme.html"
                         id="/hapdoc/hapdoc/autodocker/filetypes/readme.htmlhref"
-                        class="select-none pl-8 opacity-50 hover:opacity-100 transition-all duration-300">
+                        class="select-none pl-8 opacity-50 hover:opacity-100 transition-all duration-700">
                         readme
                       </a>
                     
@@ -239,7 +243,7 @@
                       <a
                         href="/hapdoc/hapdoc/autodocker/filetypes/js.html"
                         id="/hapdoc/hapdoc/autodocker/filetypes/js.htmlhref"
-                        class="select-none pl-8 opacity-50 hover:opacity-100 transition-all duration-300">
+                        class="select-none pl-8 opacity-50 hover:opacity-100 transition-all duration-700">
                         js
                       </a>
                     
@@ -248,7 +252,7 @@
                       <a
                         href="/hapdoc/hapdoc/autodocker/filetypes/py.html"
                         id="/hapdoc/hapdoc/autodocker/filetypes/py.htmlhref"
-                        class="select-none pl-8 opacity-50 hover:opacity-100 transition-all duration-300">
+                        class="select-none pl-8 opacity-50 hover:opacity-100 transition-all duration-700">
                         py
                       </a>
                     
@@ -269,207 +273,6 @@
       </div>
     </div>
 
-    <!-- Sidebar (mobile) -->
-    <div class="fixed top-12 left-0 z-40 w-full h-full flex flex-col gap-2 text-2xl dark:bg-surface-color bg-light-surface-color transition-all" id="sideBarPhone">
-      
-      <div class="px-2">
-        
-          
-        <!-- SideBar item -->
-        <div class="flex flex-col gap-2 dark:border-white border-black border-opacity-10 mt-2">
-          <div class="flex pl-2 flex-col w-full font-bold">
-            
-              <a
-                href="/hapdoc/hapdoc/utils.html"
-                id="/hapdoc/hapdoc/utils.htmlhrefMobile"
-                class="select-none pl-8 w-full opacity-50 hover:opacity-100 transition-all duration-300">
-                utils
-              </a>
-            
-          </div>
-        </div>
-      
-        
-          
-        <!-- SideBar item -->
-        <div class="flex flex-col gap-2 dark:border-white border-black border-opacity-10 mt-2">
-          <div class="flex pl-2 flex-col w-full font-bold">
-            
-              <a
-                href="/hapdoc/hapdoc/__main__.html"
-                id="/hapdoc/hapdoc/__main__.htmlhrefMobile"
-                class="select-none pl-8 w-full opacity-50 hover:opacity-100 transition-all duration-300">
-                __main__
-              </a>
-            
-          </div>
-        </div>
-      
-        
-          
-        <!-- SideBar item -->
-        <div class="flex flex-col gap-2 dark:border-white border-black border-opacity-10 mt-2">
-          <div class="flex pl-2 flex-col w-full font-bold">
-            
-              <a
-                href="/hapdoc/hapdoc/hapdoc.html"
-                id="/hapdoc/hapdoc/hapdoc.htmlhrefMobile"
-                class="select-none pl-8 w-full opacity-50 hover:opacity-100 transition-all duration-300">
-                hapdoc
-              </a>
-            
-          </div>
-        </div>
-      
-        
-          
-        <!-- SideBar item -->
-        <div class="flex flex-col gap-2 dark:border-white border-black border-opacity-10 mt-2">
-          <div class="flex pl-2 flex-col w-full font-bold">
-            
-              <a
-                href="/hapdoc/hapdoc/readme.html"
-                id="/hapdoc/hapdoc/readme.htmlhrefMobile"
-                class="select-none pl-8 w-full opacity-50 hover:opacity-100 transition-all duration-300">
-                readme
-              </a>
-            
-          </div>
-        </div>
-      
-        
-          
-        <!-- SideBar item -->
-        <div class="flex flex-col gap-2 dark:border-white border-black border-opacity-10 mt-2">
-          <div class="flex pl-2 flex-col w-full font-bold">
-            
-              <div class="flex w-full items-center gap-2 cursor-pointer" onclick="toggleList('md/readme')">
-                <i
-                  class="fas fa-sort-down opacity-70 transition-all ease-out select-none"
-                  id="md/readme-icon-mobile"
-                ></i>
-                <p class="select-none">
-                  md
-                </p>
-              </div>
-              <div class="flex flex-col h-fit w-full" id="md/readme-list-mobile" style="display: flex">
-                
-                  
-                    <a
-                      href="/hapdoc/hapdoc/md/readme.html"
-                      id="/hapdoc/hapdoc/md/readme.htmlhrefMobile"
-                      class="select-none pl-8 opacity-50 hover:opacity-100 transition-all duration-300">
-                      readme
-                    </a>
-                  
-                
-              </div>
-            
-          </div>
-        </div>
-      
-        
-          
-        <!-- SideBar item -->
-        <div class="flex flex-col gap-2 dark:border-white border-black border-opacity-10 mt-2">
-          <div class="flex pl-2 flex-col w-full font-bold">
-            
-              <div class="flex w-full items-center gap-2 cursor-pointer" onclick="toggleList('autodocker/readme')">
-                <i
-                  class="fas fa-sort-down opacity-70 transition-all ease-out select-none"
-                  id="autodocker/readme-icon-mobile"
-                ></i>
-                <p class="select-none">
-                  autodocker
-                </p>
-              </div>
-              <div class="flex flex-col h-fit w-full" id="autodocker/readme-list-mobile" style="display: flex">
-                
-                  
-                    <a
-                      href="/hapdoc/hapdoc/autodocker/readme.html"
-                      id="/hapdoc/hapdoc/autodocker/readme.htmlhrefMobile"
-                      class="select-none pl-8 opacity-50 hover:opacity-100 transition-all duration-300">
-                      readme
-                    </a>
-                  
-                
-                  
-                    <a
-                      href="/hapdoc/hapdoc/autodocker/abc.html"
-                      id="/hapdoc/hapdoc/autodocker/abc.htmlhrefMobile"
-                      class="select-none pl-8 opacity-50 hover:opacity-100 transition-all duration-300">
-                      abc
-                    </a>
-                  
-                
-                  
-        <!-- SideBar item -->
-        <div class="flex flex-col gap-2 dark:border-white border-black border-opacity-10 mt-2">
-          <div class="flex pl-2 flex-col w-full font-bold">
-            
-              <div class="flex w-full items-center gap-2 cursor-pointer" onclick="toggleList('autodocker/filetypes/fastapi')">
-                <i
-                  class="fas fa-sort-down opacity-70 transition-all ease-out select-none"
-                  id="autodocker/filetypes/fastapi-icon-mobile"
-                ></i>
-                <p class="select-none">
-                  filetypes
-                </p>
-              </div>
-              <div class="flex flex-col h-fit w-full" id="autodocker/filetypes/fastapi-list-mobile" style="display: flex">
-                
-                  
-                    <a
-                      href="/hapdoc/hapdoc/autodocker/filetypes/fastapi.html"
-                      id="/hapdoc/hapdoc/autodocker/filetypes/fastapi.htmlhrefMobile"
-                      class="select-none pl-8 opacity-50 hover:opacity-100 transition-all duration-300">
-                      fastapi
-                    </a>
-                  
-                
-                  
-                    <a
-                      href="/hapdoc/hapdoc/autodocker/filetypes/readme.html"
-                      id="/hapdoc/hapdoc/autodocker/filetypes/readme.htmlhrefMobile"
-                      class="select-none pl-8 opacity-50 hover:opacity-100 transition-all duration-300">
-                      readme
-                    </a>
-                  
-                
-                  
-                    <a
-                      href="/hapdoc/hapdoc/autodocker/filetypes/js.html"
-                      id="/hapdoc/hapdoc/autodocker/filetypes/js.htmlhrefMobile"
-                      class="select-none pl-8 opacity-50 hover:opacity-100 transition-all duration-300">
-                      js
-                    </a>
-                  
-                
-                  
-                    <a
-                      href="/hapdoc/hapdoc/autodocker/filetypes/py.html"
-                      id="/hapdoc/hapdoc/autodocker/filetypes/py.htmlhrefMobile"
-                      class="select-none pl-8 opacity-50 hover:opacity-100 transition-all duration-300">
-                      py
-                    </a>
-                  
-                
-              </div>
-            
-          </div>
-        </div>
-      
-                
-              </div>
-            
-          </div>
-        </div>
-      
-        
-      </div>
-    </div>
-
     <div class="h-full w-3/12 hidden xl:block"></div>
 
     <!-- Content -->
@@ -477,7 +280,7 @@
       <div class="w-full h-full pt-20 flex px-12 xl:px-32 gap-20">
         <!-- Page data -->
         <div class="flex flex-col gap-4 w-full xl:w-3/4">
-          <h1 class="titleRef" id="1c84b5be3468bda7">readme</h1><p>
+          <h1 class="titleRef" id="d0fbf3fdf8b41b56">readme</h1><p>
 
 HapDoc is a Python-based tool that automates the process of generating documentation for your projects.
 It supports <code class="command">Python</code> and <code class="command">FastAPI</code> project types and can generate Markdown files,
@@ -485,12 +288,12 @@ HTML files, and JSON structures of your project's Markdown directory.
 
 This file provides <code class="command">/hapdoc/readme</code>.
 
-</p><h2 class="titleRef" id="355f0cca5fcb30d7">Get Started</h2><p>
+</p><h2 class="titleRef" id="44a9a12bac788c94">Get Started</h2><p>
 To install the tool, you can use pip. Open up your terminal and run the following command:
 </p><pre><button class="flex gap-2 items-center text-white"><p>Copy code</p><i class="fas fa-copy"></i></button><code class="language-bash">pip install hapdoc
 </code></pre><p>
 
-</p><h2 class="titleRef" id="a8d040bccecf6231">Usage</h2><p>
+</p><h2 class="titleRef" id="72e514b5c2411464">Usage</h2><p>
 To generate documentation for your project using HapDoc,
 you will need to run the autodoc command.
 Here's an example of how to use it:
@@ -500,11 +303,11 @@ This command generates Markdown files for a Python project in the output directo
 You can also use the <code class="command">out</code> flag to specify output directory.
 <code class="command">doctype</code> flag specifies project type.
 
-</p><h2 class="titleRef" id="bb62b75b09a44dee">Supported Project Types</h2><p>
+</p><h2 class="titleRef" id="93d3c5ecc68aef3b">Supported Project Types</h2><p>
 hapDoc currently supports <code class="command">Python</code> and <code class="command">FastAPI</code> project types.
 In the future, we plan to add support for <code class="command">Nim</code>, <code class="command">JS</code>, <code class="command">Vue</code>, and many other project types.
 
-</p><h2 class="titleRef" id="226829a9d3a8deec">Command Line Interface</h2><p>
+</p><h2 class="titleRef" id="868dd46cff2b0ec2">Command Line Interface</h2><p>
 Here's a list of available commands you can use with HapDoc:
 </p><ul style="list-style-type: disc"><li><code class="command">gen</code>: Generates Markdown files with documentation for project</li><li><code class="command">build</code>: Generates like <code class="command">gen</code> and builds from it the HTML files.</li><li><code class="command">md2json</code>: Generates JSON file from directory of Markdown files.</li><li><code class="command">project-types</code>: Displays available project types.</li><li><code class="command">serve</code>: Starts server at host and port.</li><li><code class="command">tmpl-list</code>: List of saved templates.</li><li><code class="command">tmpl-new</code>: Create a new template.</ul></li>
         </div>
@@ -514,27 +317,27 @@ Here's a list of available commands you can use with HapDoc:
             On this page
           </p>
           
-          <a id="page1c84b5be3468bda7" href="#1c84b5be3468bda7"
+          <a id="paged0fbf3fdf8b41b56" href="#d0fbf3fdf8b41b56"
             class="select-none border-l-[1px] py-0.5 font-semibold pl-[1.0em] opacity-50 hover:opacity-100 dark:border-white border-black border-opacity-100 pl-5 cursor-pointer transition-all duration-200">
             readme
           </a>
           
-          <a id="page355f0cca5fcb30d7" href="#355f0cca5fcb30d7"
+          <a id="page44a9a12bac788c94" href="#44a9a12bac788c94"
             class="select-none border-l-[1px] py-0.5 font-semibold pl-[1.5em] opacity-50 hover:opacity-100 dark:border-white border-black border-opacity-100 pl-5 cursor-pointer transition-all duration-200">
             Get Started
           </a>
           
-          <a id="pagea8d040bccecf6231" href="#a8d040bccecf6231"
+          <a id="page72e514b5c2411464" href="#72e514b5c2411464"
             class="select-none border-l-[1px] py-0.5 font-semibold pl-[1.5em] opacity-50 hover:opacity-100 dark:border-white border-black border-opacity-100 pl-5 cursor-pointer transition-all duration-200">
             Usage
           </a>
           
-          <a id="pagebb62b75b09a44dee" href="#bb62b75b09a44dee"
+          <a id="page93d3c5ecc68aef3b" href="#93d3c5ecc68aef3b"
             class="select-none border-l-[1px] py-0.5 font-semibold pl-[1.5em] opacity-50 hover:opacity-100 dark:border-white border-black border-opacity-100 pl-5 cursor-pointer transition-all duration-200">
             Supported Project Types
           </a>
           
-          <a id="page226829a9d3a8deec" href="#226829a9d3a8deec"
+          <a id="page868dd46cff2b0ec2" href="#868dd46cff2b0ec2"
             class="select-none border-l-[1px] py-0.5 font-semibold pl-[1.5em] opacity-50 hover:opacity-100 dark:border-white border-black border-opacity-100 pl-5 cursor-pointer transition-all duration-200">
             Command Line Interface
           </a>
@@ -706,7 +509,7 @@ Here's a list of available commands you can use with HapDoc:
     // Get elements
     const titleRefs = document.getElementsByClassName("titleRef");
     const header = document.getElementById('header');
-    const sidebar = document.getElementById('sideBarPhone');
+    const sidebar = document.getElementById('sidebar');
     const sandwich = document.getElementById('sandwich');
     const themeIcon = document.getElementById('themeIcon');
     const themeString = document.getElementById('themeString');
@@ -761,20 +564,14 @@ Here's a list of available commands you can use with HapDoc:
     function toggleList(itemID) {
       const listElem = document.getElementById(`${itemID}-list`);
       const iconElem = document.getElementById(`${itemID}-icon`);
-      const listElemMobile = document.getElementById(`${itemID}-list-mobile`);
-      const iconElemMobile = document.getElementById(`${itemID}-icon-mobile`);
 
       // toggle
       listElem.style.display === 'flex' ? (() => {
         listElem.style.display = 'none';
         iconElem.style.transform = 'rotate(-90deg)';
-        listElemMobile.style.display = 'none';
-        iconElemMobile.style.transform = 'rotate(-90deg)';
       })() : (() => {
         listElem.style.display = 'flex';
         iconElem.style.transform = 'rotate(0deg)';
-        listElemMobile.style.display = 'flex';
-        iconElemMobile.style.transform = 'rotate(0deg)';
       })();
     }
 
@@ -810,19 +607,14 @@ Here's a list of available commands you can use with HapDoc:
 
     
       const href = document.getElementById("/hapdoc/hapdoc/readme.htmlhref");
-      const hrefMobile = document.getElementById("/hapdoc/hapdoc/readme.htmlhrefMobile");
       href.className += " opacity-90 dark:text-accent-color text-light-accent-color";
-      hrefMobile.className += " opacity-90 dark:text-accent-color text-light-accent-color";
     
 
-    window.addEventListener("scroll", ev => {
-      checkScroll(window.scrollY);
-    });
-
-    window.addEventListener("load", ev => {checkScroll(window.scrollY)});
+    window.addEventListener("scroll", ev => checkScroll(window.scrollY));
+    window.addEventListener("load", ev => checkScroll(window.scrollY));
 
     sandwich.addEventListener('click', sideBarSwitcher);
-    sideBarSwitcher();
+    // sideBarSwitcher();
 
     function handleTheme(changed) {
       if (changed) {
