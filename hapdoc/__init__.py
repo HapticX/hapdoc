@@ -5,13 +5,13 @@ HTML files, and JSON structures of your project's Markdown directory.
 
 This file provides `/hapdoc/readme`.
 
-## Get Started
+## Get Started 🔥
 To install the tool, you can use pip. Open up your terminal and run the following command:
 ```bash
 pip install hapdoc
 ```
 
-## Usage
+## Usage 👨‍🔬
 To generate documentation for your project using HapDoc,
 you will need to run the autodoc command.
 Here's an example of how to use it:
@@ -22,11 +22,11 @@ This command generates Markdown files for a Python project in the output directo
 You can also use the `out` flag to specify output directory.
 `doctype` flag specifies project type.
 
-## Supported Project Types
-hapDoc currently supports `Python` and `FastAPI` project types.
-In the future, we plan to add support for `Nim`, `JS`, `Vue`, and many other project types.
+## Supported Project Types 📄
+hapDoc currently supports `Python`, `JS` and `FastAPI` project types.
+In the future, we plan to add support for `Nim`, `Vue`, and many other project types.
 
-## Command Line Interface
+## Command Line Interface 💻
 Here's a list of available commands you can use with HapDoc:
 - `gen`: Generates Markdown files with documentation for project
 - `build`: Generates like `gen` and builds from it the HTML files.
@@ -35,6 +35,10 @@ Here's a list of available commands you can use with HapDoc:
 - `serve`: Starts server at host and port.
 - `tmpl-list`: List of saved templates.
 - `tmpl-new`: Create a new template.
+
+## What Next? 💡
+We planned to add runnable examples that runs before generating documentation.
+It's maybe helpful for checking autotests.
 
 """
 

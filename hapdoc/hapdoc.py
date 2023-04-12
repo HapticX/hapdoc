@@ -114,8 +114,6 @@ def md2json(directory: str, output_directory: str, output_file: str, root: str, 
     data = cast_md_dir_to_json(directory, root, False, ext)
     click.echo(click.style("Generated", fg="bright_green"))
 
-    root = load_conf('root', root)
-
     if output_directory is not None:
         makedirs(output_directory, exist_ok=True)
         with open(path.join(output_directory, output_file), 'w', encoding='utf-8') as file:
