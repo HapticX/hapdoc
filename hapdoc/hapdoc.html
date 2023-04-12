@@ -40,7 +40,7 @@
       <i class="fas fa-bars text-xl block xl:hidden" id="sandwich"></i>
       <div class="flex items-end gap-2 text-2xl">
         <p>HapDoc</p>
-        <p class="text-base">v1.9.8</p>
+        <p class="text-base">v1.9.9</p>
       </div>
       <div class="flex gap-2">
         
@@ -280,10 +280,10 @@
       <div class="w-full h-full pt-20 flex px-12 xl:px-32 gap-20">
         <!-- Page data -->
         <div class="flex flex-col gap-4 w-full xl:w-3/4">
-          <h1 class="titleRef" id="69bf671b3a7f423a">hapdoc</h1><p>
+          <h1 class="titleRef" id="258e388ca1ef9f83">hapdoc</h1><p>
 
 Autodoc CLI
-</p><h3 class="titleRef" id="ac92274875b67da2">Functions</h3><p>
+</p><h3 class="titleRef" id="6c7672578cc9f54e">Functions</h3><p>
 
 </p><pre><button class="flex gap-2 items-center text-white"><p>Copy code</p><i class="fas fa-copy"></i></button><code class="language-python">@click.group(invoke_without_command=True)
 @click.option(
@@ -327,7 +327,7 @@ The <code class="command">tml_new</code> command creates a new template and save
 @click.option(
     '-r', '--root', 'root',
     help='Root path, by default uses working directory',
-    default='', type=str
+    default=None, type=str
 )
 @click.option(
     '-e', '--extension', 'ext',
@@ -384,11 +384,11 @@ This command generates Markdown files with documentation for a project or file.
 )
 @click.option(
     '-t', '--template', 'templates_folder',
-    default='hapdoc/templates/vitepress', type=str
+    default=None, type=str
 )
 @click.option(
     '-T', '--title', 'title',
-    default='HapDoc', type=str
+    default=None, type=str
 )
 @click.option(
     '-a', '--accent', 'accent_color',
@@ -420,7 +420,7 @@ This command generates Markdown files with documentation for a project or file.
 @click.option(
     '-dv', '--doc-version', 'doc_version',
     help='Generated documentation version',
-    default='1.0.0', type=str
+    default=None, type=str
 )
 def serve(
    host: str,
@@ -463,12 +463,12 @@ The <code class="command">serve</code> command starts a web server using FastAPI
 )
 @click.option(
     '-t', '--template', 'templates_folder',
-    default='hapdoc/templates/vitepress', type=str
+    default=None, type=str
 )
 @click.option(
     '-T', '--title', 'title',
     help='Page title',
-    default='HapDoc', type=str
+    default=None, type=str
 )
 @click.option(
     '-a', '--accent', 'accent_color',
@@ -508,7 +508,7 @@ The <code class="command">serve</code> command starts a web server using FastAPI
 @click.option(
     '-dv', '--doc-version', 'doc_version',
     help='Generated documentation version',
-    default='1.0.0', type=str
+    default=None, type=str
 )
 def build(
    docs: str,
@@ -539,12 +539,12 @@ This command generates documentation for a project by first creating Markdown
             On this page
           </p>
           
-          <a id="page69bf671b3a7f423a" href="#69bf671b3a7f423a"
+          <a id="page258e388ca1ef9f83" href="#258e388ca1ef9f83"
             class="select-none border-l-[1px] py-0.5 font-semibold pl-[1.0em] opacity-50 hover:opacity-100 dark:border-white border-black border-opacity-100 pl-5 cursor-pointer transition-all duration-200">
             hapdoc
           </a>
           
-          <a id="pageac92274875b67da2" href="#ac92274875b67da2"
+          <a id="page6c7672578cc9f54e" href="#6c7672578cc9f54e"
             class="select-none border-l-[1px] py-0.5 font-semibold pl-[2.0em] opacity-50 hover:opacity-100 dark:border-white border-black border-opacity-100 pl-5 cursor-pointer transition-all duration-200">
             Functions
           </a>
