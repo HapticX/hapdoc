@@ -44,7 +44,7 @@ class Md2Html:
             r'</button><code class="language-\1">\2</code></pre>',
             1
         ),
-        (r'(?!")`([^`"]+)`(?!")', r'<code class="command">\1</code>', 1),
+        (r'(?<!`)`([^`]+)`(?!`)', r'<code class="command">\1</code>', 1),
         # Bold
         (r'[\s]\*\*([^*]*)\*\*[\s]', r'<b>\1</b>', 1),
         (r'[\s]__([^_]*)__[\s]', r'<b>\1</b>', 1),
@@ -81,8 +81,12 @@ class Md2Html:
                 f'<h{level}{attrs} id="{random_id}">{text}',
                 1
             )
+        # pprint(findall(
+        #     compile(r'(<)(/div|/ul|/pre|/h\d|hr)([^>]*>)([\s\S]*?)((</?)(pre|div|h\d)|\Z)', MULTILINE),
+        #     html_source
+        # ))
         html_source = sub(
-            compile(r'(<)(/div|/ul|/pre|/h\d|hr)([^>]*>)([\s\S]*?)((</?)(p|div|h\d)|\Z)', MULTILINE),
+            compile(r'(<)(/div|/ul|/pre|/h\d|hr)([^>]*>)([\s\S]*?)((</?)(pre|div|h\d)|\Z)', MULTILINE),
             r'\1\2\3<p>\4</p>\5',
             html_source
         )
@@ -97,7 +101,7 @@ class Md2Html:
             new_blockquote = sub(r'^ *&gt\s*', r'', blockquote, MULTILINE)
             new_blockquote = sub(r'\n *&gt\s*', r'\n', new_blockquote, MULTILINE)
             new_blockquote = sub(r'>[\n ]*&gt\s*', r'>', new_blockquote, MULTILINE)
-            source = source.replace(blockquote, f'<div class="quote">{new_blockquote}</div>')
+            source = source.replace(blockquote, f'<div class="quote"><p>{new_blockquote}</p></div>')
             print(new_blockquote)
         if findall(r'((^&gt\s*[^\n]+[\n\r]*)+)', source, MULTILINE):
             return Md2Html._prepare_blockquotes(source)
