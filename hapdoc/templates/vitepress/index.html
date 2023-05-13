@@ -372,7 +372,7 @@
     }
 
     // Mobile
-    let showSidebar = false;
+    let showSidebar = true;
     function sideBarSwitcher() {
       showSidebar = !showSidebar;
       sidebar.style.transform = showSidebar ? '' : `translateX(-${screen.width}px)`;
@@ -410,7 +410,7 @@
     window.addEventListener("load", ev => checkScroll(window.scrollY));
 
     sandwich.addEventListener('click', sideBarSwitcher);
-    // sideBarSwitcher();
+    sideBarSwitcher();
 
     function handleTheme(changed) {
       if (changed) {

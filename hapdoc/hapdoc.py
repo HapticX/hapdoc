@@ -354,6 +354,11 @@ def serve(
     help='Generated documentation version',
     default=None, type=str
 )
+@click.option(
+    '-fm', '--from-markdown', 'from_markdown',
+    help='Generate HTML from markdown',
+    default=None, type=bool
+)
 def build(
         docs: str,
         templates_folder: str,
@@ -370,6 +375,7 @@ def build(
         output: str,
         root: str,
         doc_version: str,
+        from_markdown: bool
 ):
     """
     This command generates documentation for a project by first creating Markdown
@@ -386,9 +392,10 @@ def build(
         autoescape=select_autoescape()
     )
     template = env.get_template('index.html')
-    generate_md_files(docs, document_type, ignore, extend, output)
-    if root is None:
-        root = path.join(getcwd(), output, docs)
+    if not from_markdown:
+        generate_md_files(docs, document_type, ignore, extend, output)
+        if root is None:
+            root = path.join(getcwd(), output, docs)
 
     if path.isfile(docs):
         docs, filename = path.split(docs)
