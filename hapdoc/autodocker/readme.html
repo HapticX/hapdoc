@@ -40,7 +40,7 @@
       <i class="fas fa-bars text-xl block xl:hidden" id="sandwich"></i>
       <div class="flex items-end gap-2 text-2xl">
         <p>HapDoc</p>
-        <p class="text-base">v1.9.19</p>
+        <p class="text-base">v1.9.20</p>
       </div>
       <div class="flex gap-2">
         
@@ -478,15 +478,15 @@
       <div class="w-full h-full pt-20 flex px-12 xl:px-32 gap-20">
         <!-- Page data -->
         <div class="flex flex-col gap-4 w-full xl:w-3/4">
-          <h1 class="titleRef" id="cf59f7b17486a85f">readme</h1>
+          <h1 class="titleRef" id="cf1bfe7b6a94c510">readme</h1><p>
 
 Init autodocker module
-<h3 class="titleRef" id="9692905ade4c28d4">Functions</h3>
+</p><h3 class="titleRef" id="3ff13ee4a9e210b9">Functions</h3><p>
 
-<pre><button class="flex gap-2 items-center text-white"><p>Copy code</p><i class="fas fa-copy"></i></button><code class="language-python">def all_project_types() -&gt list[str]:
-</code></pre>
+</p><pre><button class="flex gap-2 items-center text-white"><p>Copy code</p><i class="fas fa-copy"></i></button><code class="language-python">def all_project_types() -&gt list[str]:
+</code></pre><p>
 Returns all project types
-<hr><p></p><pre><button class="flex gap-2 items-center text-white"><p>Copy code</p><i class="fas fa-copy"></i></button><code class="language-python">def generate(
+<hr></p><pre><button class="flex gap-2 items-center text-white"><p>Copy code</p><i class="fas fa-copy"></i></button><code class="language-python">def generate(
    project_path: str,
    config: dict[str, Type[ABCFileType]] = None,
    ignore_list: list[str] = None,
@@ -494,10 +494,10 @@ Returns all project types
    extend: list[str] = None,
    output: str = 'docs'
 ) -&gt Iterable[tuple[int, int]]:
-</code></pre>
+</code></pre><p>
 Runs filetypes
 <ul style="list-style-type: disc"><li><code class="command">project_path</code> - path to the project</li><li><code class="command">config</code> - config dictionary</li><li><code class="command">ignore_list</code> - list of file extensions that need to ignore</li><li><code class="command">document_type</code> - project document type</li><li><code class="command">extend</code> - list of file extensions that need to include</li><li><code class="command">output</code> - output directory</ul></li>
-
+</p>
         </div>
         <!-- Page navigation (desktop) -->
         <div class="hidden xl:flex flex-col fixed right-0 w-1/4 h-fit text-sm pt-2">
@@ -505,12 +505,12 @@ Runs filetypes
             On this page
           </p>
           
-          <a id="pagecf59f7b17486a85f" href="#cf59f7b17486a85f"
+          <a id="pagecf1bfe7b6a94c510" href="#cf1bfe7b6a94c510"
             class="select-none border-l-[1px] py-0.5 font-semibold pl-[1.0em] opacity-50 hover:opacity-100 dark:border-white border-black border-opacity-100 pl-5 cursor-pointer transition-all duration-200">
             readme
           </a>
           
-          <a id="page9692905ade4c28d4" href="#9692905ade4c28d4"
+          <a id="page3ff13ee4a9e210b9" href="#3ff13ee4a9e210b9"
             class="select-none border-l-[1px] py-0.5 font-semibold pl-[2.0em] opacity-50 hover:opacity-100 dark:border-white border-black border-opacity-100 pl-5 cursor-pointer transition-all duration-200">
             Functions
           </a>
@@ -630,6 +630,9 @@ Runs filetypes
       justify-content: end;
       justify-items: end;
       place-items: end;
+    }
+    .hreflink {
+      color: #c27bd4;
     }
     button {
       width: fit-content;

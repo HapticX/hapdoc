@@ -40,7 +40,7 @@
       <i class="fas fa-bars text-xl block xl:hidden" id="sandwich"></i>
       <div class="flex items-end gap-2 text-2xl">
         <p>HapDoc</p>
-        <p class="text-base">v1.9.19</p>
+        <p class="text-base">v1.9.20</p>
       </div>
       <div class="flex gap-2">
         
@@ -478,22 +478,22 @@
       <div class="w-full h-full pt-20 flex px-12 xl:px-32 gap-20">
         <!-- Page data -->
         <div class="flex flex-col gap-4 w-full xl:w-3/4">
-          <h1 class="titleRef" id="0ed50d00874c904d">py</h1>
+          <h1 class="titleRef" id="338ecda572931861">py</h1><p>
 
 Describes Python file type
-<h2 class="titleRef" id="37400270316be915">Classes</h2>
+</p><h2 class="titleRef" id="9c949b5a8809a7f3">Classes</h2><p>
 
-<h3 class="titleRef" id="2b90021279ab432f"><code class="command">Py(ABCFileType)</code></h3>
+</p><h3 class="titleRef" id="913f1692b0360fda"><code class="command">Py(ABCFileType)</code></h3><p>
 Provides Python to Markdown translator
   <br>
-<h4 class="titleRef" id="1c7f4a187d0ac158">methods</h4>
-<pre><button class="flex gap-2 items-center text-white"><p>Copy code</p><i class="fas fa-copy"></i></button><code class="language-python">@staticmethod
+</p><h4 class="titleRef" id="fdf074daf2821a98">methods</h4><p>
+</p><pre><button class="flex gap-2 items-center text-white"><p>Copy code</p><i class="fas fa-copy"></i></button><code class="language-python">@staticmethod
 def process_funcs(
    functions: list[tuple]
 ) -&gt str:
-</code></pre>
+</code></pre><p>
 Process functions and methods in .py files
-<ul style="list-style-type: disc"><p><li><code class="command">source</code> - source python file</li><li><code class="command">functions</code> - list of parsed functions (via regex)</ul></li>
+<ul style="list-style-type: disc"><li><code class="command">source</code> - source python file</li><li><code class="command">functions</code> - list of parsed functions (via regex)</ul></li>
 <hr></p><pre><button class="flex gap-2 items-center text-white"><p>Copy code</p><i class="fas fa-copy"></i></button><code class="language-python">@staticmethod
 def process(
    cls,
@@ -501,10 +501,10 @@ def process(
    output: str = 'docs',
    one_file: bool = False
 ):
-</code></pre>
+</code></pre><p>
 Translates python script into md file.
 <ul style="list-style-type: disc"><li><code class="command">cls</code> - Class</li><li><code class="command">filepath</code> - path to python script</li><li><code class="command">output</code> - output directory</li><li><code class="command">one_file</code> - True when file flag is True</ul></li>
-
+</p>
         </div>
         <!-- Page navigation (desktop) -->
         <div class="hidden xl:flex flex-col fixed right-0 w-1/4 h-fit text-sm pt-2">
@@ -512,22 +512,22 @@ Translates python script into md file.
             On this page
           </p>
           
-          <a id="page0ed50d00874c904d" href="#0ed50d00874c904d"
+          <a id="page338ecda572931861" href="#338ecda572931861"
             class="select-none border-l-[1px] py-0.5 font-semibold pl-[1.0em] opacity-50 hover:opacity-100 dark:border-white border-black border-opacity-100 pl-5 cursor-pointer transition-all duration-200">
             py
           </a>
           
-          <a id="page37400270316be915" href="#37400270316be915"
+          <a id="page9c949b5a8809a7f3" href="#9c949b5a8809a7f3"
             class="select-none border-l-[1px] py-0.5 font-semibold pl-[1.5em] opacity-50 hover:opacity-100 dark:border-white border-black border-opacity-100 pl-5 cursor-pointer transition-all duration-200">
             Classes
           </a>
           
-          <a id="page2b90021279ab432f" href="#2b90021279ab432f"
+          <a id="page913f1692b0360fda" href="#913f1692b0360fda"
             class="select-none border-l-[1px] py-0.5 font-semibold pl-[2.0em] opacity-50 hover:opacity-100 dark:border-white border-black border-opacity-100 pl-5 cursor-pointer transition-all duration-200">
             <code class="command">Py(ABCFileType)</code>
           </a>
           
-          <a id="page1c7f4a187d0ac158" href="#1c7f4a187d0ac158"
+          <a id="pagefdf074daf2821a98" href="#fdf074daf2821a98"
             class="select-none border-l-[1px] py-0.5 font-semibold pl-[2.5em] opacity-50 hover:opacity-100 dark:border-white border-black border-opacity-100 pl-5 cursor-pointer transition-all duration-200">
             methods
           </a>
@@ -647,6 +647,9 @@ Translates python script into md file.
       justify-content: end;
       justify-items: end;
       place-items: end;
+    }
+    .hreflink {
+      color: #c27bd4;
     }
     button {
       width: fit-content;

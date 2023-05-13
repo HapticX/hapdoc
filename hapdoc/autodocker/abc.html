@@ -40,7 +40,7 @@
       <i class="fas fa-bars text-xl block xl:hidden" id="sandwich"></i>
       <div class="flex items-end gap-2 text-2xl">
         <p>HapDoc</p>
-        <p class="text-base">v1.9.19</p>
+        <p class="text-base">v1.9.20</p>
       </div>
       <div class="flex gap-2">
         
@@ -478,16 +478,16 @@
       <div class="w-full h-full pt-20 flex px-12 xl:px-32 gap-20">
         <!-- Page data -->
         <div class="flex flex-col gap-4 w-full xl:w-3/4">
-          <h1 class="titleRef" id="e039f52918cb636d">abc</h1>
+          <h1 class="titleRef" id="5c7f8f749254f7c2">abc</h1><p>
 
 Provides Abstract classes behavior
-<h2 class="titleRef" id="5cafb0ce747692ed">Classes</h2>
+</p><h2 class="titleRef" id="f70aedefead65fc8">Classes</h2><p>
 
-<h3 class="titleRef" id="966f6faca2001e50"><code class="command">ABCFileType</code></h3>
+</p><h3 class="titleRef" id="737f57cbf69e7f44"><code class="command">ABCFileType</code></h3><p>
 Provides abstract behavior of inherited FileType classes
   <br>
-<h4 class="titleRef" id="dab25186388e4acc">methods</h4>
-<pre><button class="flex gap-2 items-center text-white"><p>Copy code</p><i class="fas fa-copy"></i></button><code class="language-python">@staticmethod
+</p><h4 class="titleRef" id="bfa0f0e061d439fb">methods</h4><p>
+</p><pre><button class="flex gap-2 items-center text-white"><p>Copy code</p><i class="fas fa-copy"></i></button><code class="language-python">@staticmethod
 @abstractmethod
 def process(
    cls,
@@ -495,19 +495,19 @@ def process(
    output: str = 'docs',
    one_file: bool = False
 ):
-</code></pre>
+</code></pre><p>
 Process source file and translates it into Markdown file
-<ul style="list-style-type: disc"><p><li><code class="command">cls</code> - Class</li><li><code class="command">filepath</code> - path to file</li><li><code class="command">output</code> - output directory</li><li><code class="command">one_file</code> - True when target is file</ul></li>
+<ul style="list-style-type: disc"><li><code class="command">cls</code> - Class</li><li><code class="command">filepath</code> - path to file</li><li><code class="command">output</code> - output directory</li><li><code class="command">one_file</code> - True when target is file</ul></li>
 <hr></p><pre><button class="flex gap-2 items-center text-white"><p>Copy code</p><i class="fas fa-copy"></i></button><code class="language-python">@staticmethod
 def pre(
    filepath: str,
    output: str = 'docs',
    one_file: bool = False,
 ) -&gt tuple[str, str, str]:
-</code></pre>
+</code></pre><p>
 Preprocess file and making directories
 <ul style="list-style-type: disc"><li><code class="command">filepath</code> - path to file</li><li><code class="command">output</code> - output directory</li><li><code class="command">one_file</code> - True when target is file</ul></li>
-
+</p>
         </div>
         <!-- Page navigation (desktop) -->
         <div class="hidden xl:flex flex-col fixed right-0 w-1/4 h-fit text-sm pt-2">
@@ -515,22 +515,22 @@ Preprocess file and making directories
             On this page
           </p>
           
-          <a id="pagee039f52918cb636d" href="#e039f52918cb636d"
+          <a id="page5c7f8f749254f7c2" href="#5c7f8f749254f7c2"
             class="select-none border-l-[1px] py-0.5 font-semibold pl-[1.0em] opacity-50 hover:opacity-100 dark:border-white border-black border-opacity-100 pl-5 cursor-pointer transition-all duration-200">
             abc
           </a>
           
-          <a id="page5cafb0ce747692ed" href="#5cafb0ce747692ed"
+          <a id="pagef70aedefead65fc8" href="#f70aedefead65fc8"
             class="select-none border-l-[1px] py-0.5 font-semibold pl-[1.5em] opacity-50 hover:opacity-100 dark:border-white border-black border-opacity-100 pl-5 cursor-pointer transition-all duration-200">
             Classes
           </a>
           
-          <a id="page966f6faca2001e50" href="#966f6faca2001e50"
+          <a id="page737f57cbf69e7f44" href="#737f57cbf69e7f44"
             class="select-none border-l-[1px] py-0.5 font-semibold pl-[2.0em] opacity-50 hover:opacity-100 dark:border-white border-black border-opacity-100 pl-5 cursor-pointer transition-all duration-200">
             <code class="command">ABCFileType</code>
           </a>
           
-          <a id="pagedab25186388e4acc" href="#dab25186388e4acc"
+          <a id="pagebfa0f0e061d439fb" href="#bfa0f0e061d439fb"
             class="select-none border-l-[1px] py-0.5 font-semibold pl-[2.5em] opacity-50 hover:opacity-100 dark:border-white border-black border-opacity-100 pl-5 cursor-pointer transition-all duration-200">
             methods
           </a>
@@ -650,6 +650,9 @@ Preprocess file and making directories
       justify-content: end;
       justify-items: end;
       place-items: end;
+    }
+    .hreflink {
+      color: #c27bd4;
     }
     button {
       width: fit-content;
