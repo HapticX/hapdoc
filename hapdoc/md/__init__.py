@@ -16,7 +16,6 @@ class Md2Html:
         (r'<', r'&lt', 1),
         # <br>
         (compile(r'( {2}$(?!\s*`))', MULTILINE), r'<br>', 1),
-        (compile(r'\n{2,}', MULTILINE), r'<br>', 1),
         # Line
         (compile(r'^\s*^(_{3,}|-{3})\s*', MULTILINE), r'<hr>', 1),
         # List
