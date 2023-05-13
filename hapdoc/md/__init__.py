@@ -52,7 +52,7 @@ class Md2Html:
         (r'[\s]_([^_]*)_[\s]', r'<em>\1</em>', 1),
         # Find text without element
         (r'(<\/(pre|h\d))>([\s\S]+?)<(\/?)(?=hr|div|pre|h\d|ul)', r'\1><p>\3</p><\4', 1),
-        (r'(<\/?)(div|ul|hr)([^>]*>)([\s\S]*?)(<\/?)(?=(p|div))', r'<p>\1\2\3\4\5</p>', 1)
+        (r'(<\/?)(div|ul|hr)([^>]*>)([\s\S]*?)(<\/?)(?=(p|div|h\d))', r'<p>\1\2\3\4\5</p>', 1)
     ]
 
     @staticmethod
