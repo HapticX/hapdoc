@@ -42,4 +42,4 @@ It's maybe helpful for checking autotests.
 
 """
 
-__version__ = '1.9.15'
+__version__ = '1.9.16'
