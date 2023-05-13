@@ -63,12 +63,9 @@
       </div>
     </div>
 
-    <!-- SideBar -->
-    <div
-      class="fixed w-full xl:w-3/12 xl:block left-0 top-12 flex flex-col z-40 text-2xl xl:text-base dark:bg-surface-color bg-light-surface-color min-h-screen h-full transition-all"
-      id="sidebar"
-    >
-      <div class="hidden xl:block ml-36 pt-2 mr-2 border-t-[1px] dark:border-white/10 border-black/10 border-t-[1px]" id="line"></div>
+    <!-- SideBar (desktop) -->
+    <div class="hidden xl:block xl:fixed left-0 top-12 flex flex-col w-3/12 z-40 dark:bg-surface-color bg-light-surface-color min-h-screen h-full">
+      <div class="ml-36 pt-2 mr-2 border-t-[1px] dark:border-white/10 border-black/10 border-t-[1px]" id="line"></div>
       <div class="flex flex-col gap-2 pl-32 h-full">
         
         <div class="px-2">
@@ -158,7 +155,7 @@
                       <a
                         href="/hapdoc/hapdoc/md/readme.html"
                         id="/hapdoc/hapdoc/md/readme.htmlhref"
-                        class="select-none pl-8 opacity-50 hover:opacity-100 transition-all duration-700">
+                        class="select-none pl-8 opacity-50 hover:opacity-100 transition-all duration-300">
                         readme
                       </a>
                     
@@ -190,7 +187,7 @@
                       <a
                         href="/hapdoc/hapdoc/autodocker/abc.html"
                         id="/hapdoc/hapdoc/autodocker/abc.htmlhref"
-                        class="select-none pl-8 opacity-50 hover:opacity-100 transition-all duration-700">
+                        class="select-none pl-8 opacity-50 hover:opacity-100 transition-all duration-300">
                         abc
                       </a>
                     
@@ -199,7 +196,7 @@
                       <a
                         href="/hapdoc/hapdoc/autodocker/readme.html"
                         id="/hapdoc/hapdoc/autodocker/readme.htmlhref"
-                        class="select-none pl-8 opacity-50 hover:opacity-100 transition-all duration-700">
+                        class="select-none pl-8 opacity-50 hover:opacity-100 transition-all duration-300">
                         readme
                       </a>
                     
@@ -225,7 +222,7 @@
                       <a
                         href="/hapdoc/hapdoc/autodocker/filetypes/py.html"
                         id="/hapdoc/hapdoc/autodocker/filetypes/py.htmlhref"
-                        class="select-none pl-8 opacity-50 hover:opacity-100 transition-all duration-700">
+                        class="select-none pl-8 opacity-50 hover:opacity-100 transition-all duration-300">
                         py
                       </a>
                     
@@ -234,7 +231,7 @@
                       <a
                         href="/hapdoc/hapdoc/autodocker/filetypes/readme.html"
                         id="/hapdoc/hapdoc/autodocker/filetypes/readme.htmlhref"
-                        class="select-none pl-8 opacity-50 hover:opacity-100 transition-all duration-700">
+                        class="select-none pl-8 opacity-50 hover:opacity-100 transition-all duration-300">
                         readme
                       </a>
                     
@@ -243,7 +240,7 @@
                       <a
                         href="/hapdoc/hapdoc/autodocker/filetypes/fastapi.html"
                         id="/hapdoc/hapdoc/autodocker/filetypes/fastapi.htmlhref"
-                        class="select-none pl-8 opacity-50 hover:opacity-100 transition-all duration-700">
+                        class="select-none pl-8 opacity-50 hover:opacity-100 transition-all duration-300">
                         fastapi
                       </a>
                     
@@ -252,7 +249,7 @@
                       <a
                         href="/hapdoc/hapdoc/autodocker/filetypes/js.html"
                         id="/hapdoc/hapdoc/autodocker/filetypes/js.htmlhref"
-                        class="select-none pl-8 opacity-50 hover:opacity-100 transition-all duration-700">
+                        class="select-none pl-8 opacity-50 hover:opacity-100 transition-all duration-300">
                         js
                       </a>
                     
@@ -273,6 +270,207 @@
       </div>
     </div>
 
+    <!-- Sidebar (mobile) -->
+    <div class="fixed top-12 left-0 z-40 w-full h-full flex flex-col gap-2 text-2xl dark:bg-surface-color bg-light-surface-color transition-all" id="sideBarPhone">
+      
+      <div class="px-2">
+        
+          
+        <!-- SideBar item -->
+        <div class="flex flex-col gap-2 dark:border-white border-black border-opacity-10 mt-2">
+          <div class="flex pl-2 flex-col w-full font-bold">
+            
+              <a
+                href="/hapdoc/hapdoc/__main__.html"
+                id="/hapdoc/hapdoc/__main__.htmlhrefMobile"
+                class="select-none pl-8 w-full opacity-50 hover:opacity-100 transition-all duration-300">
+                __main__
+              </a>
+            
+          </div>
+        </div>
+      
+        
+          
+        <!-- SideBar item -->
+        <div class="flex flex-col gap-2 dark:border-white border-black border-opacity-10 mt-2">
+          <div class="flex pl-2 flex-col w-full font-bold">
+            
+              <a
+                href="/hapdoc/hapdoc/utils.html"
+                id="/hapdoc/hapdoc/utils.htmlhrefMobile"
+                class="select-none pl-8 w-full opacity-50 hover:opacity-100 transition-all duration-300">
+                utils
+              </a>
+            
+          </div>
+        </div>
+      
+        
+          
+        <!-- SideBar item -->
+        <div class="flex flex-col gap-2 dark:border-white border-black border-opacity-10 mt-2">
+          <div class="flex pl-2 flex-col w-full font-bold">
+            
+              <a
+                href="/hapdoc/hapdoc/readme.html"
+                id="/hapdoc/hapdoc/readme.htmlhrefMobile"
+                class="select-none pl-8 w-full opacity-50 hover:opacity-100 transition-all duration-300">
+                readme
+              </a>
+            
+          </div>
+        </div>
+      
+        
+          
+        <!-- SideBar item -->
+        <div class="flex flex-col gap-2 dark:border-white border-black border-opacity-10 mt-2">
+          <div class="flex pl-2 flex-col w-full font-bold">
+            
+              <a
+                href="/hapdoc/hapdoc/hapdoc.html"
+                id="/hapdoc/hapdoc/hapdoc.htmlhrefMobile"
+                class="select-none pl-8 w-full opacity-50 hover:opacity-100 transition-all duration-300">
+                hapdoc
+              </a>
+            
+          </div>
+        </div>
+      
+        
+          
+        <!-- SideBar item -->
+        <div class="flex flex-col gap-2 dark:border-white border-black border-opacity-10 mt-2">
+          <div class="flex pl-2 flex-col w-full font-bold">
+            
+              <div class="flex w-full items-center gap-2 cursor-pointer" onclick="toggleList('md/readme')">
+                <i
+                  class="fas fa-sort-down opacity-70 transition-all ease-out select-none"
+                  id="md/readme-icon-mobile"
+                ></i>
+                <p class="select-none">
+                  md
+                </p>
+              </div>
+              <div class="flex flex-col h-fit w-full" id="md/readme-list-mobile" style="display: flex">
+                
+                  
+                    <a
+                      href="/hapdoc/hapdoc/md/readme.html"
+                      id="/hapdoc/hapdoc/md/readme.htmlhrefMobile"
+                      class="select-none pl-8 opacity-50 hover:opacity-100 transition-all duration-300">
+                      readme
+                    </a>
+                  
+                
+              </div>
+            
+          </div>
+        </div>
+      
+        
+          
+        <!-- SideBar item -->
+        <div class="flex flex-col gap-2 dark:border-white border-black border-opacity-10 mt-2">
+          <div class="flex pl-2 flex-col w-full font-bold">
+            
+              <div class="flex w-full items-center gap-2 cursor-pointer" onclick="toggleList('autodocker/abc')">
+                <i
+                  class="fas fa-sort-down opacity-70 transition-all ease-out select-none"
+                  id="autodocker/abc-icon-mobile"
+                ></i>
+                <p class="select-none">
+                  autodocker
+                </p>
+              </div>
+              <div class="flex flex-col h-fit w-full" id="autodocker/abc-list-mobile" style="display: flex">
+                
+                  
+                    <a
+                      href="/hapdoc/hapdoc/autodocker/abc.html"
+                      id="/hapdoc/hapdoc/autodocker/abc.htmlhrefMobile"
+                      class="select-none pl-8 opacity-50 hover:opacity-100 transition-all duration-300">
+                      abc
+                    </a>
+                  
+                
+                  
+                    <a
+                      href="/hapdoc/hapdoc/autodocker/readme.html"
+                      id="/hapdoc/hapdoc/autodocker/readme.htmlhrefMobile"
+                      class="select-none pl-8 opacity-50 hover:opacity-100 transition-all duration-300">
+                      readme
+                    </a>
+                  
+                
+                  
+        <!-- SideBar item -->
+        <div class="flex flex-col gap-2 dark:border-white border-black border-opacity-10 mt-2">
+          <div class="flex pl-2 flex-col w-full font-bold">
+            
+              <div class="flex w-full items-center gap-2 cursor-pointer" onclick="toggleList('autodocker/filetypes/py')">
+                <i
+                  class="fas fa-sort-down opacity-70 transition-all ease-out select-none"
+                  id="autodocker/filetypes/py-icon-mobile"
+                ></i>
+                <p class="select-none">
+                  filetypes
+                </p>
+              </div>
+              <div class="flex flex-col h-fit w-full" id="autodocker/filetypes/py-list-mobile" style="display: flex">
+                
+                  
+                    <a
+                      href="/hapdoc/hapdoc/autodocker/filetypes/py.html"
+                      id="/hapdoc/hapdoc/autodocker/filetypes/py.htmlhrefMobile"
+                      class="select-none pl-8 opacity-50 hover:opacity-100 transition-all duration-300">
+                      py
+                    </a>
+                  
+                
+                  
+                    <a
+                      href="/hapdoc/hapdoc/autodocker/filetypes/readme.html"
+                      id="/hapdoc/hapdoc/autodocker/filetypes/readme.htmlhrefMobile"
+                      class="select-none pl-8 opacity-50 hover:opacity-100 transition-all duration-300">
+                      readme
+                    </a>
+                  
+                
+                  
+                    <a
+                      href="/hapdoc/hapdoc/autodocker/filetypes/fastapi.html"
+                      id="/hapdoc/hapdoc/autodocker/filetypes/fastapi.htmlhrefMobile"
+                      class="select-none pl-8 opacity-50 hover:opacity-100 transition-all duration-300">
+                      fastapi
+                    </a>
+                  
+                
+                  
+                    <a
+                      href="/hapdoc/hapdoc/autodocker/filetypes/js.html"
+                      id="/hapdoc/hapdoc/autodocker/filetypes/js.htmlhrefMobile"
+                      class="select-none pl-8 opacity-50 hover:opacity-100 transition-all duration-300">
+                      js
+                    </a>
+                  
+                
+              </div>
+            
+          </div>
+        </div>
+      
+                
+              </div>
+            
+          </div>
+        </div>
+      
+        
+      </div>
+    </div>
+
     <div class="h-full w-3/12 hidden xl:block"></div>
 
     <!-- Content -->
@@ -280,11 +478,11 @@
       <div class="w-full h-full pt-20 flex px-12 xl:px-32 gap-20">
         <!-- Page data -->
         <div class="flex flex-col gap-4 w-full xl:w-3/4">
-          <h1 class="titleRef" id="249594b4f0ab9614">readme<br>Provides Markdown to Html code translator</h1><p>
-</p><h2 class="titleRef" id="f0b080fbd2b0a92f">Classes<br>### <code class="command">Md2Html</code></h2><p>
+          <h1 class="titleRef" id="523f2f549c5c94cf">readme<br>Provides Markdown to Html code translator</h1><p>
+</p><h2 class="titleRef" id="1186ffba9bf1ff67">Classes<br>### <code class="command">Md2Html</code></h2><p>
 Provides Markdown to Html
   <br>
-</p><h4 class="titleRef" id="77915df8b4b05ed7">methods</h4><p>
+</p><h4 class="titleRef" id="7bf0f1021e7f88b2">methods</h4><p>
 </p><pre><button class="flex gap-2 items-center text-white"><p>Copy code</p><i class="fas fa-copy"></i></button><code class="language-python">@staticmethod
 def cast(source: str) -&gt str:
 </code></pre><p>
@@ -298,17 +496,17 @@ def rand_title_ref(html_source: str) -&gt tuple[str, list[dict]]:
             On this page
           </p>
           
-          <a id="page249594b4f0ab9614" href="#249594b4f0ab9614"
+          <a id="page523f2f549c5c94cf" href="#523f2f549c5c94cf"
             class="select-none border-l-[1px] py-0.5 font-semibold pl-[1.0em] opacity-50 hover:opacity-100 dark:border-white border-black border-opacity-100 pl-5 cursor-pointer transition-all duration-200">
             readme<br>Provides Markdown to Html code translator
           </a>
           
-          <a id="pagef0b080fbd2b0a92f" href="#f0b080fbd2b0a92f"
+          <a id="page1186ffba9bf1ff67" href="#1186ffba9bf1ff67"
             class="select-none border-l-[1px] py-0.5 font-semibold pl-[1.5em] opacity-50 hover:opacity-100 dark:border-white border-black border-opacity-100 pl-5 cursor-pointer transition-all duration-200">
             Classes<br>### <code class="command">Md2Html</code>
           </a>
           
-          <a id="page77915df8b4b05ed7" href="#77915df8b4b05ed7"
+          <a id="page7bf0f1021e7f88b2" href="#7bf0f1021e7f88b2"
             class="select-none border-l-[1px] py-0.5 font-semibold pl-[2.5em] opacity-50 hover:opacity-100 dark:border-white border-black border-opacity-100 pl-5 cursor-pointer transition-all duration-200">
             methods
           </a>
@@ -480,7 +678,7 @@ def rand_title_ref(html_source: str) -&gt tuple[str, list[dict]]:
     // Get elements
     const titleRefs = document.getElementsByClassName("titleRef");
     const header = document.getElementById('header');
-    const sidebar = document.getElementById('sidebar');
+    const sidebar = document.getElementById('sideBarPhone');
     const sandwich = document.getElementById('sandwich');
     const themeIcon = document.getElementById('themeIcon');
     const themeString = document.getElementById('themeString');
