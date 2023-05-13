@@ -40,7 +40,7 @@
       <i class="fas fa-bars text-xl block xl:hidden" id="sandwich"></i>
       <div class="flex items-end gap-2 text-2xl">
         <p>HapDoc</p>
-        <p class="text-base">v1.9.18</p>
+        <p class="text-base">v1.9.19</p>
       </div>
       <div class="flex gap-2">
         
@@ -478,39 +478,39 @@
       <div class="w-full h-full pt-20 flex px-12 xl:px-32 gap-20">
         <!-- Page data -->
         <div class="flex flex-col gap-4 w-full xl:w-3/4">
-          <h1 class="titleRef" id="faa88bdc444b903c">hapdoc</h1><p>
+          <h1 class="titleRef" id="320f9329db53ef04">hapdoc</h1>
 
 Autodoc CLI
-</p><h3 class="titleRef" id="67d43a5f18be71ee">Functions</h3><p>
+<h3 class="titleRef" id="255fdc0ca0f274f9">Functions</h3>
 
-</p><pre><button class="flex gap-2 items-center text-white"><p>Copy code</p><i class="fas fa-copy"></i></button><code class="language-python">@click.group(invoke_without_command=True)
+<pre><button class="flex gap-2 items-center text-white"><p>Copy code</p><i class="fas fa-copy"></i></button><code class="language-python">@click.group(invoke_without_command=True)
 @click.option(
     '-v/--version', 'show_version',
     default=False, type=bool
 )
 def hapdoc(show_version: bool):
-</code></pre><p>
+</code></pre>
 HapDoc is a powerful command-line interface tool that automates the process of
     generating documentation for various types of projects.
     With HapDoc, you can easily create high-quality documentation for
     Python, FastAPI, Vue, and many other types of projects.
-</p><hr><p></p><pre><button class="flex gap-2 items-center text-white"><p>Copy code</p><i class="fas fa-copy"></i></button><code class="language-python">@hapdoc.command()
+<hr><p></p><pre><button class="flex gap-2 items-center text-white"><p>Copy code</p><i class="fas fa-copy"></i></button><code class="language-python">@hapdoc.command()
 def project_types():
-</code></pre><p>
+</code></pre>
 This command displays a list of all available project
     types that can be used in doc generating.
-</p><hr><p></p><pre><button class="flex gap-2 items-center text-white"><p>Copy code</p><i class="fas fa-copy"></i></button><code class="language-python">@hapdoc.command()
+<hr><p></p><pre><button class="flex gap-2 items-center text-white"><p>Copy code</p><i class="fas fa-copy"></i></button><code class="language-python">@hapdoc.command()
 def tmpl_list():
-</code></pre><p>
+</code></pre>
 This command displays a list of all templates that have been saved by the current user.
     It is useful for quickly checking which templates are available for use.
-</p><hr><p></p><pre><button class="flex gap-2 items-center text-white"><p>Copy code</p><i class="fas fa-copy"></i></button><code class="language-python">@hapdoc.command()
+<hr><p></p><pre><button class="flex gap-2 items-center text-white"><p>Copy code</p><i class="fas fa-copy"></i></button><code class="language-python">@hapdoc.command()
 def tmpl_new():
-</code></pre><p>
+</code></pre>
 The <code class="command">tml_new</code> command creates a new template and saves it for future use.
     The user will be prompted to provide a name for the template and
     specify whether Tailwind CSS should be included.
-</p><hr><p></p><pre><button class="flex gap-2 items-center text-white"><p>Copy code</p><i class="fas fa-copy"></i></button><code class="language-python">@hapdoc.command()
+<hr><p></p><pre><button class="flex gap-2 items-center text-white"><p>Copy code</p><i class="fas fa-copy"></i></button><code class="language-python">@hapdoc.command()
 @click.argument("directory", type=str)
 @click.option(
     '-o', '--output', 'output_file',
@@ -533,12 +533,12 @@ The <code class="command">tml_new</code> command creates a new template and save
     default=None, type=str
 )
 def md2json(directory: str, output_directory: str, output_file: str, root: str, ext: str):
-</code></pre><p>
+</code></pre>
 The md2json command converts Markdown files (.md) in a directory to JSON format,
     which can be used for rendering the files using the jinja2 templating engine.
     This command is useful for converting Markdown files to a format that
     can be easily parsed and manipulated by other tools.
-</p><hr><p></p><pre><button class="flex gap-2 items-center text-white"><p>Copy code</p><i class="fas fa-copy"></i></button><code class="language-python">@hapdoc.command()
+<hr><p></p><pre><button class="flex gap-2 items-center text-white"><p>Copy code</p><i class="fas fa-copy"></i></button><code class="language-python">@hapdoc.command()
 @click.argument('project_path', type=str)
 @click.option(
     '-d', '--doctype', 'document_type',
@@ -567,10 +567,10 @@ def gen(
    extend: str,
    output: str,
 ):
-</code></pre><p>
+</code></pre>
 This command generates Markdown files with documentation for a project or file.
     The user provides a path to the project or file that needs documentation.
-</p><hr><p></p><pre><button class="flex gap-2 items-center text-white"><p>Copy code</p><i class="fas fa-copy"></i></button><code class="language-python">@hapdoc.command()
+<hr><p></p><pre><button class="flex gap-2 items-center text-white"><p>Copy code</p><i class="fas fa-copy"></i></button><code class="language-python">@hapdoc.command()
 @click.argument('docs', type=str)
 @click.option(
     '-h', '--host', 'host',
@@ -634,10 +634,10 @@ def serve(
    light_surface_color: str,
    doc_version: str,
 ):
-</code></pre><p>
+</code></pre>
 The <code class="command">serve</code> command starts a web server using FastAPI and uvicorn and
     provides access to Markdown files in a web browser.
-</p><hr><p></p><pre><button class="flex gap-2 items-center text-white"><p>Copy code</p><i class="fas fa-copy"></i></button><code class="language-python">@hapdoc.command()
+<hr><p></p><pre><button class="flex gap-2 items-center text-white"><p>Copy code</p><i class="fas fa-copy"></i></button><code class="language-python">@hapdoc.command()
 @click.argument('docs', type=str)
 @click.option(
     '-d', '--doctype', 'document_type',
@@ -743,12 +743,12 @@ This command generates documentation for a project by first creating Markdown
             On this page
           </p>
           
-          <a id="pagefaa88bdc444b903c" href="#faa88bdc444b903c"
+          <a id="page320f9329db53ef04" href="#320f9329db53ef04"
             class="select-none border-l-[1px] py-0.5 font-semibold pl-[1.0em] opacity-50 hover:opacity-100 dark:border-white border-black border-opacity-100 pl-5 cursor-pointer transition-all duration-200">
             hapdoc
           </a>
           
-          <a id="page67d43a5f18be71ee" href="#67d43a5f18be71ee"
+          <a id="page255fdc0ca0f274f9" href="#255fdc0ca0f274f9"
             class="select-none border-l-[1px] py-0.5 font-semibold pl-[2.0em] opacity-50 hover:opacity-100 dark:border-white border-black border-opacity-100 pl-5 cursor-pointer transition-all duration-200">
             Functions
           </a>
