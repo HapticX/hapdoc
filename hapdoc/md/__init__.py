@@ -5,6 +5,8 @@ Provides Markdown to Html code translator
 from re import MULTILINE, findall, sub, compile
 from secrets import token_hex
 
+from pprint import pprint
+
 
 class Md2Html:
     """
@@ -34,7 +36,7 @@ class Md2Html:
         # Image
         (r'!\[([^\n\]]+)\]\(([^\)\s]+)\)', r'<img src="\2" alt="\1">', 1),
         # URL
-        (r'\[([^\n\]]+)\]\(([^\)\s]+)\)', r'<a href="\2">\1</a>', 1),
+        (r'\[([^\n\]]+)\]\(([^\)\s]+)\)', r'<a class="hreflink" href="\2">\1</a>', 1),
         # Code
         (
             r'```(\S+)\s*([\s\S]+?)```',
@@ -51,7 +53,6 @@ class Md2Html:
         (r'[\s]_([^_]*)_[\s]', r'<em>\1</em>', 1),
         # Find text without element
         # (r'(<\/(pre|h\d))>([\s\S]+?)<(\/?)(?=hr|div|pre|h\d|ul)', r'\1><p>\3</p><\4', 1),
-        (r'(<\/?)(div|ul|hr)([^>]*>)([\s\S]*?)(<\/?)(p|div|h\d)', r'\1\2\3<p>\4</p>\5\6', 1),
     ]
 
     @staticmethod
@@ -80,6 +81,12 @@ class Md2Html:
                 f'<h{level}{attrs} id="{random_id}">{text}',
                 1
             )
+        pprint(findall(compile(r'(<)(/div|/ul|/pre|/h\d|hr)([^>]*>)([\s\S]*?)((</?)(p|div|h\d)|\Z)', MULTILINE), html_source))
+        html_source = sub(
+            compile(r'(<)(/div|/ul|/pre|/h\d|hr)([^>]*>)([\s\S]*?)((</?)(p|div|h\d)|\Z)', MULTILINE),
+            r'\1\2\3<p>\4</p>\5',
+            html_source
+        )
         return html_source, result
 
     @staticmethod
