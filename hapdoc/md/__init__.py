@@ -81,7 +81,6 @@ class Md2Html:
                 f'<h{level}{attrs} id="{random_id}">{text}',
                 1
             )
-        pprint(findall(compile(r'(<)(/div|/ul|/pre|/h\d|hr)([^>]*>)([\s\S]*?)((</?)(p|div|h\d)|\Z)', MULTILINE), html_source))
         html_source = sub(
             compile(r'(<)(/div|/ul|/pre|/h\d|hr)([^>]*>)([\s\S]*?)((</?)(p|div|h\d)|\Z)', MULTILINE),
             r'\1\2\3<p>\4</p>\5',
