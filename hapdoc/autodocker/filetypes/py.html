@@ -31,7 +31,7 @@
   </script>
   <title>HapDoc</title>
 </head>
-<body class="dark:bg-surface-color bg-light-surface-color dark:text-white text-black overflow-x-hidden">
+<body class="dark:bg-surface-color xl:text-xl bg-light-surface-color dark:text-white text-black overflow-x-hidden">
   <div class="w-screen min-h-screen h-full flex">
     <div
       id="header"
@@ -40,7 +40,7 @@
       <i class="fas fa-bars text-xl block xl:hidden" id="sandwich"></i>
       <div class="flex items-end gap-2 text-2xl">
         <p>HapDoc</p>
-        <p class="text-base">v1.9.21</p>
+        <p class="text-base">v1.9.24</p>
       </div>
       <div class="flex gap-2">
         
@@ -478,15 +478,15 @@
       <div class="w-full h-full pt-20 flex px-12 xl:px-32 gap-20">
         <!-- Page data -->
         <div class="flex flex-col gap-4 w-full xl:w-3/4">
-          <h1 class="titleRef" id="64fe4a15b1003fe4">py</h1><p>
+          <h1 class="titleRef" id="03e48c73cc08bccc">py</h1><p>
 
 Describes Python file type
-</p><h2 class="titleRef" id="89e1ab807b64b61d">Classes</h2><p>
+</p><h2 class="titleRef" id="ed1a12d8b8e6611c">Classes</h2><p>
 
-</p><h3 class="titleRef" id="e11e528f6c33b5a1"><code class="command">Py(ABCFileType)</code></h3><p>
+</p><h3 class="titleRef" id="c255867dd55e268e"><code class="command">Py(ABCFileType)</code></h3><p>
 Provides Python to Markdown translator
   <br>
-</p><h4 class="titleRef" id="8be28d992aa8f55c">methods</h4><p>
+</p><h4 class="titleRef" id="87b73a7181b9974a">methods</h4><p>
 </p><pre><button class="flex gap-2 items-center text-white"><p>Copy code</p><i class="fas fa-copy"></i></button><code class="language-python">@staticmethod
 def process_funcs(
    functions: list[tuple]
@@ -512,22 +512,22 @@ Translates python script into md file.
             On this page
           </p>
           
-          <a id="page64fe4a15b1003fe4" href="#64fe4a15b1003fe4"
+          <a id="page03e48c73cc08bccc" href="#03e48c73cc08bccc"
             class="select-none border-l-[1px] py-0.5 font-semibold pl-[1.0em] opacity-50 hover:opacity-100 dark:border-white border-black border-opacity-100 pl-5 cursor-pointer transition-all duration-200">
             py
           </a>
           
-          <a id="page89e1ab807b64b61d" href="#89e1ab807b64b61d"
+          <a id="pageed1a12d8b8e6611c" href="#ed1a12d8b8e6611c"
             class="select-none border-l-[1px] py-0.5 font-semibold pl-[1.5em] opacity-50 hover:opacity-100 dark:border-white border-black border-opacity-100 pl-5 cursor-pointer transition-all duration-200">
             Classes
           </a>
           
-          <a id="pagee11e528f6c33b5a1" href="#e11e528f6c33b5a1"
+          <a id="pagec255867dd55e268e" href="#c255867dd55e268e"
             class="select-none border-l-[1px] py-0.5 font-semibold pl-[2.0em] opacity-50 hover:opacity-100 dark:border-white border-black border-opacity-100 pl-5 cursor-pointer transition-all duration-200">
             <code class="command">Py(ABCFileType)</code>
           </a>
           
-          <a id="page8be28d992aa8f55c" href="#8be28d992aa8f55c"
+          <a id="page87b73a7181b9974a" href="#87b73a7181b9974a"
             class="select-none border-l-[1px] py-0.5 font-semibold pl-[2.5em] opacity-50 hover:opacity-100 dark:border-white border-black border-opacity-100 pl-5 cursor-pointer transition-all duration-200">
             methods
           </a>
@@ -603,25 +603,35 @@ Translates python script into md file.
       letter-spacing: .2rem;
       font-weight: bolder;
       font-size: 4rem;
+      padding-top: .7rem;
+      padding-bottom: 1.4rem;
     }
     h2 {
       letter-spacing: .15rem;
       font-weight: bold;
       font-size: 3rem;
+      padding-top: .6rem;
+      padding-bottom: 1.2rem;
     }
     h3 {
       letter-spacing: .1rem;
       font-weight: bold;
       font-size: 2rem;
+      padding-top: .5rem;
+      padding-bottom: 1rem;
     }
     h4 {
       letter-spacing: .05rem;
       font-weight: bold;
-      font-size: 1rem;
+      font-size: 1.5rem;
+      padding-top: .4rem;
+      padding-bottom: .8rem;
     }
     h5, h6 {
       font-weight: bold;
-      font-size: .5rem;
+      font-size: 1rem;
+      padding-top: .3rem;
+      padding-bottom: .6rem;
     }
     code {
       border-radius: 0 0 .5rem .5rem;

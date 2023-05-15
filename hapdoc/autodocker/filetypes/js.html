@@ -31,7 +31,7 @@
   </script>
   <title>HapDoc</title>
 </head>
-<body class="dark:bg-surface-color bg-light-surface-color dark:text-white text-black overflow-x-hidden">
+<body class="dark:bg-surface-color xl:text-xl bg-light-surface-color dark:text-white text-black overflow-x-hidden">
   <div class="w-screen min-h-screen h-full flex">
     <div
       id="header"
@@ -40,7 +40,7 @@
       <i class="fas fa-bars text-xl block xl:hidden" id="sandwich"></i>
       <div class="flex items-end gap-2 text-2xl">
         <p>HapDoc</p>
-        <p class="text-base">v1.9.21</p>
+        <p class="text-base">v1.9.24</p>
       </div>
       <div class="flex gap-2">
         
@@ -478,15 +478,15 @@
       <div class="w-full h-full pt-20 flex px-12 xl:px-32 gap-20">
         <!-- Page data -->
         <div class="flex flex-col gap-4 w-full xl:w-3/4">
-          <h1 class="titleRef" id="f60c515f3c952aed">js</h1><p>
+          <h1 class="titleRef" id="1ca8d8355b5ef954">js</h1><p>
 
 Describes JavaScript file type
-</p><h2 class="titleRef" id="9920f20bb5ea70cc">Classes</h2><p>
+</p><h2 class="titleRef" id="562e61b299ce9c1f">Classes</h2><p>
 
-</p><h3 class="titleRef" id="a3c7eb1d3575b8ad"><code class="command">JavaScript(ABCFileType)</code></h3><p>
+</p><h3 class="titleRef" id="661ad8e97c69c739"><code class="command">JavaScript(ABCFileType)</code></h3><p>
 Provides JavaScript to Markdown translator
   <br>
-</p><h4 class="titleRef" id="03c3020768b2efb7">methods</h4><p>
+</p><h4 class="titleRef" id="3edc2d4c401b1558">methods</h4><p>
 </p><pre><button class="flex gap-2 items-center text-white"><p>Copy code</p><i class="fas fa-copy"></i></button><code class="language-python">@staticmethod
 def process_functions(source: str, pattern: Pattern) -&gt str:
 </code></pre><p>
@@ -503,22 +503,22 @@ def process(cls, filepath: str, output: str = 'docs', one_file: bool = False):
             On this page
           </p>
           
-          <a id="pagef60c515f3c952aed" href="#f60c515f3c952aed"
+          <a id="page1ca8d8355b5ef954" href="#1ca8d8355b5ef954"
             class="select-none border-l-[1px] py-0.5 font-semibold pl-[1.0em] opacity-50 hover:opacity-100 dark:border-white border-black border-opacity-100 pl-5 cursor-pointer transition-all duration-200">
             js
           </a>
           
-          <a id="page9920f20bb5ea70cc" href="#9920f20bb5ea70cc"
+          <a id="page562e61b299ce9c1f" href="#562e61b299ce9c1f"
             class="select-none border-l-[1px] py-0.5 font-semibold pl-[1.5em] opacity-50 hover:opacity-100 dark:border-white border-black border-opacity-100 pl-5 cursor-pointer transition-all duration-200">
             Classes
           </a>
           
-          <a id="pagea3c7eb1d3575b8ad" href="#a3c7eb1d3575b8ad"
+          <a id="page661ad8e97c69c739" href="#661ad8e97c69c739"
             class="select-none border-l-[1px] py-0.5 font-semibold pl-[2.0em] opacity-50 hover:opacity-100 dark:border-white border-black border-opacity-100 pl-5 cursor-pointer transition-all duration-200">
             <code class="command">JavaScript(ABCFileType)</code>
           </a>
           
-          <a id="page03c3020768b2efb7" href="#03c3020768b2efb7"
+          <a id="page3edc2d4c401b1558" href="#3edc2d4c401b1558"
             class="select-none border-l-[1px] py-0.5 font-semibold pl-[2.5em] opacity-50 hover:opacity-100 dark:border-white border-black border-opacity-100 pl-5 cursor-pointer transition-all duration-200">
             methods
           </a>
@@ -594,25 +594,35 @@ def process(cls, filepath: str, output: str = 'docs', one_file: bool = False):
       letter-spacing: .2rem;
       font-weight: bolder;
       font-size: 4rem;
+      padding-top: .7rem;
+      padding-bottom: 1.4rem;
     }
     h2 {
       letter-spacing: .15rem;
       font-weight: bold;
       font-size: 3rem;
+      padding-top: .6rem;
+      padding-bottom: 1.2rem;
     }
     h3 {
       letter-spacing: .1rem;
       font-weight: bold;
       font-size: 2rem;
+      padding-top: .5rem;
+      padding-bottom: 1rem;
     }
     h4 {
       letter-spacing: .05rem;
       font-weight: bold;
-      font-size: 1rem;
+      font-size: 1.5rem;
+      padding-top: .4rem;
+      padding-bottom: .8rem;
     }
     h5, h6 {
       font-weight: bold;
-      font-size: .5rem;
+      font-size: 1rem;
+      padding-top: .3rem;
+      padding-bottom: .6rem;
     }
     code {
       border-radius: 0 0 .5rem .5rem;
